@@ -1,0 +1,101 @@
+.advert-page {
+    background:#383740 ;
+    width:100%;
+    padding: 20px 0 ;
+    //margin:20px;
+    margin: 20px auto;
+    border-radius: 10px;
+    position: relative;
+    text-align:left;
+    display: grid;
+    grid-template-columns: 1fr 0.5fr;
+    .advert-body{
+        max-height: 900px;
+        margin: 0 auto;
+        //background: #4d4d58;;
+        width: 90%;
+        height: auto;
+        padding: 20px;
+        border-radius: 10px;
+        .title-advert{
+            color: #4F99FF;
+            font-size: 40px;
+            margin: unset;
+            max-width: 300px;
+            overflow: hidden;
+            font-weight: 100;
+        }
+        .sallary{
+            font-size: 30px;
+            margin: 10px auto;
+            color: #747474;
+            font-weight: 300;
+        }
+        .companyInfo-advert{
+            margin:20px;
+            margin-left: 0;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            width: 60%;
+            background: #706F7F;
+            border-radius: 10px;
+            h2,h3{
+                margin: unset;
+                padding: 10px;
+                font-weight: 300;
+            }
+            h3{
+                font-size: 30px;
+                color: #bfbcdb;
+            }
+            h2{
+                font-size: 35px;
+                color: #4F99FF;
+            }
+            img{
+                width: 250px;
+                height: 150px;
+                float: right;
+                -webkit-border-radius: 10px;
+                -moz-border-radius: 10px;
+                border-radius: 10px;
+            }
+        }
+
+    }
+.advertEqual{
+    margin: 0 auto;
+    //position: absolute;
+    //top:10% ;
+    //right: 5%;
+}
+    .sendMail{
+        button{
+            font-size: 23px;
+            padding: 10px;
+            background: #4b8b47;
+            border: unset;
+            color:#fff;
+            border-radius: 10px;
+        }
+        button:hover{
+            cursor:pointer;
+            background: #64b65e;
+
+        }
+    }
+.description-advert-page{
+    h1{
+        font-weight: 300;
+    }
+    h2{
+        max-height: 200px;
+        overflow: scroll;
+        &::-webkit-scrollbar{
+            width: 0;
+        }
+    }
+}
+
+}

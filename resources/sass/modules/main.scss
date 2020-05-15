@@ -1,0 +1,1327 @@
+body {
+    /*background-image: linear-gradient(to top, #1e3c72 0%, #1e3c72 1%, #2a5298 100%);  !*background-color: rgb(90, 73, 73);*!*/
+    /*background:url('./img/background.png');*/
+    background-size: cover;
+    background-color: #292e33;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    /*background-color:#2d2c33;*/
+    min-height: 100vh;
+    color: #fff;
+    padding: 0;
+    font-weight: 300;
+    text-align: center;
+    width: 90%;
+    margin: 0 auto;
+}
+
+body::-webkit-scrollbar {
+    width: 0;
+}
+
+* {
+    outline: unset;
+}
+
+.header {
+    //background.png-color:rgba(43, 43, 43,0.9);
+    border-bottom: 2px solid;
+    //background: #36414C;
+    //background: #383740;
+    width: 100%;
+    margin: 0 auto;
+    height: 100px;
+    position: relative;
+}
+
+.logo {
+    font-size: 55px;
+    position: absolute;
+    left: 40px;
+}
+
+ul {
+    position: absolute;
+    right: 20px;
+
+    .headerUrl {
+        color: #fff;
+        text-decoration: unset;
+        display: inline-block;
+        margin: 20px;
+        font-size: 25px;
+    }
+}
+
+.headerUrl.urlActive {
+    color: #ef5757;
+}
+
+.mobileMenu {
+    display: none;
+}
+
+
+.advert {
+    margin: 10px ;
+    position: relative;
+    padding: 20px;
+    width: 90%;
+    display: block;
+    height: 180px;
+    background: #4d4d58;
+    border-radius: 10px;
+    text-align: left;
+
+    h2 {
+        color: #4F99FF;
+        margin: unset;
+        font-weight: 400;
+    }
+
+    h3 {
+        font-size: 18px;
+        margin: unset;
+        font-weight: 300;
+        color: #c7c7c7;
+    }
+
+    link1 {
+        font-size: 23px;
+        margin-top: 10px;
+        display: inline-block;
+        color: #a8a6a6;
+
+        &:hover {
+            color: #ec6262
+        }
+    }
+
+    .price {
+        position: absolute;
+        top: 20px;
+        right: 30%;
+    }
+}
+
+.companyImg {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    height: 150px;
+    width: 300px;
+    border-radius: 10px
+}
+
+.description {
+    //display: inline-block;
+    font-size: 20px;
+    max-width: 70%;
+    height: 70px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* сколько оставить строк */
+    -webkit-box-orient: vertical;
+}
+
+.allAdvertBody {
+    width: 100%;
+    height: 700px;
+    border-radius: 10px;
+    margin: 20px auto;
+    display: grid;
+    grid-template-columns: 0.2fr 1fr;
+    grid-column-gap: 20px;
+
+    .leftFilter, .resultBody {
+        background: #383740;
+        border-radius: 10px;
+    }
+
+}
+
+.headerFilter {
+    padding: 20px;
+    background: #383740;
+    margin-bottom: 20px;
+    //height: 100px;
+    border-radius: 10px;
+    text-align: left;
+    display: flex;
+    align-items: center;
+
+    .searchQuery {
+        width: 50%;
+        border-bottom-right-radius: unset;
+        border-top-right-radius: unset;
+    }
+
+    .searchBtn {
+        border-bottom-right-radius: 10px;
+        border-top-right-radius: 10px;
+        width: 150px;
+        padding: 12px;
+        font-size: 20px;
+        background: #0090E9;
+        color: #fff;
+        border: unset;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+
+}
+
+.resultBody {
+    padding: 20px;
+
+    h2 {
+        text-align: left;
+    }
+}
+
+.leftFilter {
+    padding: 10px 20px;
+    text-align: left;
+
+    h2 {
+        font-size: 24px;
+        margin: 20px auto 5px;
+        background: #4d4d58;
+        padding: 5px;
+        text-align: center;
+        border-radius: 10px;
+    }
+
+    label {
+        font-weight: 400;
+        margin-right: 10px;
+        font-size: 24px;
+    }
+
+    .typeWorkSpace {
+        input {
+            width: 20px;
+            height: 15px;
+            outline: none;
+            box-shadow: unset;
+        }
+    }
+
+    .skills-filter, .typeWorkSpace, .sallary {
+        div {
+            display: flex;
+            justify-content: space-between;
+        }
+    }
+
+    .sallary {
+        div {
+            margin: 5px auto;
+        }
+
+        span {
+            font-size: 24px;
+            color: #fff;
+
+            &:hover {
+                cursor: pointer;
+            }
+        }
+    }
+}
+
+.cityItem {
+    //border:1px solid;
+    font-size: 22px;
+    display: flex;
+    justify-content: space-between;
+    margin: 5px auto;
+
+    &:hover {
+        cursor: pointer;
+        color: #ee7777;
+    }
+}
+
+
+.technoI {
+    transition: all 0.5s ease;
+    font-size: 22px;
+    padding: 10px;
+    border-radius: 5px;
+    margin: unset !important;
+    background: #706f7f;
+    width: 100px;
+    text-align: center;
+    font-weight: 300;
+    display: inline-block;
+
+    &:hover {
+        cursor: pointer;
+    }
+
+    &.active {
+        background: #57b151;
+    }
+}
+
+.advertBody {
+    width: 500px;
+    //height: 150px;
+    background: #706F7F;
+    margin: 10px auto;
+    border-radius: 10px;
+    position: relative;
+    display: grid;
+    grid-template-columns: 0.5fr 1fr 0.5fr;
+    padding: 10px;
+
+    &:hover {
+        cursor: pointer
+    }
+
+    h2 {
+        display: block;
+        margin: 5px;
+        font-size: 25px;
+        text-align: left;
+    }
+
+    .advertImg, .advertPrice {
+        display: flex;
+        align-items: center;
+    }
+
+    .advertInfo {
+        display: flex;
+        align-items: center;
+        margin: 10px;
+        h2 {
+            display: block;
+            max-height: 30px !important;
+        }
+        span{
+            font-size: 22px;
+            padding: 5px;
+        }
+
+    }
+}
+
+.companyBody {
+    background: #383740;
+    //height: 600px;
+    border-radius: 10px;
+    margin: 20px auto;
+    position: relative;
+    padding: 20px;
+
+    h2 {
+        display: inline-block;
+    }
+}
+
+.blockMainInfo {
+    margin: auto auto 30px 30px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    img {
+        float: left;
+        margin: unset;
+        text-align: left;
+    }
+}
+
+.childCompanyBody, {
+    margin-top: 80px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.firstInfo {
+    text-align: left;
+}
+
+.dopInfo {
+    text-align: left;
+    margin-left: 30px;
+}
+
+.backBtn, .reating, .trek {
+    position: absolute;
+}
+
+.reating {
+    right: 20px;
+    font-size: 30px;
+}
+
+.backBtn {
+    font-size: 25px;
+    padding: 10px;
+    background: #706F7F;
+    //border-bottom-right-radius: 10px;
+    //border-top-right-radius: 10px;
+    left: 70px;
+}
+
+.trek {
+    border: 25px solid transparent;
+    border-right: 25px solid #706F7F;
+}
+
+.back {
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.description {
+    font-size: 20px;
+    font-weight: 300;
+    margin: unset;
+    max-width: 600px;
+}
+
+.descriptionTitle {
+    margin: auto auto 5px;
+}
+
+.technology {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    row-gap: 5px;
+    column-gap: 5px;
+    width: 370px;
+    margin-bottom: 10px;
+    max-height: 170px;
+    overflow: scroll;
+
+    &::-webkit-scrollbar {
+        width: 0;
+    }
+}
+
+a {
+    color: #3aa5e7;
+    text-decoration: none;
+    font-size: 30px;
+}
+
+.loginBodyParent {
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%); /*move it halfway back(x,y)*/
+    //border: 1px solid;
+    height: auto;
+}
+
+.header_block {
+    width: 600px;
+    height: 200px;
+    margin: 10px auto;
+
+    img {
+        height: 120px;
+        width: 120px;
+    }
+
+    h2 {
+        font-size: 40px;
+        font-weight: 200 !important;
+        margin: unset;
+    }
+}
+
+.loginBody {
+    margin: 0 auto;
+    text-align: left;
+    background: #383740;
+    width: 450px;
+    height: 300px;
+    border-radius: 10px;
+    padding: 20px;
+
+    .inputBlock {
+        //margin: 0 auto;
+        margin-bottom: 20px;
+    }
+
+    label {
+        font-weight: 300;
+        margin-top: 20px;
+        font-size: 30px;
+    }
+
+    input {
+        font-size: 20px;
+        border-radius: 10px;
+        margin: 10px auto;
+        width: 94%;
+        padding: 10px;
+
+        &:focus {
+            box-shadow: 0 0 8px #3aa5e7;
+        }
+    }
+}
+
+.login {
+    background: #66CC60;
+    border: unset;
+    border-radius: 10px;
+    width: 100%;
+    margin: 0 auto;
+    display: block;
+    padding: 10px;
+    font-size: 26px;
+    color: #fff;
+
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.forgotPass {
+    position: relative;
+
+    span {
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translate(0, -50%); /*move it halfway back(x,y)*/
+        font-size: 22px;
+        line-height: inherit;
+        color: #3aa5e7;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+}
+
+.notAcc {
+    width: 450px;
+    height: 30px;
+    background: #383740;
+    margin: 30px auto 0;
+    padding: 15px;
+    border-radius: 10px;
+
+    h3 {
+
+        display: inline;
+        font-size: 22px;
+        font-weight: 300;
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+    .createAcc {
+        font-weight: 400;
+        color: #3aa5e7;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+
+}
+
+/////////////////////////regiter
+.register-set-type {
+    position: absolute;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+}
+
+.body-company-reg {
+    //position: absolute;
+    //top: 40%;
+    //left: 50%;
+    //transform: translate(-50%,-50%);
+    background: #383740;
+    padding: 20px;
+    border-radius: 10px;
+    height: 200px;
+
+    a {
+        text-decoration: none;
+        color: #fff;
+        font-size: 30px;
+        padding: 20px;
+        margin: 10px;
+        //background:#706f7f;
+        background: #66CC60;
+        border-radius: 10px;
+        width: 200px;
+        display: inline-block;
+    }
+
+    h2 {
+        font-size: 35px;
+        font-weight: 300 !important;
+    }
+
+    .img {
+        width: 150px;
+        height: 150px;
+    }
+}
+
+
+/////////////////////////////
+/////register company
+.body {
+    .mainImgTitle {
+        font-size: 30px;
+        text-align: center;
+        background: #706F7F;
+        margin: 5px auto 10px;
+        width: 80%;
+        padding: 10px;
+        border-radius: 10px;
+
+    }
+
+    label, option, select {
+        font-size: 25px;
+        font-weight: 300;
+    }
+
+    img {
+        width: 350px;
+        height: 200px;
+    }
+
+    text-align: left;
+    padding: 20px 40px;
+    background: #383740;
+    border-radius: 10px;
+    width: 80%;
+    margin: 10px auto;
+}
+
+.inputBlock {
+    margin: 10px;
+}
+
+input {
+    margin: 5px 0;
+    font-size: 20px;
+    padding: 10px;
+    border-radius: 10px;
+
+    &:focus {
+        box-shadow: 0 0 5px #3aa5e7;
+    }
+}
+
+.techSteck {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    row-gap: 5px;
+    column-gap: 5px;
+    max-height: 170px;
+    width: 500px;
+    overflow: scroll;
+
+    &::-webkit-scrollbar {
+        width: 0;
+    }
+}
+
+.workSpace {
+    margin: 10px auto 5px;
+}
+
+input[type=checkbox] {
+    margin-left: 10px;
+    width: 20px;
+    height: 20px;
+}
+
+select, option {
+    background: #706F7F;
+    padding: 10px;
+    border-radius: 10px;
+    color: #f5f5fa;
+    //font-weight: 200!important;
+    border: unset;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    transition: all 1s ease;
+
+    &:focus {
+        box-shadow: 0 0 5px #3aa5e7;
+    }
+
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.allWorker, .workSpaceBody {
+    margin: 20px 10px;
+}
+
+textarea {
+    width: 95%;
+    border-radius: 10px;
+    font-size: 20px;
+    padding: 10px;
+    display: block;
+    margin: 0 auto;
+    resize: none;
+}
+
+.btnSubmit {
+    background: #66CC60;
+    width: 60%;
+    margin: 20px auto;
+    display: block;
+    text-align: center;
+    font-size: 20px;
+    color: #f5f5fa;
+    outline: unset;
+    border: unset;
+    border-radius: 10px;
+    padding: 15px;
+
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+/////////////////
+/////reg worker
+.bodyRegWorker {
+    margin: 20px auto;
+    width: 90%;
+    //height: 600px;
+    background: #383740;
+    border-radius: 10px;
+    text-align: left;
+    padding: 20px 40px;
+}
+
+h2 {
+    font-weight: 300;
+}
+
+.title {
+    margin: auto auto 20px;
+    font-weight: 300;
+    font-size: 35px;
+    text-align: center;
+}
+
+.inputBlock {
+    //border:1px solid;
+    label {
+        font-size: 30px;
+        font-weight: 300;
+    }
+
+    input {
+        margin: 10px 0;
+        font-size: 20px;
+        border-radius: 10px;
+        padding: 10px;
+
+        &:focus {
+            box-shadow: 0 0 8px #3aa5e7;
+        }
+    }
+}
+
+.mainBlock {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1.2fr;
+
+    div {
+        margin: 0 auto;
+    }
+}
+
+.selectTypeWork {
+    //border: 1px solid;
+    .titleType {
+        font-weight: 300 !important;
+        margin: auto auto 10px;
+    }
+
+    input {
+        width: 30px;
+        height: 25px;
+    }
+
+    margin-bottom: 40px;
+    font-size: 30px;
+}
+
+.selectTypeItem {
+    margin-right: 40px !important;
+    display: inline-flex;
+    font-weight: 300;
+    align-items: center;
+    justify-content: center;
+}
+
+.technoBody {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    row-gap: 5px;
+    column-gap: 5px;
+    max-height: 170px;
+    overflow: scroll;
+
+    &::-webkit-scrollbar {
+        width: 0;
+    }
+}
+
+.confirmBtn {
+    background: #66CC60;
+    border: unset;
+    border-radius: 10px;
+    width: 25%;
+    margin: 0 auto;
+    display: block;
+    padding: 10px;
+    font-size: 26px;
+    color: #fff;
+
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+////////forgot pass
+.header_block {
+    img {
+        height: 150px;
+        width: 150px;
+    }
+}
+
+.forgotBody {
+    label {
+        font-size: 30px;
+        text-align: left;
+    }
+
+    background: #383740;
+    width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: left;
+    border-radius: 10px;
+
+    input {
+        width: 90%;
+    }
+
+    .btnSend {
+        display: block;
+        margin: 30px auto 10px;
+        width: 70%;
+        white-space: nowrap;
+        border-radius: 10px;
+        border: unset;
+        background: #66CC60;
+        padding: 10px;
+        font-size: 20px;
+        color: #f5f5fa;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+}
+
+.forgot-pass-body {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+///////
+/////////////////////////add advert-page
+
+.addAdvert {
+    h2 {
+        font-size: 30px;
+        font-weight: 400;
+    }
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 20px;
+    padding-top: 20px;
+}
+
+.typeTech {
+    background: #383740;
+    height: auto;
+
+    .allSteck {
+        margin-top: 20px;
+        display: grid;
+        padding: 20px;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+        grid-column-gap: 15px;
+        grid-row-gap: 10px;
+    }
+
+    .steckItem {
+        font-size: 30px;
+        background: #4c4c4c;
+        padding: 15px;
+        border-radius: 10px;
+
+        &:hover {
+            cursor: pointer;
+            background: #3b3b3b;
+        }
+    }
+}
+
+.mainInfo {
+    background: #383740;
+    height: auto;
+    border-radius: 5px;
+    text-align: left;
+    padding: 20px 50px;
+
+    .advert-name-title {
+        font-size: 1.7em;
+    }
+
+    .advertName {
+        margin-top: 10px;
+        border-radius: 15px;
+        padding: 10px 10px;
+        font-size: 20px;
+    }
+
+    .advertDescription {
+        padding: 10px;
+        font-size: 20px;
+        min-height: 200px;
+        min-width: 500px;
+        border-radius: 15px;
+        margin-top: 10px;
+    }
+
+    .content {
+        height: 100%;
+    }
+
+    .contentContainer {
+        margin-top: 20px;
+    }
+
+    .price-add-advert {
+        h2 {
+            display: block;
+        }
+
+        label {
+            margin: 10px;
+            font-size: 24px;
+        }
+
+    }
+
+    input[type=number] {
+        border-radius: 10px;
+        width: 120px;
+        height: 40px;
+        padding: 5px 10px;
+        font-size: 20px;
+    }
+
+    .selectCity {
+        h2 {
+            margin: 15px 0 10px;
+        }
+
+        select {
+            border-radius: 10px;
+            font-size: 30px;
+            padding: 10px;
+        }
+    }
+
+
+}
+
+.language {
+    margin-top: unset;
+}
+
+.skills {
+    h1 {
+        text-align: center;
+    }
+
+    padding: 0 30px;
+    text-align: left;
+
+    input {
+        width: 50px;
+        height: 30px;
+    }
+
+    label {
+        font-size: 40px;
+    }
+}
+
+.selectTypeWork {
+    input {
+        width: 30px;
+        height: 25px;
+    }
+
+    margin-bottom: 40px;
+}
+
+.selectTypeItem {
+    margin-right: 20px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.addAdvertBtn {
+    margin: 50px auto;
+    padding: 20px;
+    font-size: 30px;
+    border-radius: 10px;
+    background: burlywood;
+
+    &:hover {
+        cursor: pointer;
+    }
+
+    //width: ;
+}
+
+.company {
+    position: relative;
+
+    input {
+        padding: 10px;
+        font-size: 20px;
+        border-radius: 10px;
+    }
+
+    .searchRes {
+        overflow: scroll;
+        padding-top: 10px;
+        width: 300px;
+        height: 150px;
+        position: absolute;
+        z-index: 200;
+        margin-top: 10px;
+        background: #000;
+        -webkit-border-radius: 10px;
+        -moz-border-radius: 10px;
+        border-radius: 10px;
+
+        &::-webkit-scrollbar {
+            width: 0;
+        }
+
+        .companyItem {
+            font-size: 20px;
+            margin: 5px;
+            padding: 5px;
+        }
+    }
+}
+
+.profile-page {
+    padding: 20px;
+    background: #383740;
+    margin: 20px auto;
+    border-radius: 10px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+
+    h1 {
+        font-weight: 200;
+    }
+
+    label {
+        font-size: 24px;
+        display: block;
+    }
+
+    .selectTypeWork {
+        display: inline-flex;
+        align-content: center;
+        justify-content: center;
+        margin-right: 20px;
+        margin-bottom: 10px;
+
+        label {
+            font-size: 26px;
+            margin-right: 5px;
+            display: inline-block;
+        }
+    }
+
+    .rightBlock {
+        h2 {
+            font-size: 28px;
+        }
+    }
+
+    .leftBlock {
+        img {
+            border-radius: 10px;
+        }
+
+        padding: 20px;
+        //height: 50%;
+        margin-bottom: 10px;
+        //border:1px solid;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-column-gap: 10px;
+    }
+
+    .centerBlock {
+        .changePass {
+            width: 60%;
+            margin-top: 20px;
+        }
+    }
+
+    .editTechno {
+        //s:1px solid;
+    }
+
+    .allUseTech {
+        width: 400px;
+        display: grid;
+        margin: 0 auto;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-column-gap: 10px;
+        grid-row-gap: 10px;
+        max-height: 120px;
+        overflow: scroll;
+
+        &::-webkit-scrollbar {
+            width: 0;
+        }
+    }
+
+    .changeDopInfo {
+        width: 50%;
+    }
+
+    .saveResume {
+        margin-top: 20px;
+        width: 40%;
+    }
+
+    .resumeProfile {
+        background: #aeadc2;
+        height: 250px;
+    }
+}
+
+.companyTitle {
+    font-size: 37px;
+    margin-top: 40px;
+    font-weight: 200;
+}
+
+.grid-company-reg {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.regCompany {
+    width: 30%;
+}
+
+.company-profile-page-parent {
+    display: grid;
+    grid-template-columns: 0.2fr 1fr;
+
+    .profile-company-menu {
+        margin: 20px auto;
+        width: 100%;
+        height: 320px;
+        padding: 20px;
+        border-radius: 10px;
+        background: #383740;
+        text-align: left;
+        h1{
+            margin: unset;
+            text-align: center;
+            font-weight: 300;
+        }
+        a{
+            white-space: nowrap;
+            margin: 10px;
+            display: block;
+            transition: all 0.4s ease;
+            background: #8b8a99;
+            padding:10px;
+            border-radius: 10px;
+            color: #000;
+            &:hover{
+                cursor: pointer;
+            }
+            &.active{
+                background: #844446;
+            }
+        }
+    }
+.company-profile-page-content{
+    transition: all 0.5s ease-in;
+    width: 88%;
+    padding: 10px;
+    border-radius: 10px;
+    margin: 20px auto;
+    background: #383740;
+    .profile-add-advert{
+        height: 100%;
+
+    }
+    .menu-item{
+        opacity: 1;
+    }
+}
+}
+
+.company-profile-page {
+    padding: 20px;
+    background: #383740;
+    margin: 20px auto;
+    border-radius: 10px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 88%;
+
+    .leftBlock {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        text-align: left;
+
+        h2 {
+            //margin-left: 20px;
+            font-size: 18px;
+            margin: 10px 20px;
+        }
+
+        .companyName {
+            font-size: 30px;
+        }
+
+        .notChange {
+            margin-left: 20px;
+
+            label {
+                display: block;
+                margin-left: 5px;
+                font-weight: 300;
+            }
+
+            input {
+                text-align: center;
+                padding: 5px;
+                width: 150px;
+                background: #aeadc2;
+                margin: 5px;
+                color: #42424b;
+
+            }
+        }
+    }
+
+    .leftBlockParent {
+        .descriptionCompany {
+            label {
+                display: block;
+                margin: 20px auto 10px;
+                font-size: 25px;
+                text-align: left;
+            }
+
+            textarea {
+                background: #aeadc2;
+            }
+        }
+    }
+
+    .selectTypeWork {
+        font-size: 25px;
+        margin-right: 20px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: space-between;
+
+    }
+
+    .editTechno {
+        h2 {
+            margin: auto auto 10px;
+        }
+    }
+
+    .allUseTech {
+        margin-top: 0;
+        padding: 0 30px;
+        width: 300px;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        column-gap: 10px;
+        row-gap: 10px;
+    }
+}
+
+.saveChangeCompanyProfile {
+    display: block;
+    width: 30% !important;
+}
+
+.addImg-reg-company:hover {
+    cursor: pointer;
+}
+input[disabled]{
+    background: slategray;
+    border: unset;
+}
+input[type=radio]{
+    box-shadow: unset;
+}
+
+.companyInfo-advert{
+    img{
+        width: 200px;
+        height: 150px;
+    }
+}
+
+.advert-filter-item-href{
+    h2{
+        font-size: 24px;
+    }
+}
+

@@ -1,0 +1,240 @@
+.main{
+    margin:0 auto;
+}
+
+.filter{
+    //margin-top: 20px;
+    width: 90%;
+    height: 200px;
+    border: 1px solid;
+    margin: 20px auto;
+    position: relative;
+    border-radius: 15px;
+}
+
+.find{
+    font-size: 40px;
+    text-align: left;
+    margin: 20px;
+    position: absolute;
+}
+
+.searchBlock{
+    position: absolute;
+    bottom: 10px;
+    margin: 15px;
+    input{
+        width: 500px;
+        font-size: 35px;
+        padding: 10px;
+        margin-top: 25px;
+    }
+    select{
+        font-size: 30px;
+    }
+    button{
+        font-size: 25px;
+        padding: 10px;
+        color:#000;
+
+    }
+}
+
+.type{
+    padding: 10px;
+    margin: 0 20px;
+}
+.city{
+    padding: 10px;
+    margin: 0 10px;
+}
+
+.allItems{
+    width: 90%;
+    margin: 0 auto;
+    border-radius:20px;
+
+}
+
+.item{
+    display:grid;
+    grid-template-columns: 1fr 3fr 1fr;
+    padding: 30px;
+    //background: rgba(8, 26, 33,0.6);
+    margin: 5px;
+    border-radius: 10px;
+    background: #383740;
+    font-weight: 300;
+    img{
+        border-radius: 20px;
+    }
+
+    .desc{
+
+        text-align: left;
+        padding: 20px;
+        .name{
+            font-size: 30px;
+            margin-bottom: 10px;
+        }
+        .description{
+            font-size: 25px;
+            max-height: 120px;
+            overflow: scroll;
+            &::-webkit-scrollbar{
+                width:0;
+            }
+
+        }
+    }
+    .price{
+        font-size: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+
+.mobileGetText{
+    display: none;
+}
+.mobileMenu{
+    display: none;
+}
+
+@media(max-width: 1024px){
+    .header{
+        position: relative;
+        display: flex;
+        align-items: baseline;
+        width: 100%;
+        padding: 5px;
+        overflow: hidden;
+        ul{
+            width: 20%;
+            height: 70px;
+            overflow: hidden;
+        }
+        li{
+            width: 0px;
+            height: 0px;
+            margin: unset;
+            font-size: 14px;
+            overflow: hidden;
+        }
+    }
+    .logo{
+        font-size: 60px;
+    }
+    .mobileMenu{
+        position: absolute;
+        font-size: 50px;
+        right:50px;
+        top: 25%;
+
+    }
+
+    .content{
+        overflow: hidden;
+    }
+    .filter{
+        overflow: hidden;
+        .find{
+            font-size: 30px;
+            text-align: center;
+            position: relative;
+            margin-bottom: 10px;
+        }
+        .searchBlock{
+            margin: 5px;
+            position: relative;
+            input{
+                font-size: 20px;
+                width: 90%;
+                margin-bottom:10px;
+            }
+            select{
+                font-size: 20px;
+                margin: 0 10px 0 0;
+            }
+            button{
+                font-size: 15px;
+                padding: 10px;
+            }
+        }
+    }
+    .allItems{
+        background: unset;
+        width: 90%;
+        .item{
+            display: block;
+            padding:20px ;
+            width: 90%;
+            margin: 0 auto 20px;
+            border-radius: 20px;
+            .description{
+                width: 100%;
+                height: 150px!important;
+                overflow: scroll;
+            }
+            #desc-main{
+                height: 150px;
+            }
+        }
+        img{
+            width: 80%;
+            margin: 0 auto;
+            text-align: center;
+            display: block;
+            //overflow: hidden;
+            object-fit: cover;
+            width: 80%;
+            height: auto;
+        }
+        .name{
+            font-size: 25px;
+            text-align: center;
+        }
+
+        .mobileGetText{
+            display: block;
+            font-size: 25px;
+            margin-top: 15px;
+            color: #ee7777;
+        }
+        .price{
+            margin-bottom: 12px;
+        }
+    }
+    .mobileMenu{
+        display: inline-block;
+    }
+}
+
+
+
+.greenBtn{
+    background: #66CC60;
+    border: unset;
+    border-radius: 10px;
+    width: 100%;
+    margin: 0 auto;
+    display: block;
+    padding: 10px;
+    font-size: 26px;
+    color: #fff;
+    &:hover{
+        cursor:pointer
+    }
+}
+.hidden{
+    display: none!important;
+    //opacity: 0!important;
+    z-index: 0;
+
+}
+
+.empty{
+    color: #7f1d1d;
+}
