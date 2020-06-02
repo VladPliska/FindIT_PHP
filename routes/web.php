@@ -55,10 +55,7 @@ Route::post('/addAdvert','MainController@addAdvert');
 
 Route::get('/all-advert','MainController@allAdvert');
 
-
 Route::get('/company/profile','MainController@companyProfile');
-
-
 
 Route::post('/chageOneInfo','MainController@saveImgResume');
 
@@ -67,3 +64,5 @@ Route::get('/worker/profile','MainController@workerProfile');
 Route::post('worker/changePassword','MainController@workerChangePassword');
 
 Route::post('worker/changeDetail','MainController@changeWorkerOtherData');
+
+Route::post('/search','MainController@search');

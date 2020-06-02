@@ -19449,6 +19449,64 @@ $(document).on('change', '.changeImg', function (e) {
   var a = $('#image')[0].files[0];
   $('.changeImg-parent').attr('src', URL.createObjectURL(a));
 });
+$(document).on('click', '.cityItem', function (e) {
+  if ($(this).hasClass('cityActive')) {
+    $(this).removeClass('cityActive');
+  } else {
+    $('.cityItem').removeClass('cityActive');
+    $(this).addClass('cityActive');
+  }
+});
+$(document).on('click', '.selectFilterPrice', function (e) {
+  if ($(this).hasClass('selectFilterPriceActive')) {
+    $(this).removeClass('selectFilterPriceActive');
+  } else {
+    $('.selectFilterPrice').removeClass('selectFilterPriceActive');
+    $(this).addClass('selectFilterPriceActive');
+  }
+});
+$('.filterStart').click(function (e) {
+  var filter = $('#checkFilter')[0].checked;
+  var city = $('.cityActive').attr('data-id');
+  var space;
+  var checkboxes = $('.workspace');
+
+  for (var index = 0; index < checkboxes.length; index++) {
+    if (checkboxes[index].checked) {
+      space = checkboxes[index].value;
+    }
+  }
+
+  var lvl = $('.level');
+  var lvlid;
+
+  for (var _index = 0; _index < lvl.length; _index++) {
+    if (lvl[_index].checked) {
+      lvlid = lvl[_index].value;
+    }
+  }
+
+  var price = $('.selectFilterPriceActive').attr('data-val');
+  var text = $('.searchQuery').val();
+  $.ajax({
+    method: 'POST',
+    headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    },
+    url: '/search',
+    data: {
+      filterOn: filter,
+      city: city,
+      workspace: space,
+      level: lvlid,
+      price: price,
+      query: text
+    },
+    success: function success(res) {
+      console.log(res);
+    }
+  });
+});
 
 /***/ }),
 

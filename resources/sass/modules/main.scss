@@ -244,6 +244,14 @@ ul {
     }
 }
 
+.selectFilterPrice{
+    &:hover {
+        cursor: pointer;
+        span{
+            color: #ee7777;
+        }
+    }
+}
 
 .technoI {
     transition: all 0.5s ease;
@@ -1368,4 +1376,25 @@ img {
 .loginSucc {
     text-align: center;
     color: #66CC60;
+}
+.queryFilter{
+    margin-left: 20px;
+    label{
+        font-size: 20px;
+    }
+    input{
+        width: 15px;
+        height: 15px;
+    }
+}
+
+.cityActive{
+    span{
+        color: #ee7777;
+    }
+}
+.selectFilterPriceActive{
+    span{
+        color: #ee7777!important;
+    }
 }

@@ -10,20 +10,20 @@
             <div class='cityBody '>
                 <h2>Місто</h2>
                 @foreach($allCity as $v)
-                    <div class='cityItem  ' data-id="{{$v->id}}">
+                    <div class='cityItem' data-id="{{$v->id}}">
                         <span>{{$v->name}}</span><span>{{$v->advert}}</span>
                     </div>
                 @endforeach
             </div>
-            <div class='typeWorkSpace  '>
+            <div class='typeWorkSpace'>
                 <h2>Можливість праці з</h2>
                 <div>
                     <label for="office">Офісу</label>
-                    <input type="radio" id='office' name='workspace' value="office"/>
+                    <input type="radio" id='office' name='workspace' class='workspace' value="office"/>
                 </div>
                 <div>
                     <label for="home">Дому</label>
-                    <input type="radio" id='home' name='workspace' value="home"/>
+                    <input type="radio" id='home' name='workspace' class="workspace" value="home"/>
                 </div>
 
             </div>
@@ -31,19 +31,19 @@
                 <h2>Рівень знань</h2>
                 <div>
                     <label for="intern">Intern</label>
-                    <input type="radio" id='intern' name="level" value="1"/>
+                    <input type="radio" id='intern' name="level" class="level" value="1"/>
                 </div>
                 <div>
                     <label for="jun">Junior</label>
-                    <input type="radio" id='jun' name="level" value="2"/>
+                    <input type="radio" id='jun' name="level"class="level" value="2"/>
                 </div>
                 <div>
                     <label for="middle">Middle</label>
-                    <input type="radio" id='middle' name="level" value="3"/>
+                    <input type="radio" id='middle' name="level" class="level" value="3"/>
                 </div>
                 <div>
                     <label for="senior">Senior</label>
-                    <input type="radio" id='senior' name="level" value="4"/>
+                    <input type="radio" id='senior' name="level" class="level" value="4"/>
                 </div>
             </div>
             <div class='sallary  '>
@@ -68,10 +68,10 @@
         <div class='forGrid'>
             <div class='headerFilter'>
                 <input type="text" placeholder='Назва компанії,вакансія' class='searchQuery  '/>
-                <button class='searchBtn'>Знайти</button>
+                <button class='searchBtn filterStart'>Знайти</button>
                 <div class="queryFilter">
                     <label for="checkFilter">Фільтрувати?</label>
-                    <input type="checkbox" id="checkFilter">
+                    <input type="checkbox" id="checkFilter" name="filterOn">
                 </div>
             </div>
             <div class='resultBody  '>

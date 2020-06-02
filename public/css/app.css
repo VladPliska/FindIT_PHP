@@ -234,6 +234,14 @@ ul .headerUrl {
   color: #ee7777;
 }
 
+.selectFilterPrice:hover {
+  cursor: pointer;
+}
+
+.selectFilterPrice:hover span {
+  color: #ee7777;
+}
+
 .technoI {
   transition: all 0.5s ease;
   font-size: 22px;
@@ -1303,6 +1311,27 @@ img {
 .loginSucc {
   text-align: center;
   color: #66CC60;
+}
+
+.queryFilter {
+  margin-left: 20px;
+}
+
+.queryFilter label {
+  font-size: 20px;
+}
+
+.queryFilter input {
+  width: 15px;
+  height: 15px;
+}
+
+.cityActive span {
+  color: #ee7777;
+}
+
+.selectFilterPriceActive span {
+  color: #ee7777 !important;
 }
 
 .main {

@@ -36,9 +36,50 @@ class MainController extends Controller
         return view('page.all-advert', compact('advert','allCity'));
     }
 
-    public function searchFilter(Request $req)
+    public function search(Request $req)
     {
+        $filterOn =$req->get('filterOn');
+        $query = $req->get('query');
+//        dd($filterOn);
 
+        if($filterOn == 'false'){
+            $adverts = Advert::where('title','ilike','%'.$query.'%')->get();
+            return response()->json([
+                'data'=>$adverts
+            ]);
+        }else{
+            $city = $req->get('city');
+            $space = $req->get('workspace');
+            $level = $req->get('level');
+            $price = $req->get('price');
+
+            $queryText = "select * from advert where title ilike '%".$query."%'";
+
+            if(!empty($city)){
+                $queryText .= " and city_id='".$city."'";
+            }
+            if(!empty($space)){
+                if($space == 'home'){
+                    $queryText .= ' and home = true';
+                }else if($space == 'office'){
+                    $queryText .= ' and office = true';
+                }
+            }
+            if(!empty($level)){
+                $queryText .= " and skills='".$level."'";
+            }
+            if(!empty($price)){
+                $queryText .= " and minsallary <'".$price."' "  ;
+            }
+
+            $res =  DB::select($queryText);
+
+            dd($res);
+
+
+
+
+        }
 
     }
 
