@@ -175,7 +175,7 @@ $('.filterStart').click(function (e) {
             query:text
         },
         success:(res)=>{
-            console.log(res);
+            $('.forSearchBody').html(res.view);
         }
     })
 

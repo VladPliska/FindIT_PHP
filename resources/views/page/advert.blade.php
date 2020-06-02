@@ -6,7 +6,7 @@
     <div class="advert-body">
         <div>
             <h2 class="title-advert">{{$advert->title ?? 'title'}}</h2>
-            <h3 class="sallary">${{$advert->minSallary ?? 0}} - ${{$advert->maxSallary ?? 1}}</h3>
+            <h3 class="sallary">${{$advert->minsallary ?? 0}} - ${{$advert->maxsallary ?? 1}}</h3>
         </div>
         <div class="companyInfo-advert">
             <div>

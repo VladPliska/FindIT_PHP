@@ -44,8 +44,10 @@ class MainController extends Controller
 
         if($filterOn == 'false'){
             $adverts = Advert::where('title','ilike','%'.$query.'%')->get();
+
+            $view = view('.include/advert-filter-item',['data'=>$adverts,'forSearch'=>true])->render();
             return response()->json([
-                'data'=>$adverts
+                'view'=>$view
             ]);
         }else{
             $city = $req->get('city');
@@ -53,7 +55,7 @@ class MainController extends Controller
             $level = $req->get('level');
             $price = $req->get('price');
 
-            $queryText = "select * from advert where title ilike '%".$query."%'";
+            $queryText = "select id from advert where title ilike '%".$query."%'";
 
             if(!empty($city)){
                 $queryText .= " and city_id='".$city."'";
@@ -69,16 +71,20 @@ class MainController extends Controller
                 $queryText .= " and skills='".$level."'";
             }
             if(!empty($price)){
-                $queryText .= " and minsallary <'".$price."' "  ;
+                $queryText .= " and minsallary >'".$price."' "  ;
             }
 
             $res =  DB::select($queryText);
+            $id =[];
+            foreach($res as $v){
+                array_push($id,$v->id);
+            }
+            $data = Advert::whereIn('id',$id)->get();
 
-            dd($res);
-
-
-
-
+            $view = view('.include/advert-filter-item',['data'=>$data,'forSearch'=>true])->render();
+            return response()->json([
+                'view'=>$view
+            ]);
         }
 
     }
@@ -410,8 +416,8 @@ class MainController extends Controller
             'office' => $office,
             'home' => $home,
             'city_id' => $city,
-            'minSallary' => $minSallary,
-            'maxSallary' => $maxSallary,
+            'minsallary' => $minSallary,
+            'maxsallary' => $maxSallary,
             'description' => $desc,
             'skills' => $skill,
             'technology' => $technology,

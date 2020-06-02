@@ -19503,7 +19503,7 @@ $('.filterStart').click(function (e) {
       query: text
     },
     success: function success(res) {
-      console.log(res);
+      $('.forSearchBody').html(res.view);
     }
   });
 });

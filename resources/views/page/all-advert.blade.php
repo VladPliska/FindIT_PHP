@@ -76,9 +76,12 @@
             </div>
             <div class='resultBody  '>
                 <h2>Результати пошуку:</h2>
-                @foreach($advert as $v)
-                    @include('.include/advert-filter-item',['advert'=>$v])
-                @endforeach
+                <div class="forSearchBody">
+                    @foreach($advert as $v)
+                        @include('.include/advert-filter-item',['advert'=>$v])
+                    @endforeach
+                </div>
+
             </div>
         </div>
     </div>
