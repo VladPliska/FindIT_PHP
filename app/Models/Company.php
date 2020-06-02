@@ -8,7 +8,7 @@ class Company extends Model
 {
     protected $table = 'company';
     protected $fillable = [
-       'token','email','password','name','city','img','office','home','workers','technology','description'
+       'token','email','password','name','city_id','img','office','home','workers','technology','description'
     ];
 
     protected $casts = [
@@ -20,7 +20,10 @@ class Company extends Model
 //        'email_verified_at' => 'datetime',
 //    ];
     public function advert(){
-        return $this->hasMany('App\models\Advert');
+        return $this->hasMany('App\Models\Advert');
     }
 
+    public function city(){
+        return $this->belongsTo('App\Models\City');
+    }
 }

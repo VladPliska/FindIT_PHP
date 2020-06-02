@@ -25,7 +25,6 @@ body::-webkit-scrollbar {
 }
 
 .header {
-  border-bottom: 2px solid;
   width: 100%;
   margin: 0 auto;
   height: 100px;
@@ -1299,6 +1298,11 @@ input[type=radio] {
 img {
   -o-object-fit: cover;
      object-fit: cover;
+}
+
+.loginSucc {
+  text-align: center;
+  color: #66CC60;
 }
 
 .main {

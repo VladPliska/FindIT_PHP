@@ -2,9 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('page/main');
-});
+Route::get('/', 'MainController@index');
 
 Route::get('/login',function(){
     return view('page/login');
@@ -56,6 +54,11 @@ Route::get('/checkEmail','MainController@checkEmail');
 Route::post('/addAdvert','MainController@addAdvert');
 
 Route::get('/all-advert','MainController@allAdvert');
+
+
+Route::get('/company/profile','MainController@companyProfile');
+
+
 
 Route::post('/chageOneInfo','MainController@saveImgResume');
 

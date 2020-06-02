@@ -16,6 +16,7 @@ class CreateCityTable extends Migration
         Schema::create('city', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->integer('advert')->default(0);
             $table->timestamps();
         });
     }

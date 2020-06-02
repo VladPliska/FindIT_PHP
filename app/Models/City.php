@@ -8,10 +8,15 @@ class City extends Model
 {
     protected $table = 'city';
     protected $fillable = [
-        'name'
+        'name','advert'
     ];
 
-
+    public function cityCompany(){
+        return $this->hasMany('App\Models\Company');
+    }
+    public function advertCity(){
+        return $this->hasMany('App\Models\Advert');
+    }
 
 
 //    protected $casts = [

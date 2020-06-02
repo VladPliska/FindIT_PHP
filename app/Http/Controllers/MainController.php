@@ -14,13 +14,33 @@ use Illuminate\Support\Facades\DB;
 //use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Storage;
-use function MongoDB\BSON\toJSON;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 
 class MainController extends Controller
 {
 
+    public function index(Request $req)
+    {
+        $advert = Advert::all()->take(20);
+        $city = City::all();
+        return view('page.main', compact('advert', 'city'));
+    }
+
+
+    public function allAdvert(Request $req)
+    {
+        $advert = Advert::all();
+        $allCity = City::orderBy('advert', 'desc')->take(20)->get();
+
+        return view('page.all-advert', compact('advert','allCity'));
+    }
+
+    public function searchFilter(Request $req)
+    {
+
+
+    }
 
 
     /////////////////WORKER FUNCTION
@@ -55,8 +75,8 @@ class MainController extends Controller
             'experience' => $exc,
             'sallary' => $sallary,
             'home' => true,
-            'role'=>$role,
-            'token'=>$authToken,
+            'role' => $role,
+            'token' => $authToken,
             'technology' => $technology
         ]);
 
@@ -86,7 +106,8 @@ class MainController extends Controller
         return back()->with('succ', 'Профіль оновленно');
     }
 
-    public function workerChangePassword(Request $req){
+    public function workerChangePassword(Request $req)
+    {
         $user = $req->get('userData');
         $oldpass = $req->get('old');
         $rep = $req->get('rep');
@@ -94,42 +115,43 @@ class MainController extends Controller
 
         $oldpass = crc32($oldpass);
 
-        if($oldpass != $user->password){
-            return back()->with('err','Старий пароль вказано не вірно');
+        if ($oldpass != $user->password) {
+            return back()->with('err', 'Старий пароль вказано не вірно');
         }
-        if($rep != $new){
-            return back()->with('err','Паролі не співпадають');
+        if ($rep != $new) {
+            return back()->with('err', 'Паролі не співпадають');
         }
 
         $new = crc32($new);
 
-        $user->update(['pasword'=>$new]);
+        $user->update(['pasword' => $new]);
 
-        return redirect('worker/profile')->with('succ','Пароль змінено');
+        return redirect('worker/profile')->with('succ', 'Пароль змінено');
     }
 
-    public function changeWorkerOtherData(Request $req){
+    public function changeWorkerOtherData(Request $req)
+    {
         $sallary = $req->get('sallary');
         $exp = $req->get('exp');
         $workspace = $req->get('settype');
         $user = $req->get('userData');
 
-        if($workspace == 'home'){
+        if ($workspace == 'home') {
             $user->update([
                 'sallary' => $sallary,
-                'experience' =>$exp,
-                'home'=>true,
-                'office'=>false
+                'experience' => $exp,
+                'home' => true,
+                'office' => false
             ]);
-        }else{
+        } else {
             $user->update([
                 'sallary' => $sallary,
-                'experience' =>$exp,
-                'home'=>false,
-                'office'=>true
+                'experience' => $exp,
+                'home' => false,
+                'office' => true
             ]);
         }
-        return  redirect('worker/profile')->with('succ','Додаткову інформацію змінено');
+        return redirect('worker/profile')->with('succ', 'Додаткову інформацію змінено');
     }
 
     public function workerSignUp()
@@ -141,17 +163,20 @@ class MainController extends Controller
     public function workerProfile(Request $req)
     {
         $user = $req->get('userData');
-        if($user == null)
-        {
+        if ($user == null) {
             return redirect('/login');
         }
-        $tech = Technology::whereIn('id',$user->technology)->get();
+        $tech = Technology::whereIn('id', $user->technology)->get();
 
 
         return view('page.profile', ['data' => $user, 'tech' => $tech]);
     }
 
+    //////////////////////
 
+
+    ///////////////////company
+    ///
     public function login(Request $req)
     {
         $login = $req->get('login');
@@ -160,7 +185,7 @@ class MainController extends Controller
         $pass = crc32($pass);
         $type = $req->get('type');
 
-        if($type == 'worker'){
+        if ($type == 'worker') {
             $user = User::where([
                 ['email', '=', $login],
                 ['password', '=', $pass]
@@ -177,12 +202,11 @@ class MainController extends Controller
 
 //                return view('page.profile', ['data' => $user,'tech'=>$tech]);
                 return redirect('worker/profile');
-            }else{
+            } else {
 
-                return back()->with('err','Не вдалося увійти,спробуйте інший логін або пароль');
+                return back()->with('err', 'Не вдалося увійти,спробуйте інший логін або пароль');
             }
-        }
-        else if($type=='company'){
+        } else if ($type == 'company') {
             $pass = $req->get('pass');
             $pass = crc32($pass);
 
@@ -202,14 +226,10 @@ class MainController extends Controller
 
                 return redirect('/company/profile');
 //            return view('page.company.profile', ['data' => $company, 'city' => $city, 'technology' => $technology]);
-            }else{
-                return back()->with('err','Не вдалося увійти,спробуйте інший логін або пароль');
+            } else {
+                return back()->with('err', 'Не вдалося увійти,спробуйте інший логін або пароль');
             }
         }
-
-
-
-
         return view('page.login');
     }
 
@@ -246,8 +266,8 @@ class MainController extends Controller
         $password = crc32($password);
 //        Storage::disk('public')->put('img', $img);
 
-        $path = $req->file('image')->store('images','s3');
-        Storage::disk('s3')->setVisibility($path,'public');
+        $path = $req->file('image')->store('images', 's3');
+        Storage::disk('s3')->setVisibility($path, 'public');
 
 
         $company = Company::create([
@@ -255,7 +275,7 @@ class MainController extends Controller
             'password' => $password,
             'technology' => $data,
             'name' => $name,
-            'city' => $city,
+            'city_id' => $city,
             'img' => Storage::disk('s3')->url($path),
             'description' => $description,
             'worker' => $worker,
@@ -268,32 +288,29 @@ class MainController extends Controller
 
         Cookie::queue('auth', $authToken, 60 * 30);
 
-        $city = City::find($company->city);
-
-        $technology = Technology::whereIn('id', $company->technology)->get();
-
-        return view('page.company.profile', ['data' => $company, 'city' => $city, 'technology' => $technology]);
+        return redirect('/company/profile');
     }
 
     public function companyProfile(Request $req)
     {
         $company = $req->get('companyData');
-        $city = City::find($company->city);
         $tech = $company->technology;
+        $city = $company->city;
+        $allCity = City::all();
         $technology = Technology::whereIn('id', $tech)->get();
         $advert = $this->getComanyAdvert($req);
-        return view('page.company.profile', compact('company', 'advert','city', 'technology'));
+        return view('page.company.profile', compact('company', 'advert', 'city', 'technology', 'allCity'));
     }
 
-    public function advert(Request $req,$id)
+    public function advert(Request $req, $id)
     {
-        $advert = Advert::where('id',$id)->first();
+        $advert = Advert::where('id', $id)->first();
         $company = Company::find($advert->company_id)->first();
-        $tech = Technology::whereIn('id',$advert->technology)->get();
-        $city = City::find($advert->city);
+        $tech = Technology::whereIn('id', $advert->technology)->get();
+        $city = $advert->city;
         $adverts = Advert::take(20)->get();
 
-        return view('page.advert',compact('advert','city','company','tech','adverts'));
+        return view('page.advert', compact('advert', 'city', 'company', 'tech', 'adverts'));
     }
 
     public function logout(Request $req)
@@ -326,7 +343,8 @@ class MainController extends Controller
 
     }
 
-    public function addAdvert(Request $req){
+    public function addAdvert(Request $req)
+    {
         $company = $req->get('companyData');
         $title = $req->get('title');
         $type = $req->get('selecttype');
@@ -337,44 +355,43 @@ class MainController extends Controller
         $skill = $req->get('setSkill');
         $technology = $req->get('technology');
 
-        if($type == 'office')
-        {
+        if ($type == 'office') {
             $office = true;
             $home = false;
-        }elseif($type == 'home')
-        {
+        } elseif ($type == 'home') {
             $office = false;
             $home = true;
         }
 
 //        dd($req->all());
         Advert::create([
-             'title'=>$title,
-             'office'=>$office,
-             'home'=>$home,
-             'city'=>$city,
-             'minSallary'=>$minSallary,
-             'maxSallary'=>$maxSallary,
-             'description'=>$desc,
-             'skills'=>$skill,
-             'technology'=>$technology,
-             'company_id'=>$company->id,
+            'title' => $title,
+            'office' => $office,
+            'home' => $home,
+            'city_id' => $city,
+            'minSallary' => $minSallary,
+            'maxSallary' => $maxSallary,
+            'description' => $desc,
+            'skills' => $skill,
+            'technology' => $technology,
+            'company_id' => $company->id,
         ]);
 
-        return redirect('company/profile#advertCompany')->with('add','Вакансію створено');
+        $city = City::find($city);
+        $city->update(['advert'=> $city->advert+1]);
+
+        return redirect('company/profile#advertCompany')->with('add', 'Вакансію створено');
     }
 
-    public function getComanyAdvert(Request $req){
+    public function getComanyAdvert(Request $req)
+    {
         $company = $req->get('companyData');
 
-        $advert = Advert::where('company_id',$company->id)->get();
+        $advert = Advert::where('company_id', $company->id)->get();
 
         return $advert;
 
     }
 
-    public function allAdvert(Request $req){
-        $advert = Advert::all();
-        return view('page.all-advert',compact('advert'));
-    }
+
 }

@@ -18,6 +18,7 @@
                     <h1>Відомості про компанію</h1>
                     <div class="leftBlockParent">
                         <div class="leftBlock">
+                            <input type="file" hidden>
                             <img src="{{$company->img}}" width="350px" height="200px" alt="">
                             <div class="notChange">
                                 <label for="">Назва</label>
@@ -30,7 +31,7 @@
                         </div>
                         <div class="descriptionCompany">
                             <label for="description">Про компанію</label>
-                            <textarea name="description" id="description" cols="30" rows="10"></textarea>
+                            <textarea name="description" id="description" cols="30" rows="10">{{$company->description}}</textarea>
                         </div>
                     </div>
 
@@ -40,20 +41,20 @@
                     <h2>Місце праці</h2>
                     <span class='selectTypeWork'>
             <label for="office">Офіс</label>
-            <input type="checkbox" name="office" id="office"/>
+            <input type="checkbox" name="office" id="office" {{$company->office ? 'checked' : '' }}/>
         </span>
                     <span class='selectTypeWork'>
             <label for="home">Дім</label>
-            <input type="checkbox" id="home" name="home">
+            <input type="checkbox" id="home" name="home" {{$company->home ? 'checked' : '' }}>
         </span>
 
                     <div>
                         <h2>Технології</h2>
                         <div class="technoBody">
                             {{--                @dd($technology)--}}
-                            {{--                            @foreach($technology as $v)--}}
-                            @include('.include.technology')
-                            {{--                            @endforeach--}}
+                            @foreach($technology as $v)
+                                @include('.include.technology',['data'=>$v])
+                            @endforeach
                         </div>
                     </div>
                 </div>
@@ -61,7 +62,7 @@
             <button class="greenBtn saveChangeCompanyProfile" type="submit">Зберегти</button>
         </div>
         <div class=" menu-item profile-add-advert hidden" data-target="addAdvert">
-            @include('.page.add-advert',['company'=>$company])
+            @include('.page.add-advert',['company'=>$company,'city'=>$allCity])
         </div>
         <div class=" menu-item profile-company-advert hidden" data-target="companyAdvert">
             @foreach($advert as $v)

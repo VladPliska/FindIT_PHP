@@ -49,11 +49,11 @@
             <h2>Місце праці</h2>
             <div class='selectTypeWork'>
                 <label for="office">Офіс</label>
-                <input type="radio" name="settype" id="office" required/>
+                <input type="radio" name="settype" id="office" value="office" required {{$data->office ? 'checked' : ''}}/>
             </div>
             <div class='selectTypeWork'>
                 <label for="home">Дім</label>
-                <input type="radio" id="home" name="settype" required>
+                <input type="radio" id="home" name="settype" value="home" required {{$data->home ? 'checked' : ''}}>
             </div>
             <div class="editTechno">
                 <h2>Технології</h2>
@@ -67,6 +67,11 @@
         </form>
     </div>
 </div>
+@if(session('err'))
+    <h2 class='msg-suc loginErr'>{{session('err')}}</h2>
+@elseif(session('succ'))
+    <h2 class='msg-suc loginSucc'>{{session('succ')}}</h2>
+@endif
 
 
 </body>

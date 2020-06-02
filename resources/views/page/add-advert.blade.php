@@ -36,8 +36,9 @@
                         <h2>Виберіть місто:</h2>
                         <select name="city" id="" required>
                             <option value="0"  selected disabled>Виберіть місто</option>
-                            <option value="1">Ужгород</option>
-                            <option value="2">Виноградів</option>
+                            @foreach($city as $v)
+                                <option value="{{$v->id}}">{{$v->name}}</option>
+                            @endforeach
                         </select>
                     </div>
                     <div class='price-add-advert'>

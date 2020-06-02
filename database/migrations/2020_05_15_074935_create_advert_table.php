@@ -19,7 +19,7 @@ class CreateAdvertTable extends Migration
             $table->integer('company_id');
             $table->boolean('office');
             $table->boolean('home');
-            $table->integer('city');
+            $table->integer('city_id');
             $table->integer('minSallary');
             $table->integer('maxSallary');
             $table->text('description');
@@ -27,6 +27,7 @@ class CreateAdvertTable extends Migration
             $table->string('skills');
 
             $table->foreign('company_id')->references('id')->on('company');
+            $table->foreign('city_id')->references('id')->on('city');
             $table->timestamps();
         });
     }

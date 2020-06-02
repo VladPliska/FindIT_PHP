@@ -7,30 +7,23 @@
 <div>
     <div class='allAdvertBody  '>
         <div class='leftFilter  '>
-            <div class='cityBody  '>
+            <div class='cityBody '>
                 <h2>Місто</h2>
-                <div class='cityItem  '>
-                    <span>Ужгород</span><span>5</span>
-                </div>
-                <div class='cityItem  '>
-                    <span>Київ</span><span>15</span>
-                </div>
-                <div class='cityItem  '>
-                    <span>Виноградів</span><span>25</span>
-                </div>
-                <div class='cityItem  '>
-                    <span>Житомир</span><span>35</span>
-                </div>
+                @foreach($allCity as $v)
+                    <div class='cityItem  ' data-id="{{$v->id}}">
+                        <span>{{$v->name}}</span><span>{{$v->advert}}</span>
+                    </div>
+                @endforeach
             </div>
             <div class='typeWorkSpace  '>
                 <h2>Можливість праці з</h2>
                 <div>
                     <label for="office">Офісу</label>
-                    <input type="radio" id='office' name='workspace'/>
+                    <input type="radio" id='office' name='workspace' value="office"/>
                 </div>
                 <div>
                     <label for="home">Дому</label>
-                    <input type="radio" id='home' name='workspace'/>
+                    <input type="radio" id='home' name='workspace' value="home"/>
                 </div>
 
             </div>
@@ -38,44 +31,48 @@
                 <h2>Рівень знань</h2>
                 <div>
                     <label for="intern">Intern</label>
-                    <input type="checkbox" id='intern'/>
+                    <input type="radio" id='intern' name="level" value="1"/>
                 </div>
                 <div>
                     <label for="jun">Junior</label>
-                    <input type="checkbox" id='jun'/>
+                    <input type="radio" id='jun' name="level" value="2"/>
                 </div>
                 <div>
                     <label for="middle">Middle</label>
-                    <input type="checkbox" id='middle'/>
+                    <input type="radio" id='middle' name="level" value="3"/>
                 </div>
                 <div>
                     <label for="senior">Senior</label>
-                    <input type="checkbox" id='senior'/>
+                    <input type="radio" id='senior' name="level" value="4"/>
                 </div>
             </div>
             <div class='sallary  '>
                 <h2>Зарплатня</h2>
-                <div>
-                    <span>від $300</span><span>200</span>
+                <div class='selectFilterPrice' data-val="300">
+                    <span>від $300</span>
                 </div>
-                <div>
-                    <span>від $600</span><span>500</span>
+                <div class='selectFilterPrice' data-val="600">
+                    <span>від $600</span>
                 </div>
-                <div>
-                    <span>від $1000</span><span>500</span>
+                <div class='selectFilterPrice' data-val="1000">
+                    <span>від $1000</span>
                 </div>
-                <div>
-                    <span>від $1500</span><span>500</span>
+                <div class='selectFilterPrice' data-val="1500">
+                    <span>від $1500</span>
                 </div>
-                <div>
-                    <span>від $2500</span><span>500</span>
+                <div class='selectFilterPrice' data-val="2500">
+                    <span>від $2500</span>
                 </div>
             </div>
         </div>
-        <div class='forGrid  '>
-            <div class='headerFilter  '>
+        <div class='forGrid'>
+            <div class='headerFilter'>
                 <input type="text" placeholder='Назва компанії,вакансія' class='searchQuery  '/>
-                <button class='searchBtn  '>Знайти</button>
+                <button class='searchBtn'>Знайти</button>
+                <div class="queryFilter">
+                    <label for="checkFilter">Фільтрувати?</label>
+                    <input type="checkbox" id="checkFilter">
+                </div>
             </div>
             <div class='resultBody  '>
                 <h2>Результати пошуку:</h2>

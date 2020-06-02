@@ -24,7 +24,7 @@ body::-webkit-scrollbar {
 
 .header {
     //background.png-color:rgba(43, 43, 43,0.9);
-    border-bottom: 2px solid;
+    //border-bottom: 2px solid;
     //background: #36414C;
     //background: #383740;
     width: 100%;
@@ -62,7 +62,7 @@ ul {
 
 
 .advert {
-    margin: 10px ;
+    margin: 10px;
     position: relative;
     padding: 20px;
     width: 90%;
@@ -297,11 +297,13 @@ ul {
         display: flex;
         align-items: center;
         margin: 10px;
+
         h2 {
             display: block;
             max-height: 30px !important;
         }
-        span{
+
+        span {
             font-size: 22px;
             padding: 5px;
         }
@@ -1171,43 +1173,50 @@ h2 {
         border-radius: 10px;
         background: #383740;
         text-align: left;
-        h1{
+
+        h1 {
             margin: unset;
             text-align: center;
             font-weight: 300;
         }
-        a{
+
+        a {
             white-space: nowrap;
             margin: 10px;
             display: block;
             transition: all 0.4s ease;
             background: #8b8a99;
-            padding:10px;
+            padding: 10px;
             border-radius: 10px;
             color: #000;
-            &:hover{
+
+            &:hover {
                 cursor: pointer;
             }
-            &.active{
+
+            &.active {
                 background: #844446;
             }
         }
     }
-.company-profile-page-content{
-    transition: all 0.5s ease-in;
-    width: 88%;
-    padding: 10px;
-    border-radius: 10px;
-    margin: 20px auto;
-    background: #383740;
-    .profile-add-advert{
-        height: 100%;
 
+    .company-profile-page-content {
+        transition: all 0.5s ease-in;
+        width: 88%;
+        padding: 10px;
+        border-radius: 10px;
+        margin: 20px auto;
+        background: #383740;
+
+        .profile-add-advert {
+            height: 100%;
+
+        }
+
+        .menu-item {
+            opacity: 1;
+        }
     }
-    .menu-item{
-        opacity: 1;
-    }
-}
 }
 
 .company-profile-page {
@@ -1304,48 +1313,59 @@ h2 {
 .addImg-reg-company:hover {
     cursor: pointer;
 }
-input[disabled]{
+
+input[disabled] {
     background: slategray;
     border: unset;
 }
-input[type=radio]{
+
+input[type=radio] {
     box-shadow: unset;
 }
 
-.companyInfo-advert{
-    img{
+.companyInfo-advert {
+    img {
         width: 200px;
         height: 150px;
     }
 }
 
-.advert-filter-item-href{
-    h2{
+.advert-filter-item-href {
+    h2 {
         font-size: 24px;
     }
 }
 
-.selectTypeAcc{
+.selectTypeAcc {
     text-align: center;
     margin-bottom: 20px;
-    label,input{
+
+    label, input {
         font-size: 22px;
-        display:inline!important;
+        display: inline !important;
         width: 20px;
-        outline: none!important;
+        outline: none !important;
     }
 }
 
-.loginErr{
+.loginErr {
     color: rgb(203, 32, 32);
 }
-.user-img{
-    height:200px;
+
+.user-img {
+    height: 200px;
     width: 350px;
-    &:hover{
-        cursor:pointer;
+
+    &:hover {
+        cursor: pointer;
     }
 }
-img{
-    object-fit:cover;
+
+img {
+    object-fit: cover;
+}
+
+.loginSucc {
+    text-align: center;
+    color: #66CC60;
 }

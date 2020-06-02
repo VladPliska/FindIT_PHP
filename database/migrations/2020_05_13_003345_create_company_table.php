@@ -20,13 +20,17 @@ class CreateCompanyTable extends Migration
             $table->string('password');
             $table->float('score')->nullable();
             $table->string('img');
-            $table->integer('city');
+            $table->integer('city_id');
             $table->boolean('office')->nullable();
             $table->boolean('home')->nullable();
             $table->integer('workers')->nullable();
             $table->text('description');
             $table->json('technology');
             $table->string('token')->nullable();
+
+            $table->foreign('city_id')->references('id')->on('city');
+
+
             $table->timestamps();
         });
     }

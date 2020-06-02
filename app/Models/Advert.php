@@ -8,7 +8,7 @@ class Advert extends Model
 {
     protected $table = 'advert';
     protected $fillable = [
-        'title','company_id','office','home','city','minSallary','maxSallary','description','technology','skills'
+        'title','company_id','office','home','city_id','minSallary','maxSallary','description','technology','skills'
     ];
 
     protected $casts = [
@@ -16,6 +16,10 @@ class Advert extends Model
     ];
 
     public function company(){
-        return $this->belongsTo('App\models\Company');
+        return $this->belongsTo('App\Models\Company');
     }
+    public function city(){
+        return $this->belongsTo('App\Models\City');
+    }
+
 }
