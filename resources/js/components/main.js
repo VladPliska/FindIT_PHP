@@ -120,3 +120,8 @@ $( document ).ready(function() {
     let link = $('.profile-company-menu').find('a[href*='+hash[1]+']');
     link.trigger('click');
 });
+
+$(document).on('change', '.changeImg', function (e) {
+    let a = $('#image')[0].files[0];
+    $('.changeImg-parent').attr('src', URL.createObjectURL(a));
+})

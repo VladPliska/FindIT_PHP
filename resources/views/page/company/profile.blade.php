@@ -18,7 +18,7 @@
                     <h1>Відомості про компанію</h1>
                     <div class="leftBlockParent">
                         <div class="leftBlock">
-                            <img src="/storage/img/{{$company->img}}" width="350px" height="200px" alt="">
+                            <img src="{{$company->img}}" width="350px" height="200px" alt="">
                             <div class="notChange">
                                 <label for="">Назва</label>
                                 <input type="text" value="{{$company->name}}"><br>

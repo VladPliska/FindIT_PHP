@@ -13,10 +13,10 @@ class CreateAdvertTable extends Migration
      */
     public function up()
     {
-        Schema::create('adverts', function (Blueprint $table) {
+        Schema::create('advert', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->integer('company');
+            $table->integer('company_id');
             $table->boolean('office');
             $table->boolean('home');
             $table->integer('city');
@@ -25,6 +25,8 @@ class CreateAdvertTable extends Migration
             $table->text('description');
             $table->json('technology');
             $table->string('skills');
+
+            $table->foreign('company_id')->references('id')->on('company');
             $table->timestamps();
         });
     }

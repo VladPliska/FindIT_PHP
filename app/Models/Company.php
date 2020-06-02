@@ -19,5 +19,8 @@ class Company extends Model
 //    protected $casts = [
 //        'email_verified_at' => 'datetime',
 //    ];
+    public function advert(){
+        return $this->hasMany('App\models\Advert');
+    }
 
 }

@@ -17,8 +17,7 @@ class RedirectIfAuthenticated
     public function handle($request, Closure $next, $guard = null)
     {
 
-        $auth  =Cookie::get('auth');
-
+        $auth = Cookie::get('auth');
         if(!empty($auth)){
             $user = User::where("token",$auth)->first();
 

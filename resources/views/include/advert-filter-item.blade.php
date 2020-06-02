@@ -8,6 +8,6 @@
     </span>
         <a class='link1' href='/resume'>Відгукнутися</a>
         <h2 class='price'>${{$advert->minSallary ?? 0}} - ${{$advert->maxsallary ?? 100}}</h2>
-        <img src="{{$company != null ? '/storage/img/'.$company->img : 'https://picsum.photos/350/200'}}" class='companyImg' alt=""/>
+        <img src="{{$company != null ? $company->img : 'https://picsum.photos/350/200'}}" class='companyImg' alt=""/>
     </div>
 </a>

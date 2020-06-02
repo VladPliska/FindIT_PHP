@@ -19445,6 +19445,10 @@ $(document).ready(function () {
   var link = $('.profile-company-menu').find('a[href*=' + hash[1] + ']');
   link.trigger('click');
 });
+$(document).on('change', '.changeImg', function (e) {
+  var a = $('#image')[0].files[0];
+  $('.changeImg-parent').attr('src', URL.createObjectURL(a));
+});
 
 /***/ }),
 
@@ -19466,8 +19470,8 @@ $(document).ready(function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /home/vlad/Portfolio/Praktuka/findIt/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /home/vlad/Portfolio/Praktuka/findIt/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /home/vlad/Portfolio/FindIT_PHP/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /home/vlad/Portfolio/FindIT_PHP/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

@@ -14,6 +14,15 @@
         <form action="/login" method="POST">
             @csrf
             <div class='loginBody'>
+                <div class="selectTypeAcc">
+                    <h2>Виберіть тип облікового запису</h2>
+                    <div>
+                        <label for="worker">Робітник</label>
+                        <input type='radio' value="worker" name="type" id="worker" checked>
+                        <label for="company">Компанія</label>
+                        <input type='radio' value="company" name="type" id="company">
+                    </div>
+                </div>
                 <div class='inputBlock'>
                     <label for="username">Логін або email</label><br/>
                     <input type="text" id='username' name="login"/>
@@ -37,6 +46,10 @@
                 <h3 class='createAcc'>Створіть акаунт.</h3>
             </a>
         </div>
+
+        @if(session('err'))
+            <h2 class='msg-suc loginErr'>{{session('err')}}</h2>
+        @endif
     </div>
 </div>
 

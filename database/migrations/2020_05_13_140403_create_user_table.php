@@ -27,8 +27,9 @@ class CreateUserTable extends Migration
             $table->boolean('home')->nullable();
             $table->json('technology');
             $table->string('role');
+            $table->text('resume')->nullable();
             $table->string('token');
-            $table->integer('experience');
+            $table->string('img')->nullable();
 
             $table->timestamps();
         });

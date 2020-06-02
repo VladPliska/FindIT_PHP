@@ -20,6 +20,10 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class MainController extends Controller
 {
+
+
+
+    /////////////////WORKER FUNCTION
     public function signUp(Request $request)
     {
         $name = $request->get('name');
@@ -33,9 +37,13 @@ class MainController extends Controller
         $workSpace = $request->get('selecttype');
         $role = 'worker';
         $technology = $request->get('technology');
-//        $data
 
         $password = crc32($password);
+
+        $rand = rand(mb_strlen($email), 200);
+        $authToken = hash('md5', $rand);
+
+        Cookie::queue('auth', $authToken, 60 * 30);
 
         $data = User::create([
             'name' => $name,
@@ -48,28 +56,101 @@ class MainController extends Controller
             'sallary' => $sallary,
             'home' => true,
             'role'=>$role,
-            'token'=>0,
+            'token'=>$authToken,
             'technology' => $technology
         ]);
 
-        $tech = Technology::whereIn('id',$technology)->get();
-        return view('page.profile', ['data' => $data,'tech'=>$tech]);
+        return redirect('worker/profile');
     }
 
-    public function profile(Request $req)
+    public function saveImgResume(Request $req)
     {
-        $data = User::first();
-        $tech = Technology::all();
+        $user = $req->get('userData');
+        $resume = $req->get('resume');
 
-        return view('page.profile', ['data' => $data, 'tech' => $tech]);
+        if ($req->file('img') != null) {
+            $path = $req->file('image')->store('images', 's3');
+            Storage::disk('s3')->setVisibility($path, 'public');
+
+            $user->update([
+                'img' => Storage::disk('s3')->url($path),
+                'resume' => $resume
+            ]);
+        } else {
+            $user->update([
+                'resume' => $resume
+            ]);
+        }
+
+
+        return back()->with('succ', 'Профіль оновленно');
+    }
+
+    public function workerChangePassword(Request $req){
+        $user = $req->get('userData');
+        $oldpass = $req->get('old');
+        $rep = $req->get('rep');
+        $new = $req->get('new');
+
+        $oldpass = crc32($oldpass);
+
+        if($oldpass != $user->password){
+            return back()->with('err','Старий пароль вказано не вірно');
+        }
+        if($rep != $new){
+            return back()->with('err','Паролі не співпадають');
+        }
+
+        $new = crc32($new);
+
+        $user->update(['pasword'=>$new]);
+
+        return redirect('worker/profile')->with('succ','Пароль змінено');
+    }
+
+    public function changeWorkerOtherData(Request $req){
+        $sallary = $req->get('sallary');
+        $exp = $req->get('exp');
+        $workspace = $req->get('settype');
+        $user = $req->get('userData');
+
+        if($workspace == 'home'){
+            $user->update([
+                'sallary' => $sallary,
+                'experience' =>$exp,
+                'home'=>true,
+                'office'=>false
+            ]);
+        }else{
+            $user->update([
+                'sallary' => $sallary,
+                'experience' =>$exp,
+                'home'=>false,
+                'office'=>true
+            ]);
+        }
+        return  redirect('worker/profile')->with('succ','Додаткову інформацію змінено');
     }
 
     public function workerSignUp()
     {
         $data = Technology::all();
-//        dd($data);
         return view('page/signup/worker', compact('data'));
+    } //???????
+
+    public function workerProfile(Request $req)
+    {
+        $user = $req->get('userData');
+        if($user == null)
+        {
+            return redirect('/login');
+        }
+        $tech = Technology::whereIn('id',$user->technology)->get();
+
+
+        return view('page.profile', ['data' => $user, 'tech' => $tech]);
     }
+
 
     public function login(Request $req)
     {
@@ -77,43 +158,58 @@ class MainController extends Controller
         $pass = $req->get('pass');
 
         $pass = crc32($pass);
+        $type = $req->get('type');
 
-        $user = User::where([
-            ['email', '=', $login],
-            ['password', '=', $pass]
-        ])->orWhere([
-            ['username', '=', $login],
-            ['password', '=', $pass]
-        ])->first();
-//        dd($user);
-        if ($user != null) {
-            $tech = Technology::whereIn('id',$user->technology)->get();
+        if($type == 'worker'){
+            $user = User::where([
+                ['email', '=', $login],
+                ['password', '=', $pass]
+            ])->orWhere([
+                ['username', '=', $login],
+                ['password', '=', $pass]
+            ])->first();
+            if ($user != null) {
+                $rand = rand(mb_strlen($user->email), 200);
+                $authToken = hash('md5', $rand);
+                $user->update(['token' => $authToken]);
 
-            return view('page.profile', ['data' => $user,'tech'=>$tech]);
+                Cookie::queue('auth', $authToken, 60 * 30);
+
+//                return view('page.profile', ['data' => $user,'tech'=>$tech]);
+                return redirect('worker/profile');
+            }else{
+
+                return back()->with('err','Не вдалося увійти,спробуйте інший логін або пароль');
+            }
         }
+        else if($type=='company'){
+            $pass = $req->get('pass');
+            $pass = crc32($pass);
 
-        $pass = $req->get('pass');
-        $pass = crc32($pass);
+            $company = Company::where([
+                ['email', '=', $login],
+                ['password', '=', $pass]])->first();
+            if ($company) {
+                $city = City::where('id', $company->city)->first();
+                $tech = $company->technology;
+                $technology = Technology::whereIn('id', $tech)->get();
 
-        $company = Company::where([
-            ['email', '=', $login],
-            ['password', '=', $pass]])->first();
-//        dd($company);
-        if ($company) {
+                $rand = rand(mb_strlen($company->email), 200);
+                $authToken = hash('md5', $rand);
+                $company->update(['token' => $authToken]);
 
-            $city = City::where('id', $company->city)->first();
-            $tech = $company->technology;
-            $technology = Technology::whereIn('id', $tech)->get();
+                Cookie::queue('auth', $authToken, 60 * 30);
 
-            $rand = rand(mb_strlen($company->email), 200);
-            $authToken = hash('md5', $rand);
-            $company->update(['token' => $authToken]);
-
-            Cookie::queue('auth', $authToken, 60 * 30);
-return redirect('/company/profile');
-
+                return redirect('/company/profile');
 //            return view('page.company.profile', ['data' => $company, 'city' => $city, 'technology' => $technology]);
+            }else{
+                return back()->with('err','Не вдалося увійти,спробуйте інший логін або пароль');
+            }
         }
+
+
+
+
         return view('page.login');
     }
 
@@ -148,7 +244,11 @@ return redirect('/company/profile');
         $password = $req->get('password');
 
         $password = crc32($password);
-        Storage::disk('public')->put('img', $img);
+//        Storage::disk('public')->put('img', $img);
+
+        $path = $req->file('image')->store('images','s3');
+        Storage::disk('s3')->setVisibility($path,'public');
+
 
         $company = Company::create([
             'email' => $email,
@@ -156,7 +256,7 @@ return redirect('/company/profile');
             'technology' => $data,
             'name' => $name,
             'city' => $city,
-            'img' => $img->hashName(),
+            'img' => Storage::disk('s3')->url($path),
             'description' => $description,
             'worker' => $worker,
             'home' => $home,
@@ -167,8 +267,11 @@ return redirect('/company/profile');
         $company->update(['token' => $authToken]);
 
         Cookie::queue('auth', $authToken, 60 * 30);
+
         $city = City::find($company->city);
+
         $technology = Technology::whereIn('id', $company->technology)->get();
+
         return view('page.company.profile', ['data' => $company, 'city' => $city, 'technology' => $technology]);
     }
 
@@ -184,9 +287,8 @@ return redirect('/company/profile');
 
     public function advert(Request $req,$id)
     {
-//        dd($id);
         $advert = Advert::where('id',$id)->first();
-        $company = Company::find($advert->company)->first();
+        $company = Company::find($advert->company_id)->first();
         $tech = Technology::whereIn('id',$advert->technology)->get();
         $city = City::find($advert->city);
         $adverts = Advert::take(20)->get();
@@ -256,7 +358,7 @@ return redirect('/company/profile');
              'description'=>$desc,
              'skills'=>$skill,
              'technology'=>$technology,
-             'company'=>$company->id,
+             'company_id'=>$company->id,
         ]);
 
         return redirect('company/profile#advertCompany')->with('add','Вакансію створено');
@@ -265,7 +367,7 @@ return redirect('/company/profile');
     public function getComanyAdvert(Request $req){
         $company = $req->get('companyData');
 
-        $advert = Advert::where('company',$company->id)->get();
+        $advert = Advert::where('company_id',$company->id)->get();
 
         return $advert;
 

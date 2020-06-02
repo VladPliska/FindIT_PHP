@@ -430,7 +430,7 @@ a {
   text-align: left;
   background: #383740;
   width: 450px;
-  height: 300px;
+  height: 420px;
   border-radius: 10px;
   padding: 20px;
 }
@@ -1268,6 +1268,37 @@ input[type=radio] {
 
 .advert-filter-item-href h2 {
   font-size: 24px;
+}
+
+.selectTypeAcc {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.selectTypeAcc label,
+.selectTypeAcc input {
+  font-size: 22px;
+  display: inline !important;
+  width: 20px;
+  outline: none !important;
+}
+
+.loginErr {
+  color: #cb2020;
+}
+
+.user-img {
+  height: 200px;
+  width: 350px;
+}
+
+.user-img:hover {
+  cursor: pointer;
+}
+
+img {
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 
 .main {
