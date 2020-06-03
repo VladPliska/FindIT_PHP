@@ -30,60 +30,70 @@ class MainController extends Controller
 
     public function allAdvert(Request $req)
     {
-        $advert = Advert::where('id','>',0)->paginate(3);
+
         $allCity = City::orderBy('advert', 'desc')->take(20)->get();
 
-        return view('page.all-advert', compact('advert','allCity'));
+        if ($req->get('company')) {
+            $advert = Advert::where('company_id',$req->get('company'))->paginate(10);
+        }else if($req->get('mainSearch')){
+            $city = $req->get('city');
+            $query = $req->get('query');
+            $advert = Advert::where([['title','ilike','%'.$query.'%'],['city_id',intval($city)]])->paginate(10);
+        } else {
+            $advert = Advert::where('id', '>', 0)->paginate(10);
+        }
+
+        return view('page.all-advert', compact('advert', 'allCity'));
     }
 
     public function search(Request $req)
     {
-        $filterOn =$req->get('filterOn');
+        $filterOn = $req->get('filterOn');
         $query = $req->get('query');
 //        dd($filterOn);
 
-        if($filterOn == 'false'){
-            $adverts = Advert::where('title','ilike','%'.$query.'%')->get() ;
+        if ($filterOn == 'false') {
+            $adverts = Advert::where('title', 'ilike', '%' . $query . '%')->get();
 
-            $view = view('.include/advert-filter-item',['data'=>$adverts,'forSearch'=>true])->render();
+            $view = view('.include/advert-filter-item', ['data' => $adverts, 'forSearch' => true])->render();
             return response()->json([
-                'view'=>$view
+                'view' => $view
             ]);
-        }else{
+        } else {
             $city = $req->get('city');
             $space = $req->get('workspace');
             $level = $req->get('level');
             $price = $req->get('price');
 
-            $queryText = "select id from advert where title ilike '%".$query."%'";
+            $queryText = "select id from advert where title ilike '%" . $query . "%'";
 
-            if(!empty($city)){
-                $queryText .= " and city_id='".$city."'";
+            if (!empty($city)) {
+                $queryText .= " and city_id='" . $city . "'";
             }
-            if(!empty($space)){
-                if($space == 'home'){
+            if (!empty($space)) {
+                if ($space == 'home') {
                     $queryText .= ' and home = true';
-                }else if($space == 'office'){
+                } else if ($space == 'office') {
                     $queryText .= ' and office = true';
                 }
             }
-            if(!empty($level)){
-                $queryText .= " and skills='".$level."'";
+            if (!empty($level)) {
+                $queryText .= " and skills='" . $level . "'";
             }
-            if(!empty($price)){
-                $queryText .= " and minsallary >'".$price."' "  ;
+            if (!empty($price)) {
+                $queryText .= " and minsallary >'" . $price . "' ";
             }
 
-            $res =  DB::select($queryText);
-            $id =[];
-            foreach($res as $v){
-                array_push($id,$v->id);
+            $res = DB::select($queryText);
+            $id = [];
+            foreach ($res as $v) {
+                array_push($id, $v->id);
             }
-            $data = Advert::whereIn('id',$id)->get();
+            $data = Advert::whereIn('id', $id)->get();
 
-            $view = view('.include/advert-filter-item',['data'=>$data,'forSearch'=>true])->render();
+            $view = view('.include/advert-filter-item', ['data' => $data, 'forSearch' => true])->render();
             return response()->json([
-                'view'=>$view
+                'view' => $view
             ]);
         }
 
@@ -223,16 +233,19 @@ class MainController extends Controller
 
 
     ///////////////////company
-   public function allCompany(Request $req){
-        return view('page.all-company');
-   }
-   public function companyPublicProfile(Request $req,$id){
+    public function allCompany(Request $req)
+    {
+        $company = Company::paginate(10);
+        return view('page.all-company', compact('company'));
+    }
 
-        $company = Company::where('id',$id)->first();
-        $technology = Technology::whereIn('id',$company->technology)->get();
-        return view('page.company',compact('company','technology'));
-   }
+    public function companyPublicProfile(Request $req, $id)
+    {
 
+        $company = Company::where('id', $id)->first();
+        $technology = Technology::whereIn('id', $company->technology)->get();
+        return view('page.company', compact('company', 'technology'));
+    }
 
 
     ///
@@ -273,7 +286,7 @@ class MainController extends Controller
                 ['email', '=', $login],
                 ['password', '=', $pass]])->first();
             if ($company) {
-                $city =$company->city;
+                $city = $company->city;
                 $tech = $company->technology;
                 $technology = Technology::whereIn('id', $tech)->get();
 
@@ -367,7 +380,7 @@ class MainController extends Controller
         $company = $advert->company;
         $tech = Technology::whereIn('id', $advert->technology)->get();
         $city = $advert->city;
-        $adverts = Advert::where('company_id',$advert->company_id)->get();
+        $adverts = Advert::where('company_id', $advert->company_id)->get();
         return view('page.advert', compact('advert', 'city', 'company', 'tech', 'adverts'));
     }
 
@@ -436,7 +449,7 @@ class MainController extends Controller
         ]);
 
         $city = City::find($city);
-        $city->update(['advert'=> $city->advert+1]);
+        $city->update(['advert' => $city->advert + 1]);
 
         return redirect('company/profile#advertCompany')->with('add', 'Вакансію створено');
     }

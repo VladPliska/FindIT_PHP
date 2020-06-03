@@ -3,7 +3,7 @@
 @include('.include/header')
 <div>
     <div class='companyBody'>
-        <div class='back'>
+        <div class='back backBtnBody'>
             <div class='trek'></div>
             <div class='backBtn'>Back</div>
         </div>
@@ -47,11 +47,9 @@
             <div class="company-advert-item-new">
                 <h2>Вакансії компанії:</h2>
                 @foreach($company->advert as $v)
-                                        @include('.include.advert-item',['advert' =>$v])
+                    @include('.include.advert-item',['advert' =>$v])
                 @endforeach
-{{--                    @include('.include.advert-item')--}}
-{{--                    @include('.include.advert-item')--}}
-                            <a href='/filter'>Показати більше...</a>
+                <a href='/all-advert?company={{$company->id}}'>Показати більше...</a>
             </div>
         </div>
 

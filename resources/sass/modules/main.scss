@@ -786,6 +786,8 @@ h2 {
 }
 
 .technoBody {
+    width: 400px;
+    margin: 0 auto;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     row-gap: 5px;
@@ -1458,4 +1460,16 @@ img {
     width: 350px;
     height: 200px;
     border-radius: 10px;
+}
+.removeLinkStyle{
+    color:unset;
+    font-size: unset;
+}
+.backBtnBody{
+    cursor: pointer;
+}
+.ce{
+    display: block;
+    margin: 20px auto;
+    text-align: center;
 }

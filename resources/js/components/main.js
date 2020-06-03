@@ -180,3 +180,22 @@ $('.filterStart').click(function (e) {
     })
 
 })
+
+$('.backBtnBody').click(function (e) {
+    history.back();
+})
+
+$('.homeSearch').click(function(e){
+        // cityHome,homeQuery
+    let query = $('.homeQuery').val();
+    let city = $('.cityHome').val();
+
+    if(query == '' || city == null){
+        popup.fire({
+            title:'Введіть назву вакансії та виберіть місто'
+        })
+    }else{
+        location.href = '/all-advert?mainSearch=true&query='+query+"&city="+city;
+    }
+
+})

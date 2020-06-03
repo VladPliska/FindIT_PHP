@@ -7,14 +7,14 @@
         <div class='filter  '>
             <div class='find  '>Знайти роботу</div>
             <div class='searchBlock  '>
-                <input type="text" placeholder="Введіть назву вакансії"/>
-                <select class='city  ' name="" id="">
+                <input type="text" placeholder="Введіть назву вакансії" class="homeQuery"/>
+                <select class='cityHome' name="" id="">
                     <option value="0" selected disabled>Виберіть місто</option>
                     @foreach($city as $v)
                         <option value="{{$v->id}}" >{{$v->name}}</option>
                     @endforeach
                 </select>
-                <button name="" id="">Пошук</button>
+                <button name="" id="" class="homeSearch">Пошук</button>
             </div>
         </div>
         <div class='allItems'>

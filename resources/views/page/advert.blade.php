@@ -8,16 +8,17 @@
             <h2 class="title-advert">{{$advert->title ?? 'title'}}</h2>
             <h3 class="sallary">${{$advert->minsallary ?? 0}} - ${{$advert->maxsallary ?? 1}}</h3>
         </div>
-        <div class="companyInfo-advert">
-            <div>
-                <h2 class="companyName-advert">{{$company->name ?? 'company'}}</h2>
-                <h3 class="city-advert">{{$city->name ?? 'city'}}</h3>
+        <a href="/company/{{$company->id}}" class="removeLinkStyle">
+            <div class="companyInfo-advert">
+                <div>
+                    <h2 class="companyName-advert">{{$company->name ?? 'company'}}</h2>
+                    <h3 class="city-advert">{{$city->name ?? 'city'}}</h3>
+                </div>
+                <div>
+                    <img src="{{$advert->company->img}}" alt="">
+                </div>
             </div>
-            <div>
-                <img src="{{$advert->company->img}}" alt="">
-            </div>
-
-        </div>
+        </a>
         <div class="sendMail">
             <div>
                 <button class="answer">Відповісти</button>
@@ -43,12 +44,13 @@
         </div>
     </div>
     @if(count($adverts) != 0)
-    <div class='advertEqual'>
-        <h2 style="text-align: center">Схожі вакансії</h2>
-        @foreach($adverts as $v)
-            @include('.include.advert-item',['advert'=>$v])
-        @endforeach
-    </div>
+        <div class='advertEqual'>
+            <h2 style="text-align: center">Схожі вакансії</h2>
+            @foreach($adverts as $v)
+                @include('.include.advert-item',['advert'=>$v])
+            @endforeach
+            <a href="/all-advert" class="ce">Переглянути більше...</a>
+        </div>
     @endif
 
 </div>
