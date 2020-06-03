@@ -116,9 +116,7 @@ ul {
     //display: inline-block;
     font-size: 20px;
     max-width: 70%;
-    height: 70px;
     overflow: hidden;
-    display: -webkit-box;
     -webkit-line-clamp: 3; /* сколько оставить строк */
     -webkit-box-orient: vertical;
 }
@@ -278,6 +276,7 @@ ul {
     width: 500px;
     //height: 150px;
     background: #706F7F;
+    color:#fff;
     margin: 10px auto;
     border-radius: 10px;
     position: relative;
@@ -286,7 +285,8 @@ ul {
     padding: 10px;
 
     &:hover {
-        cursor: pointer
+        cursor: pointer;
+        color:unset;
     }
 
     h2 {
@@ -1397,4 +1397,65 @@ img {
     span{
         color: #ee7777!important;
     }
+}
+.recomendVacancy{
+    width: 150px;
+    height: 100px;
+}
+.pagination{
+    position: relative;
+    width: 500px;
+    margin: 40px auto;
+    li{
+        display: inline-block;
+        color: #fff;
+    }
+    .page-item{
+        margin: 10px;
+        font-size: 25px!important;
+
+        a{
+            color:#fff!important;
+        }
+    }
+    .page-item.active{
+        color:#3aa5e7;
+    }
+}
+
+////all company
+
+.allCompanyBody{
+    background: #383740;
+    display: grid;
+    margin: 30px auto;
+    padding: 20px;
+    border-radius: 20px;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    .companyItem{
+        background: #4d4d58;
+        padding: 40px 20px 10px;
+        border-radius: 10px;
+        position: relative;
+        margin: 10px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        .company-img{
+            border-radius: 10px;
+            width: 200px;
+            height: 120px;
+        }
+        .reit{
+            position: absolute;
+            top: 0;
+            right: 10px;
+            font-size: 20px;
+        }
+    }
+}
+//////
+.publicCompanyProfileImg{
+    width: 350px;
+    height: 200px;
+    border-radius: 10px;
 }

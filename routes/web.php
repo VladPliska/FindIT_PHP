@@ -24,9 +24,6 @@ Route::get('/signup/worker',function(){
 Route::get('/forgotPass',function(){
     return view('page/forgotPass');
 });
-Route::get('/company',function(){
-    return view('page/company');
-});
 
 
 Route::get('/signup/worker','MainController@workerSignUp');
@@ -66,3 +63,7 @@ Route::post('worker/changePassword','MainController@workerChangePassword');
 Route::post('worker/changeDetail','MainController@changeWorkerOtherData');
 
 Route::post('/search','MainController@search');
+
+Route::get('/all-company','MainController@allCompany');
+
+Route::get('/company/{id}','MainController@companyPublicProfile');

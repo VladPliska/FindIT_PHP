@@ -31,7 +31,7 @@
                             </div>
                             <div class='mobileGetText  '>Read more...</div>
                         </div>
-                        <div class='price'>{{$v->maxSallary}}$</div>
+                        <div class='price'>{{$v->maxsallary}}$</div>
                     </div>
                 </a>
             @endforeach

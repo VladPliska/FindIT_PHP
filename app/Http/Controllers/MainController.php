@@ -30,7 +30,7 @@ class MainController extends Controller
 
     public function allAdvert(Request $req)
     {
-        $advert = Advert::all();
+        $advert = Advert::where('id','>',0)->paginate(3);
         $allCity = City::orderBy('advert', 'desc')->take(20)->get();
 
         return view('page.all-advert', compact('advert','allCity'));
@@ -43,7 +43,7 @@ class MainController extends Controller
 //        dd($filterOn);
 
         if($filterOn == 'false'){
-            $adverts = Advert::where('title','ilike','%'.$query.'%')->get();
+            $adverts = Advert::where('title','ilike','%'.$query.'%')->get() ;
 
             $view = view('.include/advert-filter-item',['data'=>$adverts,'forSearch'=>true])->render();
             return response()->json([
@@ -223,6 +223,18 @@ class MainController extends Controller
 
 
     ///////////////////company
+   public function allCompany(Request $req){
+        return view('page.all-company');
+   }
+   public function companyPublicProfile(Request $req,$id){
+
+        $company = Company::where('id',$id)->first();
+        $technology = Technology::whereIn('id',$company->technology)->get();
+        return view('page.company',compact('company','technology'));
+   }
+
+
+
     ///
     public function login(Request $req)
     {
@@ -261,7 +273,7 @@ class MainController extends Controller
                 ['email', '=', $login],
                 ['password', '=', $pass]])->first();
             if ($company) {
-                $city = City::where('id', $company->city)->first();
+                $city =$company->city;
                 $tech = $company->technology;
                 $technology = Technology::whereIn('id', $tech)->get();
 
@@ -352,11 +364,10 @@ class MainController extends Controller
     public function advert(Request $req, $id)
     {
         $advert = Advert::where('id', $id)->first();
-        $company = Company::find($advert->company_id)->first();
+        $company = $advert->company;
         $tech = Technology::whereIn('id', $advert->technology)->get();
         $city = $advert->city;
-        $adverts = Advert::take(20)->get();
-
+        $adverts = Advert::where('company_id',$advert->company_id)->get();
         return view('page.advert', compact('advert', 'city', 'company', 'tech', 'adverts'));
     }
 

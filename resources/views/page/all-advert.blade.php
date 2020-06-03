@@ -2,8 +2,6 @@
 <body>
 @include('.include/header')
 
-</body>
-
 <div>
     <div class='allAdvertBody  '>
         <div class='leftFilter  '>
@@ -76,11 +74,12 @@
             </div>
             <div class='resultBody  '>
                 <h2>Результати пошуку:</h2>
-                <div class="forSearchBody">
+                <div class="forSearchBody" style="position: relative">
                     @foreach($advert as $v)
                         @include('.include/advert-filter-item',['advert'=>$v])
                     @endforeach
                 </div>
+                {{$advert->links()}}
 
             </div>
         </div>

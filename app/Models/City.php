@@ -14,7 +14,7 @@ class City extends Model
     public function cityCompany(){
         return $this->hasMany('App\Models\Company');
     }
-    public function advertCity(){
+    public function advert(){
         return $this->hasMany('App\Models\Advert');
     }
 

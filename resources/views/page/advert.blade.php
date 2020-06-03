@@ -14,7 +14,7 @@
                 <h3 class="city-advert">{{$city->name ?? 'city'}}</h3>
             </div>
             <div>
-                <img src="/storage/img/{{$company->img}}" alt="">
+                <img src="{{$advert->company->img}}" alt="">
             </div>
 
         </div>
@@ -42,11 +42,14 @@
             <h2>{{$advert->description ?? 'test'}}</h2>
         </div>
     </div>
+    @if(count($adverts) != 0)
     <div class='advertEqual'>
+        <h2 style="text-align: center">Схожі вакансії</h2>
         @foreach($adverts as $v)
             @include('.include.advert-item',['advert'=>$v])
         @endforeach
     </div>
+    @endif
 
 </div>
 

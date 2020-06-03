@@ -7,7 +7,7 @@
         <a href='/' class='headerUrl'>Головна</a>
         <a  href='/all-advert' class='headerUrl'>Пропозиції</a>
         <a  href='/news'  class='headerUrl' >Новини</a>
-        <a  href='/company'  class= 'headerUrl'  >Компанії</a>
+        <a  href='/all-company'  class= 'headerUrl'  >Компанії</a>
         @if($company == null && $user == null)
             <a  href='/login'  class= 'headerUrl'  >Увійти</a>
         @elseif($company)
