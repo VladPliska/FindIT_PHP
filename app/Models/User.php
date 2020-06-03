@@ -8,11 +8,13 @@ class User extends Model
 {
     protected $table = 'user';
     protected $fillable = [
-       'token','name','surname','phone','username','sallary','experience', 'office','home','technology','role','email','password','img','resume'
+       'token','name','surname','phone','username','sallary','experience', 'office','home','technology','selectadvert','role','email','password','img','resume'
     ];
 
     protected $casts = [
         'technology' => 'array',
+        'selectadvert' => 'array',
+
     ];
 
 

@@ -22693,6 +22693,29 @@ $('.homeSearch').click(function (e) {
     location.href = '/all-advert?mainSearch=true&query=' + query + "&city=" + city;
   }
 });
+$(document).on('click', '.selectAdvert', function (e) {
+  var id = $(this).attr('data-id');
+  var curr = $(this);
+  $.ajax({
+    type: "POST",
+    headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    },
+    url: '/changeselectAdvert',
+    data: {
+      id: id
+    },
+    success: function success(res) {
+      if (res.add) {
+        curr.removeClass('far');
+        curr.addClass('fas');
+      } else {
+        curr.addClass('far');
+        curr.removeClass('fas');
+      }
+    }
+  });
+});
 
 /***/ }),
 

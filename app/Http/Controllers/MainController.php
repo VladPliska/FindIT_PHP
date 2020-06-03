@@ -229,6 +229,58 @@ class MainController extends Controller
         return view('page.profile', ['data' => $user, 'tech' => $tech]);
     }
 
+    public function addAdvertToFavorite(Request $req){
+
+        $id = $req->get('id');
+        $id = 1;
+        $user = $req->get('userData');
+
+        $selectadvert = $user->selectadvert;
+
+        if($selectadvert != null){
+
+            $exist = false;
+            foreach ($selectadvert as $v){
+                if($id == $v){
+                $exist = true;
+                }
+            }
+
+            if($exist){
+                //code for remove select element
+                $new =[];
+                foreach($selectadvert as $v){
+                    if($id != $v){
+                        array_push($new,$id);
+                    }
+                }
+                $user->update(['selectadvert'=>$new]);
+                return response()->json([
+                    'add'=>false,
+                    'remove' =>true
+                ]);
+
+            }else{
+                array_push($selectadvert,$id);
+                $user->update(['selectadvert'=>$selectadvert]);
+                return response()->json([
+                    'add'=>true,
+                    'remove' =>false
+                ]);
+
+            }
+
+        }else{
+            $user->update(['selectadvert'=>[$id]]);
+            return response()->json([
+                'add'=>true,
+                'remove' =>false
+            ]);
+        }
+
+        return $user;
+    }
+
     //////////////////////
 
 
@@ -376,12 +428,23 @@ class MainController extends Controller
 
     public function advert(Request $req, $id)
     {
+        $user = $req->get('userData');
         $advert = Advert::where('id', $id)->first();
         $company = $advert->company;
         $tech = Technology::whereIn('id', $advert->technology)->get();
         $city = $advert->city;
         $adverts = Advert::where('company_id', $advert->company_id)->get();
-        return view('page.advert', compact('advert', 'city', 'company', 'tech', 'adverts'));
+        if($user != null){
+            $selected = false;
+         foreach($user->selectadvert as $v){
+             if($v == $advert->id){
+                 $selected = true;
+             }
+         }
+        }else{
+            $selected = false;
+        }
+        return view('page.advert', compact('advert', 'city', 'company', 'tech', 'adverts','selected'));
     }
 
     public function logout(Request $req)

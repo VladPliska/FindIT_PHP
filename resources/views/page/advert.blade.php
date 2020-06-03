@@ -22,7 +22,11 @@
         <div class="sendMail">
             <div>
                 <button class="answer">Відповісти</button>
-                <button>LIKE</button>
+                @if($selected)
+                    <i class="fas fa-star star-like selectAdvert" data-id="{{$advert->id}}"></i>
+                @else
+                    <i class="far fa-star star-like selectAdvert"  data-id="{{$advert->id}}"></i>
+                @endif
             </div>
             <div>
                 <h2>Досвід роботи: 1</h2>

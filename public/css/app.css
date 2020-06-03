@@ -1022,7 +1022,6 @@ h2 {
 
 .profile-page {
   padding: 20px;
-  background: #383740;
   margin: 20px auto;
   border-radius: 10px;
   display: grid;
@@ -1416,6 +1415,27 @@ img {
   display: block;
   margin: 20px auto;
   text-align: center;
+}
+
+.user-content-profile {
+  width: 100% !important;
+}
+
+.user-menu {
+  height: 220px !important;
+  width: 80% !important;
+}
+
+.user-menu a {
+  font-size: 22px;
+  margin: 10px 0 !important;
+}
+
+.star-like {
+  color: #80d549;
+  font-size: 20px;
+  padding: 20px;
+  cursor: pointer;
 }
 
 .main {

@@ -199,3 +199,30 @@ $('.homeSearch').click(function(e){
     }
 
 })
+
+
+$(document).on('click','.selectAdvert',function (e) {
+
+        let id = $(this).attr('data-id');
+        let curr = $(this);
+        $.ajax({
+            type:"POST",
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url:'/changeselectAdvert',
+            data:{
+                id:id
+            },
+            success:(res)=>{
+                if(res.add){
+                    curr.removeClass('far')
+                    curr.addClass('fas')
+                }else{
+                    curr.addClass('far')
+                    curr.removeClass('fas')
+                }
+            }
+        })
+
+})

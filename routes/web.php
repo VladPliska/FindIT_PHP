@@ -67,3 +67,5 @@ Route::post('/search','MainController@search');
 Route::get('/all-company','MainController@allCompany');
 
 Route::get('/company/{id}','MainController@companyPublicProfile');
+
+Route::post('/changeselectAdvert','MainController@addAdvertToFavorite');
