@@ -23,7 +23,7 @@
         </a>
         <div class="sendMail">
             <div>
-                <button class="answer">Відповісти</button>
+                <a href="/resume/advert/{{$advert->id}}" class="answer ">Відповісти</a>
                 @if($selected)
                     <i class="fas fa-star star-like addAdvertToFav" data-id="{{$advert->id}}"></i>
                 @else

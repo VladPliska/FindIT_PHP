@@ -71,7 +71,7 @@
     //right: 5%;
 }
     .sendMail{
-        button{
+        a{
             font-size: 23px;
             padding: 10px;
             background: #4b8b47;
@@ -79,7 +79,7 @@
             color:#fff;
             border-radius: 10px;
         }
-        button:hover{
+        a:hover{
             cursor:pointer;
             background: #64b65e;
 

@@ -79,9 +79,9 @@
                             <h2>Вибраних технологій не знайдено</h2>
                         @endif
                         <div class="allUseTech">
-                                @foreach($tech as $v)
-                                    @include('.include.technology',['data'=>$v])
-                                @endforeach
+                            @foreach($tech as $v)
+                                @include('.include.technology',['data'=>$v])
+                            @endforeach
                         </div>
                         <form action="/userChangeTechnology" method="POST" class="formChageTech">
                             @csrf
@@ -99,7 +99,9 @@
             @foreach($advert as $v)
                 @include('include.advert-filter-item',['advert'=>$v])
             @endforeach
-            {{$advert->links()}}
+            @if(count($advert) != 0)
+                {{$advert->links()}}
+            @endif
         </div>
         <div class="asnswerAdvert menu-item hidden" data-target="answerAdvert"></div>
     </div>

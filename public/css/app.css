@@ -1849,7 +1849,7 @@ img {
   margin: 0 auto;
 }
 
-.advert-page .sendMail button {
+.advert-page .sendMail a {
   font-size: 23px;
   padding: 10px;
   background: #4b8b47;
@@ -1858,7 +1858,7 @@ img {
   border-radius: 10px;
 }
 
-.advert-page .sendMail button:hover {
+.advert-page .sendMail a:hover {
   cursor: pointer;
   background: #64b65e;
 }

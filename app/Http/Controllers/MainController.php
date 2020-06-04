@@ -225,8 +225,11 @@ class MainController extends Controller
             return redirect('/login');
         }
         $tech = Technology::whereIn('id', $user->technology)->get();
-
-        $advert = Advert::whereIn('id', $user->selectadvert)->paginate(5);
+        if(empty($user->selectadvert)){
+            $advert = [];
+        }else{
+            $advert = Advert::whereIn('id', $user->selectadvert)->paginate(5);
+        }
 
 
         return view('page.profile', ['data' => $user, 'tech' => $tech, 'advert' => $advert]);
@@ -439,10 +442,13 @@ class MainController extends Controller
         $adverts = Advert::where('company_id', $advert->company_id)->get();
         if ($user != null) {
             $selected = false;
-            foreach ($user->selectadvert as $v) {
-                if ($v == $advert->id) {
-                    $selected = true;
+            if($user->selectadvert){
+                foreach ($user->selectadvert as $v) {
+                    if ($v == $advert->id) {
+                        $selected = true;
+                    }
                 }
+
             }
         } else {
             $selected = false;
@@ -565,7 +571,7 @@ class MainController extends Controller
 
     public function sendAnswer(Request $req)
     {
-        $company = $req->get('companyId');
+        $company = $req->get('company');
         $pib = $req->get('pib');
         $email = $req->get('email');
         $sallary = $req->get('sallary');
@@ -573,7 +579,7 @@ class MainController extends Controller
         $resume = $req->get('resume');
         $user = $req->get('userData');
 
-
+//        dd($req->all());
         Answer::create([
            'user_id' => $user->id,
            'company_id' => $company,
@@ -584,7 +590,7 @@ class MainController extends Controller
            'resume' => $resume,
         ]);
 
-        dd($req->all());
+        return redirect('/worker/profile');
 
     }
 }

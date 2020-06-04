@@ -24,7 +24,7 @@
             </div>
             <div class="pibUserAnswer">
                 <label for="resume">Резюме</label><br>
-                <textarea name="" id="resume" name='resume' cols="30" rows="10" placeholder="Резюме" required>{{$user->resume}}</textarea>
+                <textarea id="resume" name='resume' cols="30" rows="10" placeholder="Резюме" required>{{$user->resume}}</textarea>
             </div>
 
         </div>
@@ -37,7 +37,7 @@
                     </div>
                     <div>
                         <h2>{{$advert->title}}</h2>
-                        <h2>{{$advert->maxsallary}}</h2>
+                        <h2>{{$advert->maxsallary}} $</h2>
                     </div>
                 </div>
             </a>
