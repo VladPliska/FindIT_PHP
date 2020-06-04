@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Advert;
+use App\Models\Answer;
 use App\Models\City;
 use App\Models\Company;
 use App\Models\Technology;
@@ -34,11 +35,11 @@ class MainController extends Controller
         $allCity = City::orderBy('advert', 'desc')->take(20)->get();
 
         if ($req->get('company')) {
-            $advert = Advert::where('company_id',$req->get('company'))->paginate(10);
-        }else if($req->get('mainSearch')){
+            $advert = Advert::where('company_id', $req->get('company'))->paginate(10);
+        } else if ($req->get('mainSearch')) {
             $city = $req->get('city');
             $query = $req->get('query');
-            $advert = Advert::where([['title','ilike','%'.$query.'%'],['city_id',intval($city)]])->paginate(10);
+            $advert = Advert::where([['title', 'ilike', '%' . $query . '%'], ['city_id', intval($city)]])->paginate(10);
         } else {
             $advert = Advert::where('id', '>', 0)->paginate(10);
         }
@@ -225,57 +226,58 @@ class MainController extends Controller
         }
         $tech = Technology::whereIn('id', $user->technology)->get();
 
-        $advert = Advert::whereIn('id',$user->selectadvert)->paginate(5);
+        $advert = Advert::whereIn('id', $user->selectadvert)->paginate(5);
 
 
-        return view('page.profile', ['data' => $user, 'tech' => $tech,'advert'=>$advert]);
+        return view('page.profile', ['data' => $user, 'tech' => $tech, 'advert' => $advert]);
     }
 
-    public function addAdvertToFavorite(Request $req){
+    public function addAdvertToFavorite(Request $req)
+    {
 
         $id = $req->get('id');
         $user = $req->get('userData');
 
         $selectadvert = $user->selectadvert;
 
-        if($selectadvert != null){
+        if ($selectadvert != null) {
 
             $exist = false;
-            foreach ($selectadvert as $v){
-                if($id == $v){
-                $exist = true;
+            foreach ($selectadvert as $v) {
+                if ($id == $v) {
+                    $exist = true;
                 }
             }
 
 
-            if($exist){
+            if ($exist) {
                 //code for remove select element
                 $new = [];
-                foreach($selectadvert as $v){
-                    if($id != $v){
-                        array_push($new,$v);
+                foreach ($selectadvert as $v) {
+                    if ($id != $v) {
+                        array_push($new, $v);
                     }
                 }
-                $user->update(['selectadvert'=>$new]);
+                $user->update(['selectadvert' => $new]);
                 return response()->json([
-                    'add'=>false,
-                    'remove' =>true
+                    'add' => false,
+                    'remove' => true
                 ]);
-            }else{
-                array_push($selectadvert,$id);
-                $user->update(['selectadvert'=>$selectadvert]);
+            } else {
+                array_push($selectadvert, $id);
+                $user->update(['selectadvert' => $selectadvert]);
                 return response()->json([
-                    'add'=>true,
-                    'remove' =>false
+                    'add' => true,
+                    'remove' => false
                 ]);
 
             }
 
-        }else{
-            $user->update(['selectadvert'=>[$id]]);
+        } else {
+            $user->update(['selectadvert' => [$id]]);
             return response()->json([
-                'add'=>true,
-                'remove' =>false
+                'add' => true,
+                'remove' => false
             ]);
         }
 
@@ -435,17 +437,17 @@ class MainController extends Controller
         $tech = Technology::whereIn('id', $advert->technology)->get();
         $city = $advert->city;
         $adverts = Advert::where('company_id', $advert->company_id)->get();
-        if($user != null){
+        if ($user != null) {
             $selected = false;
-         foreach($user->selectadvert as $v){
-             if($v == $advert->id){
-                 $selected = true;
-             }
-         }
-        }else{
+            foreach ($user->selectadvert as $v) {
+                if ($v == $advert->id) {
+                    $selected = true;
+                }
+            }
+        } else {
             $selected = false;
         }
-        return view('page.advert', compact('advert', 'city', 'company', 'tech', 'adverts','selected'));
+        return view('page.advert', compact('advert', 'city', 'company', 'tech', 'adverts', 'selected'));
     }
 
     public function logout(Request $req)
@@ -528,15 +530,16 @@ class MainController extends Controller
 
     }
 
-    public function getAllTech(Request $req){
+    public function getAllTech(Request $req)
+    {
         $user = $req->get('userData');
         $tech = Technology::all();
         $userChange = true;
 
-        $view = view('include.technology',['tech'=>$tech,'userChange'=>$userChange,'userTech'=>$user->technology])->render();
+        $view = view('include.technology', ['tech' => $tech, 'userChange' => $userChange, 'userTech' => $user->technology])->render();
 
         return response()->json([
-            'view'=>$view
+            'view' => $view
         ]);
     }
 
@@ -545,12 +548,43 @@ class MainController extends Controller
         $technology = $req->get('technology');
         $user = $req->get('userData');
 
-        if(empty($technology)){
+        if (empty($technology)) {
             $technology = [];
         }
 
-        $user->update(['technology'=>$technology]);
+        $user->update(['technology' => $technology]);
 
         return back();
+    }
+
+    public function showAnswerPage(Request $req, $id)
+    {
+        $advert = Advert::find($id)->first();
+        return view('page.resume', compact('advert'));
+    }
+
+    public function sendAnswer(Request $req)
+    {
+        $company = $req->get('companyId');
+        $pib = $req->get('pib');
+        $email = $req->get('email');
+        $sallary = $req->get('sallary');
+        $phone = $req->get('phone');
+        $resume = $req->get('resume');
+        $user = $req->get('userData');
+
+
+        Answer::create([
+           'user_id' => $user->id,
+           'company_id' => $company,
+           'fullname' => $pib,
+           'email' => $email,
+           'sallary' => $sallary,
+           'phone' => $phone,
+           'resume' => $resume,
+        ]);
+
+        dd($req->all());
+
     }
 }

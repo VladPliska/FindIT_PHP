@@ -242,10 +242,11 @@ ul {
     }
 }
 
-.selectFilterPrice{
+.selectFilterPrice {
     &:hover {
         cursor: pointer;
-        span{
+
+        span {
             color: #ee7777;
         }
     }
@@ -276,7 +277,7 @@ ul {
     width: 500px;
     //height: 150px;
     background: #706F7F;
-    color:#fff;
+    color: #fff;
     margin: 10px auto;
     border-radius: 10px;
     position: relative;
@@ -286,7 +287,7 @@ ul {
 
     &:hover {
         cursor: pointer;
-        color:unset;
+        color: unset;
     }
 
     h2 {
@@ -1331,6 +1332,9 @@ input[disabled] {
 
 input[type=radio] {
     box-shadow: unset;
+    &:focus{
+        box-shadow: unset!important;
+    }
 }
 
 .companyInfo-advert {
@@ -1379,62 +1383,72 @@ img {
     text-align: center;
     color: #66CC60;
 }
-.queryFilter{
+
+.queryFilter {
     margin-left: 20px;
-    label{
+
+    label {
         font-size: 20px;
     }
-    input{
+
+    input {
         width: 15px;
         height: 15px;
     }
 }
 
-.cityActive{
-    span{
+.cityActive {
+    span {
         color: #ee7777;
     }
 }
-.selectFilterPriceActive{
-    span{
-        color: #ee7777!important;
+
+.selectFilterPriceActive {
+    span {
+        color: #ee7777 !important;
     }
 }
-.recomendVacancy{
+
+.recomendVacancy {
     width: 150px;
     height: 100px;
 }
-.pagination{
+
+.pagination {
     position: relative;
     width: 500px;
     margin: 40px auto;
-    li{
+
+    li {
         display: inline-block;
         color: #fff;
     }
-    .page-item{
-        margin: 10px;
-        font-size: 25px!important;
 
-        a{
-            color:#fff!important;
+    .page-item {
+        margin: 10px;
+        font-size: 25px !important;
+
+        a {
+            color: #fff !important;
         }
     }
-    .page-item.active{
-        color:#3aa5e7;
+
+    .page-item.active {
+        color: #3aa5e7;
     }
 }
 
 ////all company
 
-.allCompanyBody{
+.allCompanyBody {
     background: #383740;
     display: grid;
     margin: 30px auto;
     padding: 20px;
     border-radius: 20px;
     grid-template-columns: 1fr 1fr 1fr 1fr;
-    .companyItem{
+
+    .companyItem {
         background: #4d4d58;
         padding: 40px 20px 10px;
         border-radius: 10px;
@@ -1442,12 +1456,14 @@ img {
         margin: 10px;
         display: grid;
         grid-template-columns: 1fr 1fr;
-        .company-img{
+
+        .company-img {
             border-radius: 10px;
             width: 200px;
             height: 120px;
         }
-        .reit{
+
+        .reit {
             position: absolute;
             top: 0;
             right: 10px;
@@ -1455,40 +1471,98 @@ img {
         }
     }
 }
+
 //////
-.publicCompanyProfileImg{
+.publicCompanyProfileImg {
     width: 350px;
     height: 200px;
     border-radius: 10px;
 }
-.removeLinkStyle{
-    color:unset;
+
+.removeLinkStyle {
+    color: unset;
     font-size: unset;
 }
-.backBtnBody{
+
+.backBtnBody {
     cursor: pointer;
 }
-.ce{
+
+.ce {
     display: block;
     margin: 20px auto;
     text-align: center;
 }
-.user-content-profile{
+
+.user-content-profile {
     width: 100% !important;
 }
-.user-menu{
-    a{
+
+.user-menu {
+    a {
         font-size: 22px;
-        margin:10px 0!important;
+        margin: 10px 0 !important;
     }
 
-    height: 220px!important;
-    width: 80%!important;
+    height: 220px !important;
+    width: 80% !important;
 }
 
-.star-like{
+.star-like {
     color: #80d549;
     font-size: 20px;
     padding: 20px;
     cursor: pointer;
+}
+
+.answerBody {
+    border-radius: 10px;
+    //height: 300px;
+    width: 50%;
+    padding: 20px;
+    margin: 20px auto;
+    background: #383740;
+    display: grid;
+    padding-bottom:80px;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    button{
+        position: absolute;
+        width: 40%;
+        bottom:20px;
+        left: 30%;
+    }
+    .answerBodyUser {
+        padding-left: 10px;
+        label {
+            font-size: 1.5em;
+        }
+        .pibUserAnswer {
+            margin: 20px 20px;
+            text-align: left;
+            textarea{
+                margin: unset;
+                width:400px;
+            }
+        }
+
+    }
+    .advertInfoAnswer{
+        width: 350px;
+        height: 150px;
+        border-radius: 20px;
+        background: #4d4d58;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+
+        .advert-img-answer{
+            width: 150px;
+            border-radius: 20px;
+            height: 100px;
+            display: flex;
+            justify-content: center ;
+            align-content: center;
+            margin:10px;
+        }
+    }
 }

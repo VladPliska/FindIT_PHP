@@ -1269,6 +1269,10 @@ input[type=radio] {
   box-shadow: unset;
 }
 
+input[type=radio]:focus {
+  box-shadow: unset !important;
+}
+
 .companyInfo-advert img {
   width: 200px;
   height: 150px;
@@ -1436,6 +1440,62 @@ img {
   font-size: 20px;
   padding: 20px;
   cursor: pointer;
+}
+
+.answerBody {
+  border-radius: 10px;
+  width: 50%;
+  padding: 20px;
+  margin: 20px auto;
+  background: #383740;
+  display: grid;
+  padding-bottom: 80px;
+  grid-template-columns: 1fr 1fr;
+  position: relative;
+}
+
+.answerBody button {
+  position: absolute;
+  width: 40%;
+  bottom: 20px;
+  left: 30%;
+}
+
+.answerBody .answerBodyUser {
+  padding-left: 10px;
+}
+
+.answerBody .answerBodyUser label {
+  font-size: 1.5em;
+}
+
+.answerBody .answerBodyUser .pibUserAnswer {
+  margin: 20px 20px;
+  text-align: left;
+}
+
+.answerBody .answerBodyUser .pibUserAnswer textarea {
+  margin: unset;
+  width: 400px;
+}
+
+.answerBody .advertInfoAnswer {
+  width: 350px;
+  height: 150px;
+  border-radius: 20px;
+  background: #4d4d58;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.answerBody .advertInfoAnswer .advert-img-answer {
+  width: 150px;
+  border-radius: 20px;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  margin: 10px;
 }
 
 .main {

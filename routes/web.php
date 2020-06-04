@@ -73,3 +73,7 @@ Route::post('/changeselectAdvert','MainController@addAdvertToFavorite');
 Route::get('/techology','MainController@getAllTech');
 
 Route::post('/userChangeTechnology','MainController@changeUserTechnology');
+
+Route::get('/resume/advert/{id}','MainController@showAnswerPage');
+
+Route::post('/resume/advert/{id}','MainController@sendAnswer');
