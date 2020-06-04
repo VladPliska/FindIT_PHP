@@ -75,7 +75,7 @@ $('.profile-company-menu a').click(function (e) {
 })
 
 
-$('.technoI').on('click', function (e) {
+$(document).on('click','.technoI', function (e) {
     e.preventDefault();
     if ($(this).toggleClass('active')) {
         $(this).find('input').attr('name', 'technology[]');
@@ -201,7 +201,7 @@ $('.homeSearch').click(function(e){
 })
 
 
-$(document).on('click','.selectAdvert',function (e) {
+$(document).on('click','.addAdvertToFav',function (e) {
 
         let id = $(this).attr('data-id');
         let curr = $(this);
@@ -215,6 +215,7 @@ $(document).on('click','.selectAdvert',function (e) {
                 id:id
             },
             success:(res)=>{
+                console.log(res)
                 if(res.add){
                     curr.removeClass('far')
                     curr.addClass('fas')
@@ -225,4 +226,35 @@ $(document).on('click','.selectAdvert',function (e) {
             }
         })
 
+})
+
+$(document).on('click','.changeTechnology',function () {
+
+    //load all tech
+    let cur =$(this);
+    $.ajax({
+        type:'GET',
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        url:'/techology',
+        success:(res)=>{
+            $('.editTechno').find('.allUseTech').first().addClass('hidden');
+            $('.editTechno').find('.allUseTech').last().html(res.view).removeClass('hidden');
+            cur.removeClass('changeTechnology').addClass('saveUserTechnology').text('Зберегти');
+            $('.cancelChangeTechn').removeClass('hidden');
+        }
+    })
+
+})
+
+$(document).on('click','.cancelChangeTechn',function(){
+    $('.allUseTech').toggleClass('hidden');
+    $(this).addClass('hidden');
+    $(document).find('.saveUserTechnology').removeClass('.saveUserTechnology').addClass('changeTechnology').text('Редагувати технології')
+
+})
+
+$(document).on('click','.saveUserTechnology',function(){
+    $('.formChageTech').submit();
 })

@@ -228,6 +228,20 @@
         cursor:pointer
     }
 }
+.grayBtn{
+    background: #7e8282;
+    border: unset;
+    border-radius: 10px;
+    width: 100%;
+    margin: 10px auto;
+    display: block;
+    padding: 10px;
+    font-size: 26px;
+    color: #fff;
+    &:hover{
+        cursor:pointer
+    }
+}
 .hidden{
     display: none!important;
     //opacity: 0!important;

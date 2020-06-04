@@ -1,7 +1,7 @@
 @include('.include.head')
 <body>
 @include('.include.header')
-
+{{--USER PROFILE--}}
 <div class="company-profile-page-parent">
     <div class="profile-company-menu user-menu">
         <h1>Меню</h1>
@@ -58,26 +58,50 @@
                     <h2>Місце праці</h2>
                     <div class='selectTypeWork'>
                         <label for="office">Офіс</label>
-                        <input type="radio" name="settype" id="office" value="office" required {{$data->office ? 'checked' : ''}}/>
+                        <input type="radio" name="settype" id="office" value="office"
+                               required {{$data->office ? 'checked' : ''}}/>
                     </div>
                     <div class='selectTypeWork'>
                         <label for="home">Дім</label>
-                        <input type="radio" id="home" name="settype" value="home" required {{$data->home ? 'checked' : ''}}>
+                        <input type="radio" id="home" name="settype" value="home"
+                               required {{$data->home ? 'checked' : ''}}>
                     </div>
-                    <div class="editTechno">
-                        <h2>Технології</h2>
-                        <div class="allUseTech">
-                            @foreach($tech as $v)
-                                @include('.include.technology',['data'=>$v])
-                            @endforeach
-                        </div>
-                    </div>
+                    <br>
+                    <br>
+                    <br>
                     <button class="greenBtn changeDopInfo">Змінити</button>
                 </form>
+                <br><br>
+                <div class="editTechno">
+                    <h2>Технології</h2>
+                    <div class="userTechnologyChge">
+                        @if(count($tech) == 0)
+                            <h2>Вибраних технологій не знайдено</h2>
+                        @endif
+                        <div class="allUseTech">
+                                @foreach($tech as $v)
+                                    @include('.include.technology',['data'=>$v])
+                                @endforeach
+                        </div>
+                        <form action="/userChangeTechnology" method="POST" class="formChageTech">
+                            @csrf
+                            <div class="allUseTech hidden">
+
+                            </div>
+                        </form>
+                    </div>
+                    <button class="changeTechnology greenBtn">Редагувати технології</button>
+                    <button class="cancelChangeTechn  grayBtn hidden">Скасувати</button>
+                </div>
             </div>
         </div>
-        <div class="selectAdvert menu-item hidden" data-target="selectAdvert"> </div>
-        <div class="asnswerAdvert menu-item hidden" data-target="answerAdvert"> </div>
+        <div class="selectAdvert menu-item hidden" data-target="selectAdvert">
+            @foreach($advert as $v)
+                @include('include.advert-filter-item',['advert'=>$v])
+            @endforeach
+            {{$advert->links()}}
+        </div>
+        <div class="asnswerAdvert menu-item hidden" data-target="answerAdvert"></div>
     </div>
 
 </div>

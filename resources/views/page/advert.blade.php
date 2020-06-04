@@ -1,7 +1,9 @@
 @include('.include.head')
 
-<body>
-@include('.include.header')
+
+
+@include('include.header')
+
 <div class="advert-page">
     <div class="advert-body">
         <div>
@@ -23,9 +25,9 @@
             <div>
                 <button class="answer">Відповісти</button>
                 @if($selected)
-                    <i class="fas fa-star star-like selectAdvert" data-id="{{$advert->id}}"></i>
+                    <i class="fas fa-star star-like addAdvertToFav" data-id="{{$advert->id}}"></i>
                 @else
-                    <i class="far fa-star star-like selectAdvert"  data-id="{{$advert->id}}"></i>
+                    <i class="far fa-star star-like addAdvertToFav"  data-id="{{$advert->id}}"></i>
                 @endif
             </div>
             <div>

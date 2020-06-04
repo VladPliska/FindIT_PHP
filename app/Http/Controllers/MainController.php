@@ -225,14 +225,15 @@ class MainController extends Controller
         }
         $tech = Technology::whereIn('id', $user->technology)->get();
 
+        $advert = Advert::whereIn('id',$user->selectadvert)->paginate(5);
 
-        return view('page.profile', ['data' => $user, 'tech' => $tech]);
+
+        return view('page.profile', ['data' => $user, 'tech' => $tech,'advert'=>$advert]);
     }
 
     public function addAdvertToFavorite(Request $req){
 
         $id = $req->get('id');
-        $id = 1;
         $user = $req->get('userData');
 
         $selectadvert = $user->selectadvert;
@@ -246,12 +247,13 @@ class MainController extends Controller
                 }
             }
 
+
             if($exist){
                 //code for remove select element
-                $new =[];
+                $new = [];
                 foreach($selectadvert as $v){
                     if($id != $v){
-                        array_push($new,$id);
+                        array_push($new,$v);
                     }
                 }
                 $user->update(['selectadvert'=>$new]);
@@ -259,7 +261,6 @@ class MainController extends Controller
                     'add'=>false,
                     'remove' =>true
                 ]);
-
             }else{
                 array_push($selectadvert,$id);
                 $user->update(['selectadvert'=>$selectadvert]);
@@ -527,5 +528,29 @@ class MainController extends Controller
 
     }
 
+    public function getAllTech(Request $req){
+        $user = $req->get('userData');
+        $tech = Technology::all();
+        $userChange = true;
 
+        $view = view('include.technology',['tech'=>$tech,'userChange'=>$userChange,'userTech'=>$user->technology])->render();
+
+        return response()->json([
+            'view'=>$view
+        ]);
+    }
+
+    public function changeUserTechnology(Request $req)
+    {
+        $technology = $req->get('technology');
+        $user = $req->get('userData');
+
+        if(empty($technology)){
+            $technology = [];
+        }
+
+        $user->update(['technology'=>$technology]);
+
+        return back();
+    }
 }

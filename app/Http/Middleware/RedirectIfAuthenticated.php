@@ -20,7 +20,6 @@ class RedirectIfAuthenticated
         $auth = Cookie::get('auth');
         if(!empty($auth)){
             $user = User::where("token",$auth)->first();
-
             if($user != null){
                 $request->request->add(['companyData'=> null]);
                 $request->request->add(['userData'=>$user]);

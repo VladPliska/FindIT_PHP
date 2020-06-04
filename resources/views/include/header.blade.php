@@ -10,11 +10,11 @@
         <a  href='/all-company'  class= 'headerUrl'  >Компанії</a>
         @if($company == null && $user == null)
             <a  href='/login'  class= 'headerUrl'  >Увійти</a>
+        @elseif($user)
+            <a  href='/worker/profile'  class= 'headerUrl'  >Профіль</a>
+            <a  href='/logout'  class= 'headerUrl'  >Вийти</a>
         @elseif($company)
             <a  href='/company/profile'  class= 'headerUrl'  >Профіль</a>
-            <a  href='/logout'  class= 'headerUrl'  >Вийти</a>
-        @elseif($user)
-            <a  href='/profile'  class= 'headerUrl'  >Профіль</a>
             <a  href='/logout'  class= 'headerUrl'  >Вийти</a>
         @endif
     </ul>

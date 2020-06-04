@@ -24,7 +24,6 @@
     @endif
 
 @else
-
     <a href="/advert/{{$advert->id ?? 1}}">
         <div class='advert advert-filter-item-href'>
             <h2>{{$advert->title ?? 'Title advert'}}</h2>
