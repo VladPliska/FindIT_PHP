@@ -621,6 +621,7 @@ class MainController extends Controller
            'sallary' => $sallary,
            'phone' => $phone,
            'resume' => $resume,
+            'status'=>'Надіслано'
         ]);
 
         return redirect('/worker/profile#anserAdvert');
@@ -648,8 +649,11 @@ class MainController extends Controller
 
 
 
+
         if($answer->status == null){
-            $answer->update(['status'=>"Прочитано"]);
+            if($req->get('companyData') != null){
+                $answer->update(['status'=>"Прочитано"]);
+            }
         }
 
         if($answer->status == 'Схваленно'){
