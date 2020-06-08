@@ -1566,3 +1566,121 @@ img {
         }
     }
 }
+// admin
+.adminTitle{
+    font-weight: 300;
+    font-size: 36px;
+}
+.adminBody{
+    display:grid;
+    grid-template-columns: 0.3fr 1fr;
+    grid-gap:25px ;
+    margin-top: 40px;
+
+    .admin-menu{
+        width: 100%;
+        height: 300px;
+        background: #383740;
+        border-radius: 20px;
+        a{
+            text-align: left;
+            white-space: nowrap;
+            margin: 10px auto;
+            display: block;
+            width: 80%;
+            transition: all 0.4s ease;
+            background: #8b8a99;
+            padding: 10px;
+            border-radius: 10px;
+            color: #000;
+
+            &:hover {
+                cursor: pointer;
+                background: #763a3a;
+            }
+
+            &.active {
+                background: #844446;
+            }
+        }
+    }
+    .admin-workspace{
+        //height: 400px;
+        background: #383740;
+        border-radius: 20px;
+        .profile-all-company{
+            padding: 20px;
+            .admin-company-item{
+                background: #4d4d58;
+                padding: 10px;
+                border-radius: 10px;
+                    display: grid;
+                    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr ;
+                    img{
+                        width: 200px;
+                        height: 150px;
+                        border-radius: 20px;
+                    }
+                    h2,a{
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                    }
+                .remove,.block{
+                    font-size: 30px;
+                    margin-left:20px;
+                    color: #3aa5e7;
+                    &:hover{
+                        cursor:pointer;
+                        color: #1071aa;
+                    }
+                }
+
+
+            }
+
+        }
+
+        .admin-worker-body{
+            display: grid;
+            grid-template-columns:1fr 1fr 1fr 1fr 1fr 1fr;
+            background: #4d4d58;
+            height: 150px;
+            border-radius: 20px;
+            padding: 20px;
+        img {
+            width: 200px;
+            height: 150px;
+            border-radius: 20px;
+            object-fit: contain;
+        }
+            div,a{
+                display: flex;
+                align-items: center;
+                font-size: 30px;
+                justify-content: center;
+            }
+            a:hover{
+                cursor:pointer;
+                color: #1071aa;
+            }
+        }
+        .profile-all-advert,.profile-all-worker{
+            padding: 20px;
+        }
+        .advert-admin-item{
+            position: relative;
+            padding: 5px;
+            border-radius: 20px;
+            .remove,.block{
+                font-size: 30px;
+                margin-left:20px;
+                &:hover{
+                    cursor:pointer;
+                    color: #1071aa;
+                }
+            }
+        }
+    }
+
+}

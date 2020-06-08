@@ -1,5 +1,11 @@
 'use strict';
 
+$.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
+
 $('.confirmBtn').on('click', function (e) {
     let pass = $('#password')[0].value;
     let reppass = $('#reppas')[0].value;
@@ -75,7 +81,7 @@ $('.profile-company-menu a').click(function (e) {
 })
 
 
-$(document).on('click','.technoI', function (e) {
+$(document).on('click', '.technoI', function (e) {
     e.preventDefault();
     if ($(this).toggleClass('active')) {
         $(this).find('input').attr('name', 'technology[]');
@@ -161,20 +167,20 @@ $('.filterStart').click(function (e) {
     let price = $('.selectFilterPriceActive').attr('data-val');
     let text = $('.searchQuery').val()
     $.ajax({
-        method:'POST',
+        method: 'POST',
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
-        url:'/search',
-        data:{
-            filterOn:filter,
-            city:city,
-            workspace:space,
-            level:lvlid,
-            price:price,
-            query:text
+        url: '/search',
+        data: {
+            filterOn: filter,
+            city: city,
+            workspace: space,
+            level: lvlid,
+            price: price,
+            query: text
         },
-        success:(res)=>{
+        success: (res) => {
             $('.forSearchBody').html(res.view);
         }
     })
@@ -185,60 +191,60 @@ $('.backBtnBody').click(function (e) {
     history.back();
 })
 
-$('.homeSearch').click(function(e){
-        // cityHome,homeQuery
+$('.homeSearch').click(function (e) {
+    // cityHome,homeQuery
     let query = $('.homeQuery').val();
     let city = $('.cityHome').val();
 
-    if(query == '' || city == null){
+    if (query == '' || city == null) {
         popup.fire({
-            title:'Введіть назву вакансії та виберіть місто'
+            title: 'Введіть назву вакансії та виберіть місто'
         })
-    }else{
-        location.href = '/all-advert?mainSearch=true&query='+query+"&city="+city;
+    } else {
+        location.href = '/all-advert?mainSearch=true&query=' + query + "&city=" + city;
     }
 
 })
 
 
-$(document).on('click','.addAdvertToFav',function (e) {
+$(document).on('click', '.addAdvertToFav', function (e) {
 
-        let id = $(this).attr('data-id');
-        let curr = $(this);
-        $.ajax({
-            type:"POST",
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            url:'/changeselectAdvert',
-            data:{
-                id:id
-            },
-            success:(res)=>{
-                console.log(res)
-                if(res.add){
-                    curr.removeClass('far')
-                    curr.addClass('fas')
-                }else{
-                    curr.addClass('far')
-                    curr.removeClass('fas')
-                }
-            }
-        })
-
-})
-
-$(document).on('click','.changeTechnology',function () {
-
-    //load all tech
-    let cur =$(this);
+    let id = $(this).attr('data-id');
+    let curr = $(this);
     $.ajax({
-        type:'GET',
+        type: "POST",
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
-        url:'/techology',
-        success:(res)=>{
+        url: '/changeselectAdvert',
+        data: {
+            id: id
+        },
+        success: (res) => {
+            console.log(res)
+            if (res.add) {
+                curr.removeClass('far')
+                curr.addClass('fas')
+            } else {
+                curr.addClass('far')
+                curr.removeClass('fas')
+            }
+        }
+    })
+
+})
+
+$(document).on('click', '.changeTechnology', function () {
+
+    //load all tech
+    let cur = $(this);
+    $.ajax({
+        type: 'GET',
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        url: '/techology',
+        success: (res) => {
             $('.editTechno').find('.allUseTech').first().addClass('hidden');
             $('.editTechno').find('.allUseTech').last().html(res.view).removeClass('hidden');
             cur.removeClass('changeTechnology').addClass('saveUserTechnology').text('Зберегти');
@@ -248,13 +254,56 @@ $(document).on('click','.changeTechnology',function () {
 
 })
 
-$(document).on('click','.cancelChangeTechn',function(){
+$(document).on('click', '.cancelChangeTechn', function () {
     $('.allUseTech').toggleClass('hidden');
     $(this).addClass('hidden');
     $(document).find('.saveUserTechnology').removeClass('.saveUserTechnology').addClass('changeTechnology').text('Редагувати технології')
 
 })
 
-$(document).on('click','.saveUserTechnology',function(){
+$(document).on('click', '.saveUserTechnology', function () {
     $('.formChageTech').submit();
+})
+
+$(document).on('click', '.adminSearchBtn', function () {
+
+    let activeBlock = location.hash;
+    let text = $('.searchInAdmin').val();
+    let block;
+    let table;
+
+    switch (activeBlock) {
+        case '#allCompany':
+             block  = $('.profile-all-company');
+             table = 'company';
+            break;
+        case '#allWorker':
+             block  = $('.profile-all-worker');
+             table = 'user';
+            break;
+        case '#allAdvert':
+            block  = $('.profile-all-advert');
+            table = 'advert';
+            break;
+    }
+
+    $.ajax({
+        type:'POST',
+        url:'/searchAdmin',
+        data:{
+            table:table,
+            text:text
+        },
+        success:(res)=>{
+            if(res.view === ''){
+                block.html('<h2>Нічого не знайдено</h2>');
+            }else{
+                block.html(res.view);
+            }
+        }
+    })
+
+    $('.searchInAdmin').val('')
+
+
 })

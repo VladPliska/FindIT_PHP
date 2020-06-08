@@ -22500,6 +22500,11 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 "use strict";
 
 
+$.ajaxSetup({
+  headers: {
+    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+  }
+});
 $('.confirmBtn').on('click', function (e) {
   var pass = $('#password')[0].value;
   var reppass = $('#reppas')[0].value; // alert(pass);
@@ -22742,6 +22747,46 @@ $(document).on('click', '.cancelChangeTechn', function () {
 });
 $(document).on('click', '.saveUserTechnology', function () {
   $('.formChageTech').submit();
+});
+$(document).on('click', '.adminSearchBtn', function () {
+  var activeBlock = location.hash;
+  var text = $('.searchInAdmin').val();
+  var block;
+  var table;
+
+  switch (activeBlock) {
+    case '#allCompany':
+      block = $('.profile-all-company');
+      table = 'company';
+      break;
+
+    case '#allWorker':
+      block = $('.profile-all-worker');
+      table = 'user';
+      break;
+
+    case '#allAdvert':
+      block = $('.profile-all-advert');
+      table = 'advert';
+      break;
+  }
+
+  $.ajax({
+    type: 'POST',
+    url: '/searchAdmin',
+    data: {
+      table: table,
+      text: text
+    },
+    success: function success(res) {
+      if (res.view === '') {
+        block.html('<h2>Нічого не знайдено</h2>');
+      } else {
+        block.html(res.view);
+      }
+    }
+  });
+  $('.searchInAdmin').val('');
 });
 
 /***/ }),

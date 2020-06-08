@@ -77,3 +77,9 @@ Route::post('/userChangeTechnology','MainController@changeUserTechnology');
 Route::get('/resume/advert/{id}','MainController@showAnswerPage');
 
 Route::post('/resume/advert/{id}','MainController@sendAnswer');
+
+Route::post('worker/public/profile','MainController@publicWorkerProfile');
+
+Route::get('/admin','AdminController@index');
+
+Route::post('/searchAdmin','AdminController@searchAdmin');

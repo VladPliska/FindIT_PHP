@@ -1498,6 +1498,143 @@ img {
   margin: 10px;
 }
 
+.adminTitle {
+  font-weight: 300;
+  font-size: 36px;
+}
+
+.adminBody {
+  display: grid;
+  grid-template-columns: 0.3fr 1fr;
+  grid-gap: 25px;
+  margin-top: 40px;
+}
+
+.adminBody .admin-menu {
+  width: 100%;
+  height: 300px;
+  background: #383740;
+  border-radius: 20px;
+}
+
+.adminBody .admin-menu a {
+  text-align: left;
+  white-space: nowrap;
+  margin: 10px auto;
+  display: block;
+  width: 80%;
+  transition: all 0.4s ease;
+  background: #8b8a99;
+  padding: 10px;
+  border-radius: 10px;
+  color: #000;
+}
+
+.adminBody .admin-menu a:hover {
+  cursor: pointer;
+  background: #763a3a;
+}
+
+.adminBody .admin-menu a.active {
+  background: #844446;
+}
+
+.adminBody .admin-workspace {
+  background: #383740;
+  border-radius: 20px;
+}
+
+.adminBody .admin-workspace .profile-all-company {
+  padding: 20px;
+}
+
+.adminBody .admin-workspace .profile-all-company .admin-company-item {
+  background: #4d4d58;
+  padding: 10px;
+  border-radius: 10px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+
+.adminBody .admin-workspace .profile-all-company .admin-company-item img {
+  width: 200px;
+  height: 150px;
+  border-radius: 20px;
+}
+
+.adminBody .admin-workspace .profile-all-company .admin-company-item h2,
+.adminBody .admin-workspace .profile-all-company .admin-company-item a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.adminBody .admin-workspace .profile-all-company .admin-company-item .remove,
+.adminBody .admin-workspace .profile-all-company .admin-company-item .block {
+  font-size: 30px;
+  margin-left: 20px;
+  color: #3aa5e7;
+}
+
+.adminBody .admin-workspace .profile-all-company .admin-company-item .remove:hover,
+.adminBody .admin-workspace .profile-all-company .admin-company-item .block:hover {
+  cursor: pointer;
+  color: #1071aa;
+}
+
+.adminBody .admin-workspace .admin-worker-body {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  background: #4d4d58;
+  height: 150px;
+  border-radius: 20px;
+  padding: 20px;
+}
+
+.adminBody .admin-workspace .admin-worker-body img {
+  width: 200px;
+  height: 150px;
+  border-radius: 20px;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+
+.adminBody .admin-workspace .admin-worker-body div,
+.adminBody .admin-workspace .admin-worker-body a {
+  display: flex;
+  align-items: center;
+  font-size: 30px;
+  justify-content: center;
+}
+
+.adminBody .admin-workspace .admin-worker-body a:hover {
+  cursor: pointer;
+  color: #1071aa;
+}
+
+.adminBody .admin-workspace .profile-all-advert,
+.adminBody .admin-workspace .profile-all-worker {
+  padding: 20px;
+}
+
+.adminBody .admin-workspace .advert-admin-item {
+  position: relative;
+  padding: 5px;
+  border-radius: 20px;
+}
+
+.adminBody .admin-workspace .advert-admin-item .remove,
+.adminBody .admin-workspace .advert-admin-item .block {
+  font-size: 30px;
+  margin-left: 20px;
+}
+
+.adminBody .admin-workspace .advert-admin-item .remove:hover,
+.adminBody .admin-workspace .advert-admin-item .block:hover {
+  cursor: pointer;
+  color: #1071aa;
+}
+
 .main {
   margin: 0 auto;
 }
