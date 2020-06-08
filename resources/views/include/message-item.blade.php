@@ -10,7 +10,7 @@
                     <span>{{$v->company->name}}</span>
                 @elseif($v->sender == 'user')
                     <img
-                        src="{{$v->user->img}}"
+                        src="{{$v->user->img ?? asset('img/user-img.png')}}"
                         alt="">
                     <span>{{$v->user->surname}}</span>
                 @endif
@@ -34,7 +34,7 @@
                     <span>{{$v->company->name}}</span>
                 @elseif($v->sender == 'user')
                     <img
-                        src="{{$v->user->img}}"
+                        src="{{$v->user->img ?? asset('img/user-img.png')}}"
                         alt="">
                     <span>{{$v->user->surname}}</span>
                 @endif
