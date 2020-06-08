@@ -1876,3 +1876,23 @@ img {
     }
 
 }
+
+.profile-public-body {
+    padding: 20px;
+    background:#383740;
+    margin: 20px auto;
+    width: 40%;
+    border-radius: 20px;
+    text-align: left;
+    .headerInfo {
+        img{
+            height: 200px;
+            width: 250px;
+            border-radius: 20px;
+            text-align: center;
+            margin: 0 auto;
+        }
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+}

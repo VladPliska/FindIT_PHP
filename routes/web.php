@@ -93,3 +93,5 @@ Route::post('/changeStatus','MainController@changeStatus');
 
 Route::post('/sendMessage','MessageController@sendMessage');
 
+Route::get('/public/worker/profile/{id}','MainController@showPublicUserProfile');
+

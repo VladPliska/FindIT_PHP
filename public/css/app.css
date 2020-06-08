@@ -1805,6 +1805,28 @@ img {
   border-bottom-right-radius: unset !important;
 }
 
+.profile-public-body {
+  padding: 20px;
+  background: #383740;
+  margin: 20px auto;
+  width: 40%;
+  border-radius: 20px;
+  text-align: left;
+}
+
+.profile-public-body .headerInfo {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.profile-public-body .headerInfo img {
+  height: 200px;
+  width: 250px;
+  border-radius: 20px;
+  text-align: center;
+  margin: 0 auto;
+}
+
 .main {
   margin: 0 auto;
 }

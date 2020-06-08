@@ -688,4 +688,10 @@ class MainController extends Controller
 
         return redirect('/answer-show/'.$answer);
     }
+
+    public function showPublicUserProfile($id,Request $req){
+        $user = User::find($id);
+        $tech = Technology::whereIn('id',$user->technology)->get();
+        return view('page.user-public-profile',compact('user','tech'));
+    }
 }
