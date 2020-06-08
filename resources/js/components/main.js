@@ -245,8 +245,8 @@ $(document).on('click', '.changeTechnology', function () {
         },
         url: '/techology',
         success: (res) => {
-            $('.editTechno').find('.allUseTech').first().addClass('hidden');
-            $('.editTechno').find('.allUseTech').last().html(res.view).removeClass('hidden');
+            $('.editTechno').find('.techReadyUse').first().addClass('hidden');
+            $('.editTechno').find('.techReadyUse').last().html(res.view).removeClass('hidden');
             cur.removeClass('changeTechnology').addClass('saveUserTechnology').text('Зберегти');
             $('.cancelChangeTechn').removeClass('hidden');
         }
@@ -255,9 +255,10 @@ $(document).on('click', '.changeTechnology', function () {
 })
 
 $(document).on('click', '.cancelChangeTechn', function () {
-    $('.allUseTech').toggleClass('hidden');
+    $('.techReadyUse').toggleClass('hidden');
     $(this).addClass('hidden');
     $(document).find('.saveUserTechnology').removeClass('.saveUserTechnology').addClass('changeTechnology').text('Редагувати технології')
+    $('.greenBtn').removeClass('saveUserTechnology');
 
 })
 

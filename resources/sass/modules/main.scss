@@ -263,6 +263,8 @@ ul {
     text-align: center;
     font-weight: 300;
     display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
 
     &:hover {
         cursor: pointer;

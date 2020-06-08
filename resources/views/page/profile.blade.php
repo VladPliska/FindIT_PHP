@@ -78,14 +78,14 @@
                         @if(count($tech) == 0)
                             <h2>Вибраних технологій не знайдено</h2>
                         @endif
-                        <div class="allUseTech">
+                        <div class="allUseTech techReadyUse">
                             @foreach($tech as $v)
                                 @include('.include.technology',['data'=>$v])
                             @endforeach
                         </div>
                         <form action="/userChangeTechnology" method="POST" class="formChageTech">
                             @csrf
-                            <div class="allUseTech hidden">
+                            <div class="allUseTech techReadyUse hidden">
 
                             </div>
                         </form>

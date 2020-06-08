@@ -251,6 +251,8 @@ ul .headerUrl {
   text-align: center;
   font-weight: 300;
   display: inline-block;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .technoI:hover {

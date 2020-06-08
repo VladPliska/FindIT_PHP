@@ -48,14 +48,28 @@
             <input type="checkbox" id="home" name="home" {{$company->home ? 'checked' : '' }}>
         </span>
 
-                    <div>
+                    <div class="editTechno">
                         <h2>Технології</h2>
-                        <div class="technoBody">
-                            {{--                @dd($technology)--}}
-                            @foreach($technology as $v)
-                                @include('.include.technology',['data'=>$v])
-                            @endforeach
+                        <div class="userTechnologyChge">
+                            @if(count($technology) == 0)
+                                <h2>Вибраних технологій не знайдено</h2>
+                            @endif
+                            <div class="technoBody techReadyUse">
+                                @foreach($technology as $v)
+                                    @include('.include.technology',['data'=>$v])
+                                @endforeach
+                            </div>
+                            <form action="/userChangeTechnology" method="POST" class="formChageTech">
+                                @csrf
+                                <div class="allUseTech techReadyUse hidden">
+
+                                </div>
+                            </form>
+                                <br>
+                                <button class="changeTechnology greenBtn">Редагувати технології</button>
+                                <button class="cancelChangeTechn  grayBtn hidden">Скасувати</button>
                         </div>
+
                     </div>
                 </div>
             </div>

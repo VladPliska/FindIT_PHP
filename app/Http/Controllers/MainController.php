@@ -553,11 +553,14 @@ class MainController extends Controller
 
     public function getAllTech(Request $req)
     {
-        $user = $req->get('userData');
+        $client = $req->get('userData');
+        if($client == null){
+            $client = $req->get('companyData');
+        }
         $tech = Technology::all();
         $userChange = true;
 
-        $view = view('include.technology', ['tech' => $tech, 'userChange' => $userChange, 'userTech' => $user->technology])->render();
+        $view = view('include.technology', ['tech' => $tech, 'userChange' => $userChange, 'userTech' => $client->technology])->render();
 
         return response()->json([
             'view' => $view
@@ -568,6 +571,10 @@ class MainController extends Controller
     {
         $technology = $req->get('technology');
         $user = $req->get('userData');
+
+        if($user == null ){
+            $user = $req->get('companyData');
+        }
 
         if (empty($technology)) {
             $technology = [];
