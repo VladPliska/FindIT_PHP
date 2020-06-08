@@ -12,10 +12,14 @@
             <a  href='/login'  class= 'headerUrl'  >Увійти</a>
         @elseif($user)
             <a  href='/worker/profile'  class= 'headerUrl'  >Профіль</a>
+        @if($user->role == 'admin')
+                <a  href='/admin'  class= 'headerUrl'>Admin</a>
+            @endif
             <a  href='/logout'  class= 'headerUrl'  >Вийти</a>
         @elseif($company)
             <a  href='/company/profile'  class= 'headerUrl'  >Профіль</a>
             <a  href='/logout'  class= 'headerUrl'  >Вийти</a>
+
         @endif
     </ul>
 </div>

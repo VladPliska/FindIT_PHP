@@ -23,7 +23,7 @@ class MainController extends Controller
 
     public function index(Request $req)
     {
-        $advert = Advert::all()->take(20);
+        $advert = Advert::where('block',false)->take(20)->get();
         $city = City::all();
         return view('page.main', compact('advert', 'city'));
     }
@@ -35,13 +35,13 @@ class MainController extends Controller
         $allCity = City::orderBy('advert', 'desc')->take(20)->get();
 
         if ($req->get('company')) {
-            $advert = Advert::where('company_id', $req->get('company'))->paginate(10);
+            $advert = Advert::where([['company_id', $req->get('company')],['block',false]])->paginate(10);
         } else if ($req->get('mainSearch')) {
             $city = $req->get('city');
             $query = $req->get('query');
-            $advert = Advert::where([['title', 'ilike', '%' . $query . '%'], ['city_id', intval($city)]])->paginate(10);
+            $advert = Advert::where([['title', 'ilike', '%' . $query . '%'], ['city_id', intval($city)],['block',false]])->paginate(10);
         } else {
-            $advert = Advert::where('id', '>', 0)->paginate(10);
+            $advert = Advert::where([['id', '>', 0],['block',false]])->paginate(10);
         }
 
         return view('page.all-advert', compact('advert', 'allCity'));
@@ -51,12 +51,11 @@ class MainController extends Controller
     {
         $filterOn = $req->get('filterOn');
         $query = $req->get('query');
-//        dd($filterOn);
-
+        $company = Company::where([['name','ilike','%'.$query.'%'],['block',false]])->get();
         if ($filterOn == 'false') {
-            $adverts = Advert::where('title', 'ilike', '%' . $query . '%')->get();
+            $adverts = Advert::where([['title', 'ilike', '%' . $query . '%'],['block',false]])->get();
 
-            $view = view('.include/advert-filter-item', ['data' => $adverts, 'forSearch' => true])->render();
+            $view = view('.include/advert-filter-item', ['data' => $adverts, 'forSearch' => true,'company'=>$company])->render();
             return response()->json([
                 'view' => $view
             ]);
@@ -85,6 +84,8 @@ class MainController extends Controller
                 $queryText .= " and minsallary >'" . $price . "' ";
             }
 
+            $queryText .= " and block = false ";
+
             $res = DB::select($queryText);
             $id = [];
             foreach ($res as $v) {
@@ -92,7 +93,7 @@ class MainController extends Controller
             }
             $data = Advert::whereIn('id', $id)->get();
 
-            $view = view('.include/advert-filter-item', ['data' => $data, 'forSearch' => true])->render();
+            $view = view('.include/advert-filter-item', ['data' => $data, 'forSearch' => true,'company'=>$company])->render();
             return response()->json([
                 'view' => $view
             ]);
@@ -146,10 +147,9 @@ class MainController extends Controller
         $user = $req->get('userData');
         $resume = $req->get('resume');
 
-        if ($req->file('img') != null) {
+        if ($req->file('image') != null) {
             $path = $req->file('image')->store('images', 's3');
             Storage::disk('s3')->setVisibility($path, 'public');
-
             $user->update([
                 'img' => Storage::disk('s3')->url($path),
                 'resume' => $resume
@@ -224,7 +224,11 @@ class MainController extends Controller
         if ($user == null) {
             return redirect('/login');
         }
-        $tech = Technology::whereIn('id', $user->technology)->get();
+        if(count($user->technology) != 0){
+            $tech = Technology::whereIn('id', $user->technology)->get();
+        }else{
+            $tech = [];
+        }
         if(empty($user->selectadvert)){
             $advert = [];
         }else{
@@ -293,14 +297,14 @@ class MainController extends Controller
     ///////////////////company
     public function allCompany(Request $req)
     {
-        $company = Company::paginate(10);
+        $company = Company::where('block',false)->paginate(10);
         return view('page.all-company', compact('company'));
     }
 
     public function companyPublicProfile(Request $req, $id)
     {
 
-        $company = Company::where('id', $id)->first();
+        $company = Company::where([['id', $id],['block',false]])->first();
         $technology = Technology::whereIn('id', $company->technology)->get();
         return view('page.company', compact('company', 'technology'));
     }
@@ -324,14 +328,18 @@ class MainController extends Controller
                 ['password', '=', $pass]
             ])->first();
             if ($user != null) {
-                $rand = rand(mb_strlen($user->email), 200);
-                $authToken = hash('md5', $rand);
-                $user->update(['token' => $authToken]);
 
-                Cookie::queue('auth', $authToken, 60 * 30);
+                if($user->block){
+                    return back()->with('err', 'Не вдалося увійти,користувач заблокований');
+                }else {
+                    $rand = rand(mb_strlen($user->email), 200);
+                    $authToken = hash('md5', $rand);
+                    $user->update(['token' => $authToken]);
 
-//                return view('page.profile', ['data' => $user,'tech'=>$tech]);
-                return redirect('worker/profile');
+                    Cookie::queue('auth', $authToken, 60 * 30);
+
+                    return redirect('worker/profile');
+                }
             } else {
 
                 return back()->with('err', 'Не вдалося увійти,спробуйте інший логін або пароль');
@@ -344,17 +352,24 @@ class MainController extends Controller
                 ['email', '=', $login],
                 ['password', '=', $pass]])->first();
             if ($company) {
-                $city = $company->city;
-                $tech = $company->technology;
-                $technology = Technology::whereIn('id', $tech)->get();
 
-                $rand = rand(mb_strlen($company->email), 200);
-                $authToken = hash('md5', $rand);
-                $company->update(['token' => $authToken]);
+                if($company->block){
+                    return back()->with('err', 'Не вдалося увійти,компанія заблокована');
+                }
+                else{
+                    $city = $company->city;
+                    $tech = $company->technology;
+                    $technology = Technology::whereIn('id', $tech)->get();
 
-                Cookie::queue('auth', $authToken, 60 * 30);
+                    $rand = rand(mb_strlen($company->email), 200);
+                    $authToken = hash('md5', $rand);
+                    $company->update(['token' => $authToken]);
 
-                return redirect('/company/profile');
+                    Cookie::queue('auth', $authToken, 60 * 30);
+
+                    return redirect('/company/profile');
+                }
+
 //            return view('page.company.profile', ['data' => $company, 'city' => $city, 'technology' => $technology]);
             } else {
                 return back()->with('err', 'Не вдалося увійти,спробуйте інший логін або пароль');
@@ -435,11 +450,11 @@ class MainController extends Controller
     public function advert(Request $req, $id)
     {
         $user = $req->get('userData');
-        $advert = Advert::where('id', $id)->first();
+        $advert = Advert::where([['id', $id],['block',false]])->first();
         $company = $advert->company;
         $tech = Technology::whereIn('id', $advert->technology)->get();
         $city = $advert->city;
-        $adverts = Advert::where('company_id', $advert->company_id)->get();
+        $adverts = Advert::where([['company_id', $advert->company_id],['block',false]])->get();
         if ($user != null) {
             $selected = false;
             if($user->selectadvert){
@@ -530,7 +545,7 @@ class MainController extends Controller
     {
         $company = $req->get('companyData');
 
-        $advert = Advert::where('company_id', $company->id)->get();
+        $advert = Advert::where([['company_id', $company->id],['block',false]])->get();
 
         return $advert;
 

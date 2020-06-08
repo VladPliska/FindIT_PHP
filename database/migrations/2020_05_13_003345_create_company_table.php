@@ -23,6 +23,7 @@ class CreateCompanyTable extends Migration
             $table->integer('city_id');
             $table->boolean('office')->nullable();
             $table->boolean('home')->nullable();
+            $table->boolean('block')->default('false');
             $table->integer('workers')->nullable();
             $table->text('description');
             $table->json('technology');

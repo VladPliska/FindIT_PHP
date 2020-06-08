@@ -25,6 +25,7 @@ class CreateAdvertTable extends Migration
             $table->text('description');
             $table->json('technology');
             $table->string('skills');
+            $table->boolean('block')->default('false');
 
             $table->foreign('company_id')->references('id')->on('company');
             $table->foreign('city_id')->references('id')->on('city');

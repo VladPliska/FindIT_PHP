@@ -8,7 +8,7 @@ class Advert extends Model
 {
     protected $table = 'advert';
     protected $fillable = [
-        'title','company_id','office','home','city_id','minsallary','maxsallary','description','technology','skills'
+        'title','company_id','office','home','city_id','minsallary','maxsallary','description','technology','skills','block'
     ];
 
     protected $casts = [

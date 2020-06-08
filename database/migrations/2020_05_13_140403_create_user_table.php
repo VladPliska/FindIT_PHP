@@ -27,6 +27,7 @@ class CreateUserTable extends Migration
             $table->boolean('home')->nullable();
             $table->json('technology');
             $table->json('selectadvert')->nullable();
+            $table->boolean('block')->default('false');
             $table->string('role');
             $table->text('resume')->nullable();
             $table->string('token');

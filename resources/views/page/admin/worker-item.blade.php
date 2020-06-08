@@ -4,7 +4,11 @@
     <div class="username">{{$v->name}}</div>
     <div class="email">{{$v->email}}</div>
     <div class="experience">{{$v->experience}}</div>
-    <a class="remove" data-type="worker" data-id="{{$v->id}}">Видалити</a>
-    <a class="block" data-type='worker' data-id="{{$v->id}}">Блокувати</a>
-</div>
+    <a class="changeAccess" data-type="worker" data-action='remove' data-id="{{$v->id}}">Видалити</a>
+        @if($v->block)
+            <a class="changeAccess" data-type='worker' data-action='unblock' data-id="{{$v->id}}">Розблокувати</a>
+        @else
+            <a class="changeAccess" data-type='worker' data-action='block' data-id="{{$v->id}}">Заблокувати</a>
+        @endif
+    </div>
 @endforeach

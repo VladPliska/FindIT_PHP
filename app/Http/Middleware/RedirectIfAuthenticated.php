@@ -48,6 +48,9 @@ class RedirectIfAuthenticated
             View::share('user',null);
             View::share('company',null);
         }
+        if($request->path() == 'admin' && ((!empty($user) && $user->role != 'admin') || empty($user))){
+           return  redirect('login');
+        }
 
         return $next($request);
     }

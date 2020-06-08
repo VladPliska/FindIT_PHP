@@ -83,3 +83,6 @@ Route::post('worker/public/profile','MainController@publicWorkerProfile');
 Route::get('/admin','AdminController@index');
 
 Route::post('/searchAdmin','AdminController@searchAdmin');
+
+
+Route::post('/chageAccess','AdminController@chageAccess'); //block or remove

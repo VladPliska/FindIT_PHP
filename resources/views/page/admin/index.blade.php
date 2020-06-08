@@ -18,7 +18,7 @@
         <a href='#allAdvert' class="company-menu-item" data-target="allAdvert">Оголошення</a>
     </div>
     <div class="admin-workspace">
-        <div class=" menu-item profile-all-company" data-target="AllCompany">
+        <div class=" menu-item profile-admin-company" data-target="AllCompany">
                 @include('.page.admin.company-item',compact('company'))
         </div>
         <div class=" menu-item profile-all-worker hidden" data-target="allWorker">

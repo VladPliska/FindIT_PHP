@@ -2,6 +2,7 @@
     @if(count($data) == 0)
         <h2>Вакансій по вказаним критеріям не знайденно</h2>
     @else
+        <h2>Оголошення:</h2>
         @foreach($data as $v)
             <a href="/advert/{{$v->id ?? 1}}">
                 <div class='advert advert-filter-item-href'>
@@ -10,7 +11,8 @@
                     <h3>{{$v->city->name ?? 'CITY'}}</h3>
                     <span class='description'>
                         {{$v->description ?? 'desc'}}
-    </span> @if($company != null)
+                </span><br>
+                    @if($company != null)
                         <a class='link1' href='javascript:;'>Авторизуйтеся як працівник,для відповіді</a>
                     @else
                         <a class='link1' href='/resume/advert/{{$v->id}}'>Відгукнутися</a>
@@ -21,6 +23,24 @@
                 </div>
             </a>
         @endforeach
+    @endif
+    @if(!empty($company))
+        @if(count($company) == 0)
+            <h2>Жодної компанії не знайдено</h2>
+        @else
+
+            <h2>Компанії:</h2>
+            <div class="profile-admin-company filter-company-item">
+                @foreach($company as $v)
+                    <a href="/company/{{$v->id}}" class="removeLinkStyle admin-company-item">
+                        <img class='company-img' src="{{$v->img}}" alt="company-img">
+                        <h2>{{$v->name}}</h2>
+                        <h2>{{$v->city->name}}</h2>
+                        <h2 class="reit">Рейтинг: {{$v->score ?? 1}}/10</h2>
+                    </a>
+                @endforeach
+            </div>
+        @endif
     @endif
 @elseif(!empty($admin))
     @foreach($advert as $v)
@@ -46,8 +66,13 @@
                 </div>
             </a>
 
-            <a class="remove" data-type="advert" data-id="{{$v->id}}">Видалити</a>
-            <a class="block" data-type="advert" data-id="{{$v->id}}">Заблокувати</a>
+
+            <a class="changeAccess" data-type="advert" data-action='remove' data-id="{{$v->id}}">Видалити</a>
+            @if($v->block)
+                <a class="changeAccess" data-type="advert" data-action='unblock' data-id="{{$v->id}}">Розблокувати</a>
+            @else
+                <a class="changeAccess" data-type="advert" data-action='block' data-id="{{$v->id}}">Заблокувати</a>
+            @endif
         </div>
         <br><br>
     @endforeach

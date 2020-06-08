@@ -1608,40 +1608,10 @@ img {
         //height: 400px;
         background: #383740;
         border-radius: 20px;
-        .profile-all-company{
-            padding: 20px;
-            .admin-company-item{
-                background: #4d4d58;
-                padding: 10px;
-                border-radius: 10px;
-                    display: grid;
-                    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr ;
-                    img{
-                        width: 200px;
-                        height: 150px;
-                        border-radius: 20px;
-                    }
-                    h2,a{
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-                    }
-                .remove,.block{
-                    font-size: 30px;
-                    margin-left:20px;
-                    color: #3aa5e7;
-                    &:hover{
-                        cursor:pointer;
-                        color: #1071aa;
-                    }
-                }
 
-
-            }
-
-        }
 
         .admin-worker-body{
+            margin: 10px;
             display: grid;
             grid-template-columns:1fr 1fr 1fr 1fr 1fr 1fr;
             background: #4d4d58;
@@ -1672,7 +1642,7 @@ img {
             position: relative;
             padding: 5px;
             border-radius: 20px;
-            .remove,.block{
+            .changeAccess{
                 font-size: 30px;
                 margin-left:20px;
                 &:hover{
@@ -1684,3 +1654,37 @@ img {
     }
 
 }
+.profile-admin-company{
+    padding: 20px;
+    .admin-company-item{
+        background: #4d4d58;
+        padding: 10px;
+        border-radius: 10px;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr ;
+        img{
+            width: 200px;
+            height: 150px;
+            border-radius: 20px;
+        }
+        h2,a{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .changeAccess{
+            font-size: 30px;
+            margin-left:20px;
+            color: #3aa5e7;
+            &:hover{
+                cursor:pointer;
+                color: #1071aa;
+            }
+        }
+
+
+    }
+
+}
+
+

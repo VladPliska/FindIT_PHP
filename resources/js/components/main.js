@@ -303,7 +303,78 @@ $(document).on('click', '.adminSearchBtn', function () {
         }
     })
 
-    $('.searchInAdmin').val('')
+    $('.searchInAdmin').val('');
+})
+
+$(document).on('click','.changeAccess',function(e){
+    let action  = $(this).attr('data-action');
+    let type = $(this).attr('data-type');
+    let id = $(this).attr('data-id');
+    let curr = $(this);
+
+    let text;
+
+        if(type === 'company' && action === 'remove'){
+            text = 'Видалити компанію?';
+        }else if(type === 'advert' && action === 'remove'){
+            text = 'Видалити оголошення?';
+        }else if(type === 'worker' && action === 'remove'){
+            text = 'Видалити працівника?';
+        }
+
+        if(type === 'company' && action === 'block'){
+            text = 'Заблокувати компанію?';
+        }else if(type === 'advert' && action === 'block'){
+            text = 'Заблокувати оголошення?';
+        }else if(type === 'worker' && action === 'block'){
+            text = 'Заблокувати працівника?';
+        }
+
+        if(type === 'company' && action === 'unblock'){
+            text = 'Розблокувати компанію?';
+        }else if(type === 'advert' && action === 'unblock'){
+            text = 'Розблокувати оголошення?';
+        }else if(type === 'worker' && action === 'unblock'){
+            text = 'Розблокувати працівника?';
+        }
 
 
+        popup.fire({
+            title:text,
+            buttons: true,
+            showCancelButton: true,
+        }).then(data =>{
+            if(data.value){
+                $.ajax({
+                    type:'POST',
+                    url:'/chageAccess',
+                    data:{
+                        table:type,
+                        action:action,
+                        id:id
+                    },
+                    success:(res)=>{
+                        if(action === 'block'){
+                            curr.text("Розблокувати").attr('data-action','unblock');
+                        }else{
+                            curr.text("Блокувати").attr('data-action','block');
+                        }
+                        if(action ==='remove'){
+                            curr.parent().remove();
+                        }
+
+                    }
+                })
+            }
+        })
+
+
+
+    console.log(action,type);
+})
+
+$(document).on('click','.admin-company-item', function(e){
+    if($(e.target).hasClass('changeAccess')){
+        e.preventDefault();
+    }
 })

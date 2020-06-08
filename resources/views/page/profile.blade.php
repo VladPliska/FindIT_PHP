@@ -19,7 +19,7 @@
                     <div class="leftBlock">
                         <label for="image">
                             <img src="{{$data->img ?? 'https://picsum.photos/350/200'}}" alt=""
-                                 class="user-img changeImg-parent">
+                                 class="user-img changeImg-parent chageUserImg" name="image">
                         </label>
                         <input type="file" hidden name="image" id="image" class="changeImg">
                         <div class="notChange">
