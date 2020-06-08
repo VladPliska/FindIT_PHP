@@ -12,6 +12,7 @@
                     <span class='description'>
                         {{$v->description ?? 'desc'}}
                 </span><br>
+
                     @if($company != null)
                         <a class='link1' href='javascript:;'>Авторизуйтеся як працівник,для відповіді</a>
                     @else
@@ -24,14 +25,14 @@
             </a>
         @endforeach
     @endif
-    @if(!empty($company))
-        @if(count($company) == 0)
+    @if(!empty($companyData))
+        @if(count($companyData) == 0)
             <h2>Жодної компанії не знайдено</h2>
         @else
 
             <h2>Компанії:</h2>
             <div class="profile-admin-company filter-company-item">
-                @foreach($company as $v)
+                @foreach($companyData as $v)
                     <a href="/company/{{$v->id}}" class="removeLinkStyle admin-company-item">
                         <img class='company-img' src="{{$v->img}}" alt="company-img">
                         <h2>{{$v->name}}</h2>

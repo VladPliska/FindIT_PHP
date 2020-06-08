@@ -51,11 +51,11 @@ class MainController extends Controller
     {
         $filterOn = $req->get('filterOn');
         $query = $req->get('query');
-        $company = Company::where([['name','ilike','%'.$query.'%'],['block',false]])->get();
+        $companyData = Company::where([['name','ilike','%'.$query.'%'],['block',false]])->get();
         if ($filterOn == 'false') {
             $adverts = Advert::where([['title', 'ilike', '%' . $query . '%'],['block',false]])->get();
 
-            $view = view('.include/advert-filter-item', ['data' => $adverts, 'forSearch' => true,'company'=>$company])->render();
+            $view = view('.include/advert-filter-item', ['data' => $adverts, 'forSearch' => true,'companyData'=>$companyData])->render();
             return response()->json([
                 'view' => $view
             ]);
@@ -93,7 +93,7 @@ class MainController extends Controller
             }
             $data = Advert::whereIn('id', $id)->get();
 
-            $view = view('.include/advert-filter-item', ['data' => $data, 'forSearch' => true,'company'=>$company])->render();
+            $view = view('.include/advert-filter-item', ['data' => $data, 'forSearch' => true,'companyData'=>$companyData])->render();
             return response()->json([
                 'view' => $view
             ]);
