@@ -1,7 +1,6 @@
 @include('.include.head')
 
 
-
 @include('include.header')
 
 <div class="advert-page">
@@ -23,11 +22,15 @@
         </a>
         <div class="sendMail">
             <div>
-                <a href="/resume/advert/{{$advert->id}}" class="answer ">Відповісти</a>
-                @if($selected)
-                    <i class="fas fa-star star-like addAdvertToFav" data-id="{{$advert->id}}"></i>
+                @if($user != null)
+                    <a href="/resume/advert/{{$advert->id}}" class="answer ">Відповісти</a>
+                    @if($selected)
+                        <i class="fas fa-star star-like addAdvertToFav" data-id="{{$advert->id}}"></i>
+                    @else
+                        <i class="far fa-star star-like addAdvertToFav" data-id="{{$advert->id}}"></i>
+                    @endif
                 @else
-                    <i class="far fa-star star-like addAdvertToFav"  data-id="{{$advert->id}}"></i>
+                    <a>Увійдіть як робітник для взаємодії з вакансією</a>
                 @endif
             </div>
             <div>

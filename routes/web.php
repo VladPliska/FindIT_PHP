@@ -86,3 +86,10 @@ Route::post('/searchAdmin','AdminController@searchAdmin');
 
 
 Route::post('/chageAccess','AdminController@chageAccess'); //block or remove
+
+Route::get('/answer-show/{id}','MainController@companyShowAnswer');
+
+Route::post('/changeStatus','MainController@changeStatus');
+
+Route::post('/sendMessage','MessageController@sendMessage');
+

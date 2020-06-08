@@ -6,6 +6,7 @@ use App\Models\Advert;
 use App\Models\Answer;
 use App\Models\City;
 use App\Models\Company;
+use App\Models\Message;
 use App\Models\Technology;
 use Illuminate\Http\Request;
 use App\Models\User as User;
@@ -235,8 +236,9 @@ class MainController extends Controller
             $advert = Advert::whereIn('id', $user->selectadvert)->paginate(5);
         }
 
+        $answer = Answer::where('user_id',$user->id)->get();
 
-        return view('page.profile', ['data' => $user, 'tech' => $tech, 'advert' => $advert]);
+        return view('page.profile', ['data' => $user, 'tech' => $tech, 'advert' => $advert,'answer'=>$answer]);
     }
 
     public function addAdvertToFavorite(Request $req)
@@ -444,7 +446,8 @@ class MainController extends Controller
         $allCity = City::all();
         $technology = Technology::whereIn('id', $tech)->get();
         $advert = $this->getComanyAdvert($req);
-        return view('page.company.profile', compact('company', 'advert', 'city', 'technology', 'allCity'));
+        $companyAnswerAdvert = Answer::where('company_id',$company->id)->get();
+        return view('page.company.profile', compact('company', 'advert', 'city', 'technology', 'allCity','companyAnswerAdvert'));
     }
 
     public function advert(Request $req, $id)
@@ -587,13 +590,14 @@ class MainController extends Controller
 
     public function showAnswerPage(Request $req, $id)
     {
-        $advert = Advert::find($id)->first();
+        $advert = Advert::find($id);
         return view('page.resume', compact('advert'));
     }
 
     public function sendAnswer(Request $req)
     {
         $company = $req->get('company');
+        $advert_id = $req->get('advert_id');
         $pib = $req->get('pib');
         $email = $req->get('email');
         $sallary = $req->get('sallary');
@@ -602,8 +606,15 @@ class MainController extends Controller
         $user = $req->get('userData');
 
 //        dd($req->all());
+        $checkExistAnswer = Answer::where([['user_id',$user->id],['advert_id',$advert_id]])->get();
+//        dd($checkExistAnswer);
+
+        if(count($checkExistAnswer) > 1){
+            return redirect('/worker/profile#anserAdvert');
+        }
         Answer::create([
            'user_id' => $user->id,
+           'advert_id'=>$advert_id,
            'company_id' => $company,
            'fullname' => $pib,
            'email' => $email,
@@ -612,7 +623,65 @@ class MainController extends Controller
            'resume' => $resume,
         ]);
 
-        return redirect('/worker/profile');
+        return redirect('/worker/profile#anserAdvert');
 
+    }
+
+    public function companyShowAnswer($id,Request $req){
+        $answer = Answer::find($id);
+        $client = $req->get('companyData');
+        $companyCheck = true;
+        $message =[];
+        if($client == null){
+            $client = $req->get('userData');
+            if($answer->user_id != $client->id){
+                return \redirect(404);
+            }
+        }else{
+            if($answer->company_id != $client->id){
+                return \redirect(404);
+            }
+        }
+        if($client == null){
+            return \redirect(404);
+        }
+
+
+
+        if($answer->status == null){
+            $answer->update(['status'=>"Прочитано"]);
+        }
+
+        if($answer->status == 'Схваленно'){
+            $message = Message::where('token',$id)->get();
+        }
+        return view('.page.resume',compact('answer','companyCheck','message'));
+    }
+
+    public function changeStatus(Request $req){
+        $status = $req->get('status');
+        $answer = $req->get('id');
+
+        $data = Answer::find($answer);
+
+        $data->update(['status'=>$status]);
+
+        if($status == 'Схваленно'){
+            ///create unique token for chat - answer id
+            $checkExistChat = Message::where('token',$answer)->first();
+            if(!$checkExistChat){
+                Message::create([
+                    'user_id'=>$data->user_id,
+                    'company_id'=>$data->company_id,
+                    'message'=>'Відповідь на вакансію позитивна,тепер Вам доступний чат.',
+                    'token' => $answer,
+                    'status' =>'first',
+                    'advert_id'=>$data->advert_id
+                ]);
+            }
+        }
+
+
+        return redirect('/answer-show/'.$answer);
     }
 }

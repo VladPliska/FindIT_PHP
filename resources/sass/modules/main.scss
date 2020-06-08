@@ -1334,8 +1334,9 @@ input[disabled] {
 
 input[type=radio] {
     box-shadow: unset;
-    &:focus{
-        box-shadow: unset!important;
+
+    &:focus {
+        box-shadow: unset !important;
     }
 }
 
@@ -1448,7 +1449,7 @@ img {
     margin: 30px auto;
     padding: 20px;
     border-radius: 20px;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr ;
 
     .companyItem {
         background: #4d4d58;
@@ -1525,31 +1526,37 @@ img {
     margin: 20px auto;
     background: #383740;
     display: grid;
-    padding-bottom:80px;
+    padding-bottom: 80px;
     grid-template-columns: 1fr 1fr;
     position: relative;
-    button{
+
+    button {
         position: absolute;
         width: 40%;
-        bottom:20px;
+        bottom: 20px;
         left: 30%;
     }
+
     .answerBodyUser {
         padding-left: 10px;
+
         label {
             font-size: 1.5em;
         }
+
         .pibUserAnswer {
             margin: 20px 20px;
             text-align: left;
-            textarea{
+
+            textarea {
                 margin: unset;
-                width:400px;
+                width: 400px;
             }
         }
 
     }
-    .advertInfoAnswer{
+
+    .advertInfoAnswer {
         width: 350px;
         height: 150px;
         border-radius: 20px;
@@ -1557,34 +1564,37 @@ img {
         display: grid;
         grid-template-columns: 1fr 1fr;
 
-        .advert-img-answer{
+        .advert-img-answer {
             width: 150px;
             border-radius: 20px;
             height: 100px;
             display: flex;
-            justify-content: center ;
+            justify-content: center;
             align-content: center;
-            margin:10px;
+            margin: 10px;
         }
     }
 }
+
 // admin
-.adminTitle{
+.adminTitle {
     font-weight: 300;
     font-size: 36px;
 }
-.adminBody{
-    display:grid;
+
+.adminBody {
+    display: grid;
     grid-template-columns: 0.3fr 1fr;
-    grid-gap:25px ;
+    grid-gap: 25px;
     margin-top: 40px;
 
-    .admin-menu{
+    .admin-menu {
         width: 100%;
         height: 300px;
         background: #383740;
         border-radius: 20px;
-        a{
+
+        a {
             text-align: left;
             white-space: nowrap;
             margin: 10px auto;
@@ -1606,13 +1616,14 @@ img {
             }
         }
     }
-    .admin-workspace{
+
+    .admin-workspace {
         //height: 400px;
         background: #383740;
         border-radius: 20px;
 
 
-        .admin-worker-body{
+        .admin-worker-body {
             margin: 10px;
             display: grid;
             grid-template-columns:1fr 1fr 1fr 1fr 1fr 1fr;
@@ -1620,35 +1631,42 @@ img {
             height: 150px;
             border-radius: 20px;
             padding: 20px;
-        img {
-            width: 200px;
-            height: 150px;
-            border-radius: 20px;
-            object-fit: contain;
-        }
-            div,a{
+
+            img {
+                width: 200px;
+                height: 150px;
+                border-radius: 20px;
+                object-fit: contain;
+            }
+
+            div, a {
                 display: flex;
                 align-items: center;
                 font-size: 30px;
                 justify-content: center;
             }
-            a:hover{
-                cursor:pointer;
+
+            a:hover {
+                cursor: pointer;
                 color: #1071aa;
             }
         }
-        .profile-all-advert,.profile-all-worker{
+
+        .profile-all-advert, .profile-all-worker {
             padding: 20px;
         }
-        .advert-admin-item{
+
+        .advert-admin-item {
             position: relative;
             padding: 5px;
             border-radius: 20px;
-            .changeAccess{
+
+            .changeAccess {
                 font-size: 30px;
-                margin-left:20px;
-                &:hover{
-                    cursor:pointer;
+                margin-left: 20px;
+
+                &:hover {
+                    cursor: pointer;
                     color: #1071aa;
                 }
             }
@@ -1656,37 +1674,205 @@ img {
     }
 
 }
-.profile-admin-company{
+
+.profile-admin-company {
     padding: 20px;
-    .admin-company-item{
+
+    .admin-company-item {
         background: #4d4d58;
         padding: 10px;
         border-radius: 10px;
         display: grid;
-        grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr ;
-        img{
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+
+        img {
             width: 200px;
             height: 150px;
             border-radius: 20px;
         }
-        h2,a{
+
+        h2, a {
             display: flex;
             justify-content: center;
             align-items: center;
         }
-        .changeAccess{
+
+        .changeAccess {
             font-size: 30px;
-            margin-left:20px;
+            margin-left: 20px;
             color: #3aa5e7;
-            &:hover{
-                cursor:pointer;
+
+            &:hover {
+                cursor: pointer;
                 color: #1071aa;
             }
         }
 
 
     }
+}
+
+.answerAdvert {
+    padding: 20px;
+}
+
+.answer-body-user {
+    display: grid;
+    grid-template-columns:1fr 1fr;
+    width: 96%;
+    background: #4d4d58;
+    border-radius: 20px;
+    //height: 150px;
+    padding: 20px;
+    margin: 20px auto;
+
+    .advert-body {
+        width: 80%;
+        display: grid;
+        background: #706F7F;
+        border-radius: 20px;
+        padding: 20px;
+        grid-template-columns: 1fr 1fr;
+
+        img {
+            border-radius: 20px;
+            width: 200px;
+            height: 150px;
+            margin: 0 auto;
+        }
+
+        .advert-data {
+            font-size: 30px;
+            text-align: left;
+        }
+    }
+
+    .OtherInfo {
+        text-align: left;
+    }
 
 }
 
+.pibUserAnswer {
+    a {
+        font-size: 18px;
+    }
 
+    h2 {
+        display: inline;
+    }
+}
+
+.statusBlock {
+    font-size: 20px;
+
+    select {
+        font-size: 20px;
+    }
+}
+
+
+.chatBody{
+    background: #383740;
+    width: 900px;
+    margin: 20px auto;
+    border-radius: 20px;
+    padding: 20px 5px;
+    .messageAll{
+        width: 90%;
+        margin: 0 auto;
+        border-radius: 20px;
+        background: #4d4d58;
+        height: 500px;
+        padding: 20px;
+        overflow: scroll;
+        &::-webkit-scrollbar{
+            width: 0;
+        }
+        .messageItem{
+            flex-basis: 45%;
+            border-bottom-right-radius: 20px;
+            border-top-right-radius: 20px;
+            border-top-left-radius: 20px;
+            font-size: 20px;
+            background: #706F7F;
+            max-width: 45%;
+            margin: 10px 0;
+            width: auto;
+            //height: 100px;
+            padding: 10px;
+            //div{
+            //    border:1px solid;
+            //}
+            .header-msg{
+                display: flex;
+                align-items: center;
+                img{
+                    display: inline;
+                    border-radius: 50%;
+                    width: 50px;
+                    height: 50px;
+                    margin-left: 20px;
+                    margin-right: 20px;
+                }
+            }
+            .body-msg{
+                text-align: left;
+                padding: 10px 10px 10px 30px;
+                p{
+                    margin: 0;
+                }
+            }
+            .footer-msg{
+                color: #909999;
+                p{
+                    margin: 0!important;
+                }
+                text-align: right;
+                font-size: 16px;
+            }
+        }
+    }
+    .sendBlock{
+        width: 90%;
+        margin: 20px auto;
+        display: grid;
+        grid-template-columns: 1fr 0.1fr;
+        textarea{
+            background: #585861;
+            border: none;
+            font-size: 18px;
+            color: #afafaf;
+            &::-webkit-scrollbar{
+                width: 0;
+            }
+        }
+        i{
+            font-size: 35px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #3085d6;
+            &:before{
+                padding: 20px;
+                border-radius: 50%;
+                background: #41b8ff;
+                border: 2px solid;
+            }
+            &:hover{
+                cursor:pointer;
+                color: #fff;
+            }
+
+        }
+    }
+}
+.myMessage{
+    display: flex;
+    justify-content: flex-end;
+    .messageItem{
+        border-bottom-left-radius: 20px;
+        border-bottom-right-radius: unset!important;
+    }
+
+}

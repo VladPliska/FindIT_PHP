@@ -103,7 +103,11 @@
                 {{$advert->links()}}
             @endif
         </div>
-        <div class="asnswerAdvert menu-item hidden" data-target="answerAdvert"></div>
+        <div class="asnswerAdvert menu-item hidden" data-target="answerAdvert">
+            @foreach($answer as $v)
+                @include('.include.answer-for-user-profile',compact('v'))
+            @endforeach
+        </div>
     </div>
 
 </div>

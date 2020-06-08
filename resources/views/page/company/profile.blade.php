@@ -7,7 +7,7 @@
         <h1>Меню</h1>
         <a href='#profileCompany' class="active company-menu-item" data-target="profile">Профіль</a>
         <a href='#advertCompany' class="company-menu-item" data-target="companyAdvert">Вакансії компанії</a>
-        <a href='#answerCompanyAdvert' class="company-menu-item">Відповіді на вакансії</a>
+        <a href='#answerCompanyAdvert' class="company-menu-item" data-target="companyAnswer">Відповіді на вакансії</a>
         <a href='#addCompanyAdvert' class="company-menu-item" id="addAdvertShow" data-target="addAdvert">Додати
             вакансію</a>
     </div>
@@ -31,7 +31,8 @@
                         </div>
                         <div class="descriptionCompany">
                             <label for="description">Про компанію</label>
-                            <textarea name="description" id="description" cols="30" rows="10">{{$company->description}}</textarea>
+                            <textarea name="description" id="description" cols="30"
+                                      rows="10">{{$company->description}}</textarea>
                         </div>
                     </div>
 
@@ -65,9 +66,9 @@
 
                                 </div>
                             </form>
-                                <br>
-                                <button class="changeTechnology greenBtn">Редагувати технології</button>
-                                <button class="cancelChangeTechn  grayBtn hidden">Скасувати</button>
+                            <br>
+                            <button class="changeTechnology greenBtn">Редагувати технології</button>
+                            <button class="cancelChangeTechn  grayBtn hidden">Скасувати</button>
                         </div>
 
                     </div>
@@ -81,6 +82,25 @@
         <div class=" menu-item profile-company-advert hidden" data-target="companyAdvert">
             @foreach($advert as $v)
                 @include('.include.advert-filter-item',['advert'=> $v,'company'=>$company,'city'=>$city])
+            @endforeach
+        </div>
+        <div class=" menu-item profile-answer-advert hidden" data-target="companyAnswer">
+            @foreach($companyAnswerAdvert as $v)
+                    <div class="answer-body-user">
+                        <a href='/advert/{{$v->advert_id}}' class="advert-body">
+                            <img class="adwert-img-answer" src="https://find-it-img.s3.eu-central-1.amazonaws.com/images/dAe2A0QRkPAxsaguaIgqTM5N0AKp3TggW8XaxIZx.jpeg" alt="">
+                            <div class="advert-data">
+                                <div>{{$v->advert->title}}</div>
+                                <div class="">{{$v->company->name}}</div>
+                                <div>{{$v->advert->maxsallary}}$</div>
+                            </div>
+                        </a>
+                        <div class="OtherInfo">
+                            <h2>Статус:{{$v->status}}</h2>
+                            <h2>Відповідь віправленна: {{date('d-m-Y h:s',strtotime($v->created_at))}}</h2>
+                            <a href="/answer-show/{{$v->id}}">Переглянути деталі</a>
+                        </div>
+                    </div>
             @endforeach
         </div>
     </div>

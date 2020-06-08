@@ -379,3 +379,30 @@ $(document).on('click','.admin-company-item', function(e){
         e.preventDefault();
     }
 })
+
+$(document).on('click','.sendMessage',function (e) {
+    let text = $('.sendBlock').find('textarea').val();
+    let answerId = $('.sendBlock').find('input').val();
+
+    if(text === ''){
+        popup.fire('Введіть текст');
+    }else{
+        $.ajax({
+            type:'POST',
+            url:'/sendMessage',
+            data:{
+                answer:answerId,
+                text:text
+            },
+            success:res=>{
+            if(res.send){
+                $('.messageAll').append(res.view);
+                $('.sendBlock').find('textarea').val('');
+            }
+            }
+        })
+
+    }
+
+
+})
