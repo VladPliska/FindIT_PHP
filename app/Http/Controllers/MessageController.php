@@ -24,6 +24,7 @@ class MessageController extends Controller
             $sender = 'company';
         }
         $answer = Answer::where('id',$answer)->first();
+        dd($answer);
     try{
         $mes = Message::create([
             'user_id'=>$answer->user_id,
