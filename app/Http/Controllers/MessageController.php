@@ -16,7 +16,6 @@ class MessageController extends Controller
         $user = $req->get('userData');
         $company = $req->get('companyData');
         $sender = '';
-        dd($req->all());
 
         if($user != null)
         {
@@ -24,8 +23,9 @@ class MessageController extends Controller
         }else if($company != null){
             $sender = 'company';
         }
-        $answer = Answer::where('id',$answer)->first();
         dd($answer,Answer::all(),$answer);
+
+        $answer = Answer::where('id',$answer)->first();
     try{
         $mes = Message::create([
             'user_id'=>$answer->user_id,
