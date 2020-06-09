@@ -376,10 +376,13 @@ ul .headerUrl {
 }
 
 .description {
+  display: block;
+  overflow: hidden;
+  height: 50px;
   font-size: 20px;
   font-weight: 300;
   margin: unset;
-  max-width: 600px;
+  max-width: 750px;
 }
 
 .descriptionTitle {
