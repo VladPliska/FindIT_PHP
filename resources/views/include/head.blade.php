@@ -9,7 +9,7 @@
     <title>FindIT</title>
 
     <!-- Scripts -->
-    <script src="js/app.js" defer></script>
+    <script src="/js/app.js" defer></script>
     <link rel="icon" href="/img/white-logo.png" type="image/png"/>
 
     <!-- Fonts -->
@@ -20,6 +20,6 @@
     <script src="https://kit.fontawesome.com/71de464d86.js" crossorigin="anonymous"></script>
 
     <!-- Styles -->
-    <link href="css/app.css" rel="stylesheet">
+    <link href="/css/app.css" rel="stylesheet">
 </head>
 
