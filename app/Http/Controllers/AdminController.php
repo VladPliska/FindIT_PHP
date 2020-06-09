@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Advert;
 use App\Models\Answer;
 use App\Models\Company;
+use App\Models\Message;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -63,6 +64,7 @@ class AdminController extends Controller
             switch ($table) {
                 case 'worker':
                     try {
+                        $message = Message::where('user_id',$id)->delete();
                         Answer::where('user_id',$id)->delete();
                         $data = User::where('id', $id)->delete();
                         return response()->json([
