@@ -23,7 +23,7 @@ class MessageController extends Controller
         }else if($company != null){
             $sender = 'company';
         }
-        dd($answer,Answer::all(),Answer::where('id',$answer)->first());
+        dd($answer,Answer::all(),Answer::where('id',strval($answer))->first());
 
         $answer = Answer::where('id',$answer)->first();
     try{
