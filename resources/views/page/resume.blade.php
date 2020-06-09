@@ -74,7 +74,7 @@
                 <h2 id="price">{{$answer->sallary}}</h2>
             </div>
             <div class="pibUserAnswer">
-                <label for="resume">Резюме: </label>
+                <label for="resume" style="display: block">Резюме: </label>
                 <h2 id="resume" class="userResumeAnswer">{{$answer->resume}}</h2>
             </div>
         </div>

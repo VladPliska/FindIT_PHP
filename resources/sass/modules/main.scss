@@ -1901,6 +1901,7 @@ img {
 }
 .userResumeAnswer{
     max-height: 200px;
+    max-width: 200px;
     overflow: scroll;
     display: inline-block!important;
     &::-webkit-scrollbar{
