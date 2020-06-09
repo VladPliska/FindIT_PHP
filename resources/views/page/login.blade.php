@@ -30,9 +30,9 @@
                 <div class='inputBlock'>
                     <div class='forgotPass'><label
                             for="password">Пароль</label>
-                        <a href='/forgotPass'>
-                            <span>Забули пароль?</span>
-                        </a>
+{{--                        <a href='/forgotPass'>--}}
+{{--                            <span>Забули пароль?</span>--}}
+{{--                        </a>--}}
                     </div>
                     <input type="password" id='password' name="pass"/>
                 </div>
