@@ -42,6 +42,7 @@ class MessageController extends Controller
         ]);
 
     }catch (\Exception $e){
+        dd($e);
         return response()->json([
             'send'=>false
         ]);
