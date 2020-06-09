@@ -3,7 +3,7 @@
 @include('.include/header')
         <h2>Всі компанії</h2>
 <div class="allCompanyBody">
-    @foreach($company as $v)
+    @foreach($companyData as $v)
         <a href="/company/{{$v->id}}" class="removeLinkStyle">
             <div class="companyItem">
             <div>

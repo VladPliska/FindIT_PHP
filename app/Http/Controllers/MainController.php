@@ -299,8 +299,8 @@ class MainController extends Controller
     ///////////////////company
     public function allCompany(Request $req)
     {
-        $company = Company::where('block',false)->paginate(10);
-        return view('page.all-company', compact('company'));
+        $companyData = Company::where('block',false)->paginate(10);
+        return view('page.all-company', compact('companyData'));
     }
 
     public function companyPublicProfile(Request $req, $id)
