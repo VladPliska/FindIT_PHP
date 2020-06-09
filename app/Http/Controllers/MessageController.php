@@ -16,6 +16,7 @@ class MessageController extends Controller
         $user = $req->get('userData');
         $company = $req->get('companyData');
         $sender = '';
+        dd($req->all());
 
         if($user != null)
         {
