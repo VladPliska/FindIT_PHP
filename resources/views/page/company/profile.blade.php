@@ -88,7 +88,7 @@
             @foreach($companyAnswerAdvert as $v)
                     <div class="answer-body-user">
                         <a href='/advert/{{$v->advert_id}}' class="advert-body">
-                            <img class="adwert-img-answer" src="https://find-it-img.s3.eu-central-1.amazonaws.com/images/dAe2A0QRkPAxsaguaIgqTM5N0AKp3TggW8XaxIZx.jpeg" alt="">
+                            <img class="adwert-img-answer" src="{{$v->company->img}}" alt="">
                             <div class="advert-data">
                                 <div>{{$v->advert->title}}</div>
                                 <div class="">{{$v->company->name}}</div>
