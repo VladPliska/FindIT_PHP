@@ -383,7 +383,7 @@ $(document).on('click','.admin-company-item', function(e){
 $(document).on('click','.sendMessage',function (e) {
     let text = $('.sendBlock').find('textarea').val();
     let answerId = $('.sendBlock').find('input').val();
-
+        console.log(answerId);
     if(text === ''){
         popup.fire('Введіть текст');
     }else{
