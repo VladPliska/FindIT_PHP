@@ -1830,6 +1830,15 @@ img {
   margin: 0 auto;
 }
 
+.userResumeAnswer {
+  max-height: 200px;
+  overflow: scroll;
+}
+
+.userResumeAnswer::-webkit-scrollbar {
+  width: 0;
+}
+
 .main {
   margin: 0 auto;
 }

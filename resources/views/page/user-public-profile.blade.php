@@ -3,7 +3,7 @@
 
 <div class="profile-public-body">
     <div class="headerInfo">
-        <img src="{{$user->img ?? asset('img/user->img.png')}}" alt="">
+        <img src="{{$user->img ?? asset('img/user-img.png')}}" alt="">
         <div>
             <h2>{{$user->name . ' '. $user->surname}}</h2>
             <h2>{{$user->email}}</h2>

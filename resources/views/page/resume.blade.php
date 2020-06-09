@@ -75,7 +75,7 @@
             </div>
             <div class="pibUserAnswer">
                 <label for="resume">Резюме: </label>
-                <h2 id="resume">{{$answer->resume}}</h2>
+                <h2 id="resume" class="userResumeAnswer">{{$answer->resume}}</h2>
             </div>
         </div>
         <div class="answerBodyAdvert">
