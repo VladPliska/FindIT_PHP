@@ -38,7 +38,7 @@
                     </div>
                     <div>
                         <h2 class='descriptionTitle'>Короткі відомості</h2>
-                        <h3 class='description'>
+                        <h3 class='company-description-1'>
                             {{$company->description}}
                         </h3>
                     </div>
