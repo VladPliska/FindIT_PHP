@@ -94,6 +94,7 @@ class AdminController extends Controller
                     break;
                 case 'advert':
                     try {
+                        Answer::where('advert_id',$id)->delete();
                         $data = Advert::where('id', $id)->delete();
                         return response()->json([
                             'delete' => true
