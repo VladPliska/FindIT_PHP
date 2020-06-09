@@ -134,7 +134,7 @@
             <div class="sendBlock">
                 <textarea name="messageText" id="messageText" cols="15" rows="4"
                           placeholder="Введіть текст повідомлення"></textarea>
-                <input type="text" hidden value="{{$answer->advert->id}}" name='advertID'>
+                <input type="text" hidden value="{{$answer->id}}" name='advertID'>
                 <i class="fas fa-paper-plane sendMessage"></i>
             </div>
         </div>
