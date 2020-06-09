@@ -19,8 +19,8 @@ class CreateAnswerTable extends Migration
             $table->integer('company_id');
             $table->string('fullname');
             $table->string('email');
-            $table->integer('phone');
-            $table->integer('sallary');
+            $table->string('phone');
+            $table->bigInteger('sallary');
             $table->text('resume');
             $table->integer('advert_id');
             $table->string('status')->nullable();

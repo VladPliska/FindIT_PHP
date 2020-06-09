@@ -17,12 +17,12 @@ class CreateUserTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('surname');
-            $table->integer('phone');
+            $table->string('phone');
             $table->string('email')->unique();
             $table->string('username')->unique();
             $table->string('password');
             $table->integer('experience')->nullable();
-            $table->integer('sallary')->nullable();
+            $table->string('sallary')->nullable();
             $table->boolean('office')->nullable();
             $table->boolean('home')->nullable();
             $table->json('technology');

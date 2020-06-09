@@ -21,7 +21,7 @@ class CreateAdvertTable extends Migration
             $table->boolean('home');
             $table->integer('city_id');
             $table->integer('minsallary');
-            $table->integer('maxsallary');
+            $table->bigInteger('maxsallary');
             $table->text('description');
             $table->json('technology');
             $table->string('skills');
