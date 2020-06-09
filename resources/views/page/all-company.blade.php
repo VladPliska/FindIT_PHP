@@ -17,5 +17,5 @@
         </div>
         </a>
     @endforeach
-    {{$company->links()}}
+    {{$companyData->links()}}
 </div>
