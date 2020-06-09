@@ -1606,6 +1606,7 @@ img {
 }
 
 .profile-admin-company .admin-company-item {
+  margin: 20px;
   background: #4d4d58;
   padding: 10px;
   border-radius: 10px;
