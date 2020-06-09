@@ -23,8 +23,7 @@ class MessageController extends Controller
         }else if($company != null){
             $sender = 'company';
         }
-        dd(Answer::all());
-        $answer = Answer::find($answer);
+        $answer = Answer::where('id',$answer)->first();
     try{
         $mes = Message::create([
             'user_id'=>$answer->user_id,
