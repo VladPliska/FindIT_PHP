@@ -11,9 +11,10 @@
         @if($company == null && $user == null)
             <a  href='/login'  class= 'headerUrl'  >Увійти</a>
         @elseif($user)
-            <a  href='/worker/profile'  class= 'headerUrl'  >Профіль</a>
         @if($user->role == 'admin')
                 <a  href='/admin'  class= 'headerUrl'>Admin</a>
+            @else
+                <a  href='/worker/profile'  class= 'headerUrl'  >Профіль</a>
             @endif
             <a  href='/logout'  class= 'headerUrl'  >Вийти</a>
         @elseif($company)

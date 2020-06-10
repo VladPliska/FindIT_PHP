@@ -225,6 +225,9 @@ class MainController extends Controller
         if ($user == null) {
             return redirect('/login');
         }
+        if($user->role == 'admin'){
+            return redirect('/admin');
+        }
         if(count($user->technology) != 0){
             $tech = Technology::whereIn('id', $user->technology)->get();
         }else{
@@ -340,7 +343,11 @@ class MainController extends Controller
 
                     Cookie::queue('auth', $authToken, 60 * 30);
 
-                    return redirect('worker/profile');
+                    if($user->role == 'admin'){
+                        return redirect('admin');
+                    }else{
+                        return redirect('worker/profile');
+                    }
                 }
             } else {
 

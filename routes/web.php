@@ -30,7 +30,7 @@ Route::get('/signup/worker','MainController@workerSignUp');
 
 Route::post('/signUp','MainController@signUp');
 
-Route::get('/worker/profile','MainController@profile');
+//Route::get('/worker/profile','MainController@profile');
 
 Route::post('/login','MainController@login');
 

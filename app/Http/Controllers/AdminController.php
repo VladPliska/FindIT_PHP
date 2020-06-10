@@ -118,7 +118,7 @@ class AdminController extends Controller
                         ]);
                     } catch (\Exception $e) {
                         return response()->json([
-                            'blcok' => false
+                            'block' => false
                         ]);
                     }
 
