@@ -29,7 +29,7 @@
                             <h2>{{$data->phone}}</h2>
                         </div>
                     </div>
-                    <h2>Резюме</h2>
+                    <h2>Про мене</h2>
                     <textarea class="resumeProfile" name="resume">{{$data->resume}}</textarea>
                     <button class="greenBtn saveResume" type="submit">Зберегти зміни</button>
                 </form>

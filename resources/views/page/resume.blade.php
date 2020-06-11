@@ -28,8 +28,8 @@
                            required>
                 </div>
                 <div class="pibUserAnswer">
-                    <label for="resume">Резюме</label><br>
-                    <textarea id="resume" name='resume' cols="30" rows="10" placeholder="Резюме"
+                    <label for="resume">Додаткова інформація</label><br>
+                    <textarea id="resume" name='resume' cols="30" rows="10" placeholder="Додаткова інформація"
                               required>{{$user->resume}}</textarea>
                 </div>
 
@@ -74,7 +74,7 @@
                 <h2 id="price">{{$answer->sallary}}</h2>
             </div>
             <div class="pibUserAnswer">
-                <label for="resume" style="display: block">Резюме: </label>
+                <label for="resume" style="display: block">Додаткова інформація: </label>
                 <h2 id="resume" class="userResumeAnswer">{{$answer->resume}}</h2>
             </div>
         </div>
