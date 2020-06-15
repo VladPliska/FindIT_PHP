@@ -29,7 +29,7 @@
                             <div class='description' style="height: 100px">
                                 {{$v->description}}
                             </div>
-                            <div class='mobileGetText  '>Read more...</div>
+{{--                            <div class='mobileGetText  '>Read more...</div>--}}
                         </div>
                         <div class='price'>{{$v->maxsallary}}$</div>
                     </div>

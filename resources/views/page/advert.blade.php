@@ -9,7 +9,7 @@
             <h2 class="title-advert">{{$advert->title ?? 'title'}}</h2>
             <h3 class="sallary">${{$advert->minsallary ?? 0}} - ${{$advert->maxsallary ?? 1}}</h3>
         </div>
-        <a href="/company/{{$company->id}}" class="removeLinkStyle">
+        <a href="/company/{{$company->id}}" class="removeLinkStyle company-block">
             <div class="companyInfo-advert">
                 <div>
                     <h2 class="companyName-advert">{{$company->name ?? 'company'}}</h2>

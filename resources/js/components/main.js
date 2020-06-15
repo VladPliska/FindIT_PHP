@@ -406,3 +406,14 @@ $(document).on('click','.sendMessage',function (e) {
 
 
 })
+
+$(document).on('click','.mobileOpenFilter',function(e){
+    $('.leftFilter').toggleClass('active');
+    let check = $('#checkFilter')[0];
+
+    if($('.leftFilter').hasClass('active')){
+        check.checked = true
+    }else{
+        check.checked = false
+    }
+    });

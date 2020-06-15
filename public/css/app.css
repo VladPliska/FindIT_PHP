@@ -1842,6 +1842,130 @@ img {
   width: 0;
 }
 
+.leftFilter {
+  transition: all 1s ease-in-out;
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .header ul a {
+    font-size: 18px;
+  }
+
+  .allAdvertBody {
+    grid-template-columns: unset !important;
+  }
+
+  .allAdvertBody:first-child {
+    height: 70px;
+    margin: 10px;
+  }
+
+  .leftFilter {
+    height: 0;
+    padding: 0;
+    overflow: hidden;
+    margin-bottom: 20px;
+  }
+
+  .leftFilter.active {
+    height: 300px;
+    padding: 20px;
+    overflow: scroll;
+  }
+
+  .leftFilter::-webkit-scrollbar {
+    width: 0;
+  }
+
+  .mobileOpenFilter {
+    display: block;
+    font-size: 20px;
+    width: 35%;
+    height: 60px;
+    border-radius: 20px;
+    border: unset;
+    background: #66CC60;
+    color: #ffffff;
+    margin-bottom: 20px;
+  }
+
+  .advert-page {
+    grid-template-columns: unset !important;
+  }
+
+  .advert-page .advert-body {
+    text-align: center;
+  }
+
+  .advert-page .advert-body .title-advert {
+    margin: 0 auto;
+    max-width: unset !important;
+  }
+
+  .advert-page .advert-body .company-block {
+    display: flex;
+    justify-content: center;
+  }
+
+  .childCompanyBody {
+    grid-template-columns: unset !important;
+  }
+
+  .childCompanyBody .blockMainInfo {
+    grid-template-columns: unset !important;
+    justify-content: center;
+  }
+
+  .childCompanyBody .firstInfo {
+    text-align: center;
+  }
+
+  .companyItem {
+    grid-template-columns: unset !important;
+  }
+
+  .company-profile-page-parent {
+    grid-template-columns: unset !important;
+  }
+
+  .profile-company-menu {
+    text-align: center !important;
+  }
+
+  .profile-page {
+    grid-template-columns: unset !important;
+  }
+
+  .body-company-reg {
+    height: unset;
+  }
+
+  .grid-company-reg {
+    grid-template-columns: unset !important;
+  }
+
+  .createUser-form .mainBlock {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .createUser-form .confirmBtn {
+    width: unset;
+  }
+
+  .company-profile-page {
+    grid-template-columns: 1fr;
+  }
+
+  .addAdvert {
+    grid-template-columns: 1fr;
+  }
+
+  .advert {
+    height: auto !important;
+  }
+}
+
 .main {
   margin: 0 auto;
 }
@@ -1960,29 +2084,8 @@ img {
     overflow: hidden;
   }
 
-  .header ul {
-    width: 20%;
-    height: 70px;
-    overflow: hidden;
-  }
-
-  .header li {
-    width: 0px;
-    height: 0px;
-    margin: unset;
-    font-size: 14px;
-    overflow: hidden;
-  }
-
   .logo {
     font-size: 60px;
-  }
-
-  .mobileMenu {
-    position: absolute;
-    font-size: 50px;
-    right: 50px;
-    top: 25%;
   }
 
   .content {

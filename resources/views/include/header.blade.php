@@ -2,7 +2,7 @@
     <div class='logo'>
         <img src="/img/white-logo.png" width='100px' height='100px' alt="err"/>
     </div>
-    <div class='mobileMenu'><i class="fas fa-ellipsis-v"></i></div>
+{{--    <div class='mobileMenu'><i class="fas fa-ellipsis-v"></i></div>--}}
     <ul>
         <a href='/' class='headerUrl'>Головна</a>
         <a  href='/all-advert' class='headerUrl'>Пропозиції</a>

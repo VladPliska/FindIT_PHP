@@ -4,6 +4,7 @@
 
 <div>
     <div class='allAdvertBody  '>
+        <button class="mobileOpenFilter" hidden>Фільтри</button>
         <div class='leftFilter  '>
             <div class='cityBody '>
                 <h2>Місто</h2>
