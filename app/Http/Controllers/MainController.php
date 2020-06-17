@@ -412,10 +412,11 @@ class MainController extends Controller
         $city = $req->get('city');
         $home = $req->get('home') ?? null;
         $office = $req->get('office') ?? null;
-        $worker = $req->get('worker') ?? null;
+        $worker = $req->get('wokers') ?? null;
         $description = $req->get('description');
         $email = $req->get('email');
         $password = $req->get('password');
+
 
         $password = crc32($password);
 //        Storage::disk('public')->put('img', $img);
@@ -423,6 +424,7 @@ class MainController extends Controller
         $path = $req->file('image')->store('images', 's3');
         Storage::disk('s3')->setVisibility($path, 'public');
 
+//        dd($req->all());
 
         $company = Company::create([
             'email' => $email,
@@ -432,7 +434,7 @@ class MainController extends Controller
             'city_id' => $city,
             'img' => Storage::disk('s3')->url($path),
             'description' => $description,
-            'worker' => $worker,
+            'workers' => intval($worker),
             'home' => $home,
             'office' => $office
         ]);
@@ -461,7 +463,7 @@ class MainController extends Controller
     {
         $user = $req->get('userData');
         $advert = Advert::where([['id', $id],['block',false]])->first();
-        $company = $advert->company;
+//        $company = $advert->company;
         $tech = Technology::whereIn('id', $advert->technology)->get();
         $city = $advert->city;
         $adverts = Advert::where([['company_id', $advert->company_id],['block',false]])->get();
@@ -478,7 +480,7 @@ class MainController extends Controller
         } else {
             $selected = false;
         }
-        return view('page.advert', compact('advert', 'city', 'company', 'tech', 'adverts', 'selected'));
+        return view('page.advert', compact('advert', 'city', 'tech', 'adverts', 'selected'));
     }
 
     public function logout(Request $req)
@@ -545,6 +547,23 @@ class MainController extends Controller
             'company_id' => $company->id,
         ]);
 
+        $checkAllAdvert = Advert::where('company_id',$company->id)->count();
+
+        switch($checkAllAdvert){
+            case 2:
+                $company->update(['score'=>3]);
+                break;
+            case 5:
+                $company->update(['score'=>5]);
+                dd($company);
+                break;
+            case 10:
+                $company->update(['score'=>7]);
+                break;
+            case 20:
+                $company->update(['score'=>10]);
+                break;
+        }
         $city = City::find($city);
         $city->update(['advert' => $city->advert + 1]);
 
@@ -612,13 +631,44 @@ class MainController extends Controller
         $resume = $req->get('resume');
         $user = $req->get('userData');
 
-//        dd($req->all());
         $checkExistAnswer = Answer::where([['user_id',$user->id],['advert_id',$advert_id]])->get();
-//        dd($checkExistAnswer);
 
-        if(count($checkExistAnswer) > 1){
+        if(count($checkExistAnswer) >= 1){
             return redirect('/worker/profile#anserAdvert');
         }
+
+        $companyAnswer = Answer::where('company_id',$company)->count();
+        $companyInfo = Company::where('id',$company)->first();
+
+        if($companyInfo->score == null || $companyInfo->score == 1){
+            //сетимо по кількості відповідей
+              switch ($companyAnswer){
+                  case 2:
+                      $companyInfo->update(['score'=>3]);
+                      break;
+                  case 5:
+                      $companyInfo->update(['score'=>5]);
+                      break;
+                  case 10:
+                      $companyInfo->update(['score'=>7]);
+                      break;
+                  case 20:
+                      $companyInfo->update(['score'=>10]);
+                      break;
+              }
+        }else{
+            //вибираємо середнє арефметичне
+            $arf = ($companyAnswer + $companyInfo->score)/2;
+
+            if($arf == 10){
+                $companyInfo->update(['score'=>9.9]);
+            }else{
+                $companyInfo->update(['score'=>$arf]);
+            }
+        }
+
+//        dd($companyInfo->score);
+
         Answer::create([
            'user_id' => $user->id,
            'advert_id'=>$advert_id,

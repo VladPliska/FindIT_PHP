@@ -26,8 +26,9 @@
                                 <label for="">Місто</label>
                                 <input type="text" value="{{$city->name}}"><br>
                                 <label for="">Працівники</label>
-                                <input type="text" value="{{$company->worker ?? 0}}"><br>
+                                <input type="text" value="{{$company->workers ?? 0}}"><br>
                             </div>
+
                         </div>
                         <div class="descriptionCompany">
                             <label for="description">Про компанію</label>

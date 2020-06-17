@@ -8,7 +8,7 @@ class Company extends Model
 {
     protected $table = 'company';
     protected $fillable = [
-       'token','email','password','name','city_id','img','office','home','workers','technology','description','block'
+       'token','email','password','name','city_id','img','office','home','workers','technology','description','block','score'
     ];
 
     protected $casts = [
