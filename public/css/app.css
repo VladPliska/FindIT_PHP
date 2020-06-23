@@ -1846,7 +1846,11 @@ img {
   transition: all 1s ease-in-out;
 }
 
-@media (min-width: 320px) and (max-width: 1024px) {
+@media (min-width: 768px) and (max-width: 1200px) {
+  .allCompanyBody {
+    grid-template-columns: 1fr 1fr;
+  }
+
   .header ul a {
     font-size: 18px;
   }
@@ -1963,6 +1967,77 @@ img {
 
   .advert {
     height: auto !important;
+  }
+
+  .companyInfo-advert .companyName-advert {
+    width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .companyInfo-advert div img {
+    width: 165px !important;
+    height: 100px !important;
+  }
+
+  .description-advert-page h2 {
+    text-align: left;
+    width: 500px;
+    margin: 0 auto;
+  }
+
+  .advert-filter-item-href .companyImg {
+    top: 50px;
+    height: 120px;
+    width: 200px;
+  }
+
+  .advert-filter-item-href .price {
+    right: 20px;
+  }
+
+  a {
+    font-size: 25px;
+  }
+
+  .adminBody {
+    display: block;
+  }
+
+  .adminBody .admin-company-item {
+    display: block;
+  }
+
+  .adminBody .admin-company-item img {
+    text-align: center;
+  }
+
+  .adminBody .admin-worker-body {
+    display: block !important;
+    height: auto !important;
+  }
+
+  .adminBody .advert-filter-item-href .link1 {
+    display: none !important;
+  }
+
+  .admin-menu {
+    margin-bottom: 20px;
+  }
+
+  .company-profile-page-content .answer-body-user {
+    display: block;
+    width: 80%;
+  }
+
+  .company-profile-page-content .answer-body-user .advert-body {
+    margin: 0 auto;
+  }
+
+  .answerBody,
+  .chatBody {
+    width: unset;
   }
 }
 

@@ -22,7 +22,7 @@
         </a>
         <div class="sendMail">
             <div>
-                @if($user != null)
+                @if($user != null && $user->role != 'admin')
                     <a href="/resume/advert/{{$advert->id}}" class="answer ">Відповісти</a>
                     @if($selected)
                         <i class="fas fa-star star-like addAdvertToFav" data-id="{{$advert->id}}"></i>

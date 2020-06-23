@@ -15,8 +15,10 @@
 
                     @if($company != null)
                         <a class='link1' href='javascript:;'>Авторизуйтеся як працівник,для відповіді</a>
-                    @else
+                    @elseif($user)
                         <a class='link1' href='/resume/advert/{{$v->id}}'>Відгукнутися</a>
+                    @else
+                        <a class='link1' href='/login'>Авторизуйтеся для відповіді</a>
                     @endif
                     <h2 class='price'>${{$v->minsallary ?? 0}} - ${{$v->maxsallary ?? 100}}</h2>
                     <img src="{{$v->company != null ? $v->company->img : 'https://picsum.photos/350/200'}}"
@@ -57,8 +59,10 @@
     </span><br>
                     @if($company != null)
                         <a class='link1' href='javascript:;'>Авторизуйтеся як працівник,для відповіді</a>
-                    @else
+                    @elseif($user)
                         <a class='link1' href='/resume/advert/{{$v->id}}'>Відгукнутися</a>
+                    @else
+                        <a class='link1' href='/login'>Авторизуйтеся для відповіді</a>
                     @endif
                     <h2 class='price'>${{$v->minsallary ?? 0}} - ${{$v->maxsallary ?? 100}}</h2>
                     <img src="{{$v->company != null ? $v->company->img : 'https://picsum.photos/350/200'}}"
@@ -90,8 +94,10 @@
     </span><br>
             @if($company != null)
                 <a class='link1' href='javascript:;'>Авторизуйтеся як працівник,для відповіді</a>
-            @else
+            @elseif($user)
                 <a class='link1' href='/resume/advert/{{$advert->id}}'>Відгукнутися</a>
+            @else
+                <a class='link1' href='/login'>Авторизуйтеся для відповіді</a>
             @endif
             <h2 class='price'>${{$advert->minsallary ?? 0}} - ${{$advert->maxsallary ?? 100}}</h2>
             <img src="{{$advert->company != null ? $advert->company->img : 'https://picsum.photos/350/200'}}"

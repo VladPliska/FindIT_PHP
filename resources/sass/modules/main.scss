@@ -1452,7 +1452,7 @@ img {
     margin: 30px auto;
     padding: 20px;
     border-radius: 20px;
-    grid-template-columns: 1fr 1fr 1fr ;
+    grid-template-columns: 1fr 1fr 1fr;
 
     .companyItem {
         background: #4d4d58;
@@ -1776,13 +1776,14 @@ img {
 }
 
 
-.chatBody{
+.chatBody {
     background: #383740;
     width: 900px;
     margin: 20px auto;
     border-radius: 20px;
     padding: 20px 5px;
-    .messageAll{
+
+    .messageAll {
         width: 90%;
         margin: 0 auto;
         border-radius: 20px;
@@ -1790,10 +1791,12 @@ img {
         height: 500px;
         padding: 20px;
         overflow: scroll;
-        &::-webkit-scrollbar{
+
+        &::-webkit-scrollbar {
             width: 0;
         }
-        .messageItem{
+
+        .messageItem {
             flex-basis: 45%;
             border-bottom-right-radius: 20px;
             border-top-right-radius: 20px;
@@ -1808,10 +1811,11 @@ img {
             //div{
             //    border:1px solid;
             //}
-            .header-msg{
+            .header-msg {
                 display: flex;
                 align-items: center;
-                img{
+
+                img {
                     display: inline;
                     border-radius: 50%;
                     width: 50px;
@@ -1820,134 +1824,155 @@ img {
                     margin-right: 20px;
                 }
             }
-            .body-msg{
+
+            .body-msg {
                 text-align: left;
                 padding: 10px 10px 10px 30px;
-                p{
+
+                p {
                     margin: 0;
                 }
             }
-            .footer-msg{
+
+            .footer-msg {
                 color: #909999;
-                p{
-                    margin: 0!important;
+
+                p {
+                    margin: 0 !important;
                 }
+
                 text-align: right;
                 font-size: 16px;
             }
         }
     }
-    .sendBlock{
+
+    .sendBlock {
         width: 90%;
         margin: 20px auto;
         display: grid;
         grid-template-columns: 1fr 0.1fr;
-        textarea{
+
+        textarea {
             background: #585861;
             border: none;
             font-size: 18px;
             color: #afafaf;
-            &::-webkit-scrollbar{
+
+            &::-webkit-scrollbar {
                 width: 0;
             }
         }
-        i{
+
+        i {
             font-size: 35px;
             display: flex;
             justify-content: center;
             align-items: center;
             color: #3085d6;
-            &:before{
+
+            &:before {
                 padding: 20px;
                 border-radius: 50%;
                 background: #41b8ff;
                 border: 2px solid;
             }
-            &:hover{
-                cursor:pointer;
+
+            &:hover {
+                cursor: pointer;
                 color: #fff;
             }
 
         }
     }
 }
-.myMessage{
+
+.myMessage {
     display: flex;
     justify-content: flex-end;
-    .messageItem{
+
+    .messageItem {
         border-bottom-left-radius: 20px;
-        border-bottom-right-radius: unset!important;
+        border-bottom-right-radius: unset !important;
     }
 
 }
 
 .profile-public-body {
     padding: 20px;
-    background:#383740;
+    background: #383740;
     margin: 20px auto;
     width: 40%;
     border-radius: 20px;
     text-align: left;
+
     .headerInfo {
-        img{
+        img {
             height: 200px;
             width: 250px;
             border-radius: 20px;
             text-align: center;
             margin: 0 auto;
         }
+
         display: grid;
         grid-template-columns: 1fr 1fr;
     }
 }
-.userResumeAnswer{
+
+.userResumeAnswer {
     max-height: 200px;
     max-width: 200px;
     overflow: scroll;
-    display: inline-block!important;
-    &::-webkit-scrollbar{
+    display: inline-block !important;
+
+    &::-webkit-scrollbar {
         width: 0;
     }
 }
 
 //adaptive
-.leftFilter{
+.leftFilter {
     transition: all 1s ease-in-out;
 }
 
-@media (min-width: 320px) and (max-width: 1024px){
-    .header{
-        ul{
-            a{
+@media (min-width: 768px) and (max-width: 1200px) {
+    .allCompanyBody {
+        grid-template-columns: 1fr 1fr;
+    }
+    .header {
+        ul {
+            a {
                 font-size: 18px;
             }
         }
     }
-    .allAdvertBody{
-        grid-template-columns: unset!important;
-        &:first-child{
+    .allAdvertBody {
+        grid-template-columns: unset !important;
+
+        &:first-child {
             height: 70px;
             margin: 10px;
         }
 
     }
-    .leftFilter{
+    .leftFilter {
         height: 0;
         padding: 0;
         overflow: hidden;
         margin-bottom: 20px;
 
-        &.active{
+        &.active {
             height: 300px;
             padding: 20px;
             overflow: scroll;
         }
+
         &::-webkit-scrollbar {
             width: 0;
         }
     }
-    .mobileOpenFilter
-    {
+    .mobileOpenFilter {
         display: block;
         font-size: 20px;
         width: 35%;
@@ -1960,67 +1985,143 @@ img {
         margin-bottom: 20px;
     }
 
-    .advert-page{
-        grid-template-columns: unset!important;
-        .advert-body{
+    .advert-page {
+        grid-template-columns: unset !important;
+
+        .advert-body {
             text-align: center;
-            .title-advert{
+
+            .title-advert {
                 margin: 0 auto;
-                max-width: unset!important;
+                max-width: unset !important;
             }
-            .company-block{
+
+            .company-block {
                 display: flex;
                 justify-content: center;
             }
         }
     }
-    .childCompanyBody{
-        grid-template-columns: unset!important;
-        .blockMainInfo{
-            grid-template-columns: unset!important;
+    .childCompanyBody {
+        grid-template-columns: unset !important;
+
+        .blockMainInfo {
+            grid-template-columns: unset !important;
             justify-content: center;
         }
-        .firstInfo{
+
+        .firstInfo {
             text-align: center;
         }
     }
-    .companyItem{
-        grid-template-columns: unset!important;
+    .companyItem {
+        grid-template-columns: unset !important;
     }
-    .company-profile-page-parent{
-        grid-template-columns: unset!important;
+    .company-profile-page-parent {
+        grid-template-columns: unset !important;
     }
-    .profile-company-menu{
-        text-align: center!important;
+    .profile-company-menu {
+        text-align: center !important;
     }
-    .profile-page{
-        grid-template-columns:unset!important;
+    .profile-page {
+        grid-template-columns:unset !important;
     }
-    .body-company-reg{
+    .body-company-reg {
         height: unset;
     }
-    .grid-company-reg{
-    grid-template-columns: unset!important;
+    .grid-company-reg {
+        grid-template-columns: unset !important;
     }
-    .createUser-form{
-        .mainBlock{
+    .createUser-form {
+        .mainBlock {
             grid-template-columns:1fr;
             text-align: center;
         }
-        .confirmBtn{
+
+        .confirmBtn {
             width: unset;
         }
     }
-    .company-profile-page{
+    .company-profile-page {
         grid-template-columns: 1fr;
     }
-    .addAdvert{
+    .addAdvert {
         grid-template-columns: 1fr;
     }
-    .advert{
-        height: auto!important;
+    .advert {
+        height: auto !important;
+    }
+    .companyInfo-advert {
+        .companyName-advert {
+            width: 200px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        div {
+            img {
+                width: 165px !important;
+                height: 100px !important;
+            }
+        }
+    }
+    .description-advert-page {
+        h2 {
+            text-align: left;
+            width: 500px;
+            margin: 0 auto;
+        }
+
+    }
+    .advert-filter-item-href{
+        .companyImg{
+            top:50px;
+            height: 120px;
+            width: 200px;
+        }
+        .price{
+            right: 20px;
+        }
+    }
+    a{
+        font-size: 25px;
+    }
+    .adminBody{
+        display: block;
+        .admin-company-item{
+            display: block;
+            img{
+                text-align: center;
+            }
+        }
+        .admin-worker-body{
+            display: block!important;
+            height: auto!important;
+        }
+        .advert-filter-item-href{
+            .link1{
+                display: none!important;
+            }
+        }
+    }
+    .admin-menu{
+        margin-bottom: 20px;
+    }
+    .company-profile-page-content{
+        .answer-body-user{
+            display: block;
+            width: 80%;
+            .advert-body{
+                margin: 0 auto;
+            }
+        }
+    }
+    .answerBody,.chatBody{
+        width: unset;
     }
 }
+
 @media (min-width: 1024px) and (max-width: 1400px) {
-    
+
 }
