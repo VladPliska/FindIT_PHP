@@ -300,6 +300,10 @@ ul .headerUrl {
 }
 
 .advertBody .advertInfo h2 {
+  width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   display: block;
   max-height: 30px !important;
 }
