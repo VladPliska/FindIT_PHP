@@ -309,9 +309,9 @@ class MainController extends Controller
     public function companyPublicProfile(Request $req, $id)
     {
 
-        $company = Company::where([['id', $id],['block',false]])->first();
+        $companyInfo = Company::where([['id', $id],['block',false]])->first();
         $technology = Technology::whereIn('id', $company->technology)->get();
-        return view('page.company', compact('company', 'technology'));
+        return view('page.company', compact('companyInfo', 'technology'));
     }
 
 
