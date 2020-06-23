@@ -24,7 +24,7 @@ class MainController extends Controller
 
     public function index(Request $req)
     {
-        $advert = Advert::where('block',false)->take(20)->get();
+        $advert = Advert::where('block', false)->take(20)->get();
         $city = City::all();
         return view('page.main', compact('advert', 'city'));
     }
@@ -36,13 +36,13 @@ class MainController extends Controller
         $allCity = City::orderBy('advert', 'desc')->take(20)->get();
 
         if ($req->get('company')) {
-            $advert = Advert::where([['company_id', $req->get('company')],['block',false]])->paginate(10);
+            $advert = Advert::where([['company_id', $req->get('company')], ['block', false]])->paginate(10);
         } else if ($req->get('mainSearch')) {
             $city = $req->get('city');
             $query = $req->get('query');
-            $advert = Advert::where([['title', 'ilike', '%' . $query . '%'], ['city_id', intval($city)],['block',false]])->paginate(10);
+            $advert = Advert::where([['title', 'ilike', '%' . $query . '%'], ['city_id', intval($city)], ['block', false]])->paginate(10);
         } else {
-            $advert = Advert::where([['id', '>', 0],['block',false]])->paginate(10);
+            $advert = Advert::where([['id', '>', 0], ['block', false]])->paginate(10);
         }
 
         return view('page.all-advert', compact('advert', 'allCity'));
@@ -52,11 +52,11 @@ class MainController extends Controller
     {
         $filterOn = $req->get('filterOn');
         $query = $req->get('query');
-        $companyData = Company::where([['name','ilike','%'.$query.'%'],['block',false]])->get();
+        $companyData = Company::where([['name', 'ilike', '%' . $query . '%'], ['block', false]])->get();
         if ($filterOn == 'false') {
-            $adverts = Advert::where([['title', 'ilike', '%' . $query . '%'],['block',false]])->get();
+            $adverts = Advert::where([['title', 'ilike', '%' . $query . '%'], ['block', false]])->get();
 
-            $view = view('.include/advert-filter-item', ['data' => $adverts, 'forSearch' => true,'companyData'=>$companyData])->render();
+            $view = view('.include/advert-filter-item', ['data' => $adverts, 'forSearch' => true, 'companyData' => $companyData])->render();
             return response()->json([
                 'view' => $view
             ]);
@@ -94,7 +94,7 @@ class MainController extends Controller
             }
             $data = Advert::whereIn('id', $id)->get();
 
-            $view = view('.include/advert-filter-item', ['data' => $data, 'forSearch' => true,'companyData'=>$companyData])->render();
+            $view = view('.include/advert-filter-item', ['data' => $data, 'forSearch' => true, 'companyData' => $companyData])->render();
             return response()->json([
                 'view' => $view
             ]);
@@ -225,23 +225,23 @@ class MainController extends Controller
         if ($user == null) {
             return redirect('/login');
         }
-        if($user->role == 'admin'){
+        if ($user->role == 'admin') {
             return redirect('/admin');
         }
-        if(count($user->technology) != 0){
+        if (count($user->technology) != 0) {
             $tech = Technology::whereIn('id', $user->technology)->get();
-        }else{
+        } else {
             $tech = [];
         }
-        if(empty($user->selectadvert)){
+        if (empty($user->selectadvert)) {
             $advert = [];
-        }else{
+        } else {
             $advert = Advert::whereIn('id', $user->selectadvert)->paginate(5);
         }
 
-        $answer = Answer::where('user_id',$user->id)->get();
+        $answer = Answer::where('user_id', $user->id)->get();
 
-        return view('page.profile', ['data' => $user, 'tech' => $tech, 'advert' => $advert,'answer'=>$answer]);
+        return view('page.profile', ['data' => $user, 'tech' => $tech, 'advert' => $advert, 'answer' => $answer]);
     }
 
     public function addAdvertToFavorite(Request $req)
@@ -302,16 +302,48 @@ class MainController extends Controller
     ///////////////////company
     public function allCompany(Request $req)
     {
-        $companyData = Company::where('block',false)->paginate(10);
+        $companyData = Company::where('block', false)->paginate(10);
         return view('page.all-company', compact('companyData'));
     }
 
     public function companyPublicProfile(Request $req, $id)
     {
 
-        $companyInfo = Company::where([['id', $id],['block',false]])->first();
+        $companyInfo = Company::where([['id', $id], ['block', false]])->first();
         $technology = Technology::whereIn('id', $companyInfo->technology)->get();
         return view('page.company', compact('companyInfo', 'technology'));
+    }
+
+    public function updateCompanyProfile(Request $req)
+    {
+        $worker = $req->get('workers');
+        $home = $req->get('home');
+        $office = $req->get('office');
+        $description = $req->get('description');
+        $company = $req->get('companyData');
+
+        if($home == 'on'){
+            $home = true;
+        }else{
+            $home = false;
+        }
+
+        if($office == 'on'){
+            $office = true;
+        }else{
+            $office = false;
+        }
+
+        $company->update([
+           'workers' => $worker,
+           'home'=> $home,
+            'office'=>$office,
+            'description'=>$description
+        ]);
+
+        return redirect('/company/profile');
+
+
     }
 
 
@@ -334,18 +366,18 @@ class MainController extends Controller
             ])->first();
             if ($user != null) {
 
-                if($user->block){
+                if ($user->block) {
                     return back()->with('err', 'Не вдалося увійти,користувач заблокований');
-                }else {
+                } else {
                     $rand = rand(mb_strlen($user->email), 200);
                     $authToken = hash('md5', $rand);
                     $user->update(['token' => $authToken]);
 
                     Cookie::queue('auth', $authToken, 60 * 30);
 
-                    if($user->role == 'admin'){
+                    if ($user->role == 'admin') {
                         return redirect('admin');
-                    }else{
+                    } else {
                         return redirect('worker/profile');
                     }
                 }
@@ -362,10 +394,9 @@ class MainController extends Controller
                 ['password', '=', $pass]])->first();
             if ($company) {
 
-                if($company->block){
+                if ($company->block) {
                     return back()->with('err', 'Не вдалося увійти,компанія заблокована');
-                }
-                else{
+                } else {
                     $city = $company->city;
                     $tech = $company->technology;
                     $technology = Technology::whereIn('id', $tech)->get();
@@ -455,21 +486,21 @@ class MainController extends Controller
         $allCity = City::all();
         $technology = Technology::whereIn('id', $tech)->get();
         $advert = $this->getComanyAdvert($req);
-        $companyAnswerAdvert = Answer::where('company_id',$company->id)->get();
-        return view('page.company.profile', compact('company', 'advert', 'city', 'technology', 'allCity','companyAnswerAdvert'));
+        $companyAnswerAdvert = Answer::where('company_id', $company->id)->get();
+        return view('page.company.profile', compact('company', 'advert', 'city', 'technology', 'allCity', 'companyAnswerAdvert'));
     }
 
     public function advert(Request $req, $id)
     {
         $user = $req->get('userData');
-        $advert = Advert::where([['id', $id],['block',false]])->first();
+        $advert = Advert::where([['id', $id], ['block', false]])->first();
 //        $company = $advert->company;
         $tech = Technology::whereIn('id', $advert->technology)->get();
         $city = $advert->city;
-        $adverts = Advert::where([['company_id', $advert->company_id],['block',false]])->get();
+        $adverts = Advert::where([['company_id', $advert->company_id], ['block', false]])->get();
         if ($user != null) {
             $selected = false;
-            if($user->selectadvert){
+            if ($user->selectadvert) {
                 foreach ($user->selectadvert as $v) {
                     if ($v == $advert->id) {
                         $selected = true;
@@ -547,21 +578,21 @@ class MainController extends Controller
             'company_id' => $company->id,
         ]);
 
-        $checkAllAdvert = Advert::where('company_id',$company->id)->count();
+        $checkAllAdvert = Advert::where('company_id', $company->id)->count();
 
-        switch($checkAllAdvert){
+        switch ($checkAllAdvert) {
             case 2:
-                $company->update(['score'=>3]);
+                $company->update(['score' => 3]);
                 break;
             case 5:
-                $company->update(['score'=>5]);
+                $company->update(['score' => 5]);
                 dd($company);
                 break;
             case 10:
-                $company->update(['score'=>7]);
+                $company->update(['score' => 7]);
                 break;
             case 20:
-                $company->update(['score'=>10]);
+                $company->update(['score' => 10]);
                 break;
         }
         $city = City::find($city);
@@ -574,7 +605,7 @@ class MainController extends Controller
     {
         $company = $req->get('companyData');
 
-        $advert = Advert::where([['company_id', $company->id],['block',false]])->get();
+        $advert = Advert::where([['company_id', $company->id], ['block', false]])->get();
 
         return $advert;
 
@@ -583,7 +614,7 @@ class MainController extends Controller
     public function getAllTech(Request $req)
     {
         $client = $req->get('userData');
-        if($client == null){
+        if ($client == null) {
             $client = $req->get('companyData');
         }
         $tech = Technology::all();
@@ -601,7 +632,7 @@ class MainController extends Controller
         $technology = $req->get('technology');
         $user = $req->get('userData');
 
-        if($user == null ){
+        if ($user == null) {
             $user = $req->get('companyData');
         }
 
@@ -631,124 +662,125 @@ class MainController extends Controller
         $resume = $req->get('resume');
         $user = $req->get('userData');
 
-        $checkExistAnswer = Answer::where([['user_id',$user->id],['advert_id',$advert_id]])->get();
+        $checkExistAnswer = Answer::where([['user_id', $user->id], ['advert_id', $advert_id]])->get();
 
-        if(count($checkExistAnswer) >= 1){
+        if (count($checkExistAnswer) >= 1) {
             return redirect('/worker/profile#anserAdvert');
         }
 
-        $companyAnswer = Answer::where('company_id',$company)->count();
-        $companyInfo = Company::where('id',$company)->first();
+        $companyAnswer = Answer::where('company_id', $company)->count();
+        $companyInfo = Company::where('id', $company)->first();
 
-        if($companyInfo->score == null || $companyInfo->score == 1){
+        if ($companyInfo->score == null || $companyInfo->score == 1) {
             //сетимо по кількості відповідей
-              switch ($companyAnswer){
-                  case 2:
-                      $companyInfo->update(['score'=>3]);
-                      break;
-                  case 5:
-                      $companyInfo->update(['score'=>5]);
-                      break;
-                  case 10:
-                      $companyInfo->update(['score'=>7]);
-                      break;
-                  case 20:
-                      $companyInfo->update(['score'=>10]);
-                      break;
-              }
-        }else{
+            switch ($companyAnswer) {
+                case 2:
+                    $companyInfo->update(['score' => 3]);
+                    break;
+                case 5:
+                    $companyInfo->update(['score' => 5]);
+                    break;
+                case 10:
+                    $companyInfo->update(['score' => 7]);
+                    break;
+                case 20:
+                    $companyInfo->update(['score' => 10]);
+                    break;
+            }
+        } else {
             //вибираємо середнє арефметичне
-            $arf = ($companyAnswer + $companyInfo->score)/2;
+            $arf = ($companyAnswer + $companyInfo->score) / 2;
 
-            if($arf == 10){
-                $companyInfo->update(['score'=>9.9]);
-            }else{
-                $companyInfo->update(['score'=>$arf]);
+            if ($arf == 10) {
+                $companyInfo->update(['score' => 9.9]);
+            } else {
+                $companyInfo->update(['score' => $arf]);
             }
         }
 
 //        dd($companyInfo->score);
 
         Answer::create([
-           'user_id' => $user->id,
-           'advert_id'=>$advert_id,
-           'company_id' => $company,
-           'fullname' => $pib,
-           'email' => $email,
-           'sallary' => $sallary,
-           'phone' => $phone,
-           'resume' => $resume,
-            'status'=>'Надіслано'
+            'user_id' => $user->id,
+            'advert_id' => $advert_id,
+            'company_id' => $company,
+            'fullname' => $pib,
+            'email' => $email,
+            'sallary' => $sallary,
+            'phone' => $phone,
+            'resume' => $resume,
+            'status' => 'Надіслано'
         ]);
 
         return redirect('/worker/profile#anserAdvert');
 
     }
 
-    public function companyShowAnswer($id,Request $req){
+    public function companyShowAnswer($id, Request $req)
+    {
         $answer = Answer::find($id);
         $client = $req->get('companyData');
         $companyCheck = true;
-        $message =[];
-        if($client == null){
+        $message = [];
+        if ($client == null) {
             $client = $req->get('userData');
-            if($answer->user_id != $client->id){
+            if ($answer->user_id != $client->id) {
                 return \redirect(404);
             }
-        }else{
-            if($answer->company_id != $client->id){
+        } else {
+            if ($answer->company_id != $client->id) {
                 return \redirect(404);
             }
         }
-        if($client == null){
+        if ($client == null) {
             return \redirect(404);
         }
 
 
-
-
-        if($answer->status == null){
-            if($req->get('companyData') != null){
-                $answer->update(['status'=>"Прочитано"]);
+        if ($answer->status == null) {
+            if ($req->get('companyData') != null) {
+                $answer->update(['status' => "Прочитано"]);
             }
         }
 
-        if($answer->status == 'Схваленно'){
-            $message = Message::where('token',$id)->get();
+        if ($answer->status == 'Схваленно') {
+            $message = Message::where('token', $id)->get();
         }
-        return view('.page.resume',compact('answer','companyCheck','message'));
+        return view('.page.resume', compact('answer', 'companyCheck', 'message'));
     }
 
-    public function changeStatus(Request $req){
+    public function changeStatus(Request $req)
+    {
         $status = $req->get('status');
         $answer = $req->get('id');
 
         $data = Answer::find($answer);
 
-        $data->update(['status'=>$status]);
+        $data->update(['status' => $status]);
 
-        if($status == 'Схваленно'){
+        if ($status == 'Схваленно') {
             ///create unique token for chat - answer id
-            $checkExistChat = Message::where('token',$answer)->first();
-            if(!$checkExistChat){
+            $checkExistChat = Message::where('token', $answer)->first();
+            if (!$checkExistChat) {
                 Message::create([
-                    'user_id'=>$data->user_id,
-                    'company_id'=>$data->company_id,
-                    'message'=>'Відповідь на вакансію позитивна,тепер Вам доступний чат.',
+                    'user_id' => $data->user_id,
+                    'company_id' => $data->company_id,
+                    'message' => 'Відповідь на вакансію позитивна,тепер Вам доступний чат.',
                     'token' => $answer,
-                    'status' =>'first',
-                    'advert_id'=>$data->advert_id
+                    'status' => 'first',
+                    'advert_id' => $data->advert_id
                 ]);
             }
         }
 
 
-        return redirect('/answer-show/'.$answer);
+        return redirect('/answer-show/' . $answer);
     }
 
-    public function showPublicUserProfile($id,Request $req){
+    public function showPublicUserProfile($id, Request $req)
+    {
         $user = User::find($id);
-        $tech = Technology::whereIn('id',$user->technology)->get();
-        return view('page.user-public-profile',compact('user','tech'));
+        $tech = Technology::whereIn('id', $user->technology)->get();
+        return view('page.user-public-profile', compact('user', 'tech'));
     }
 }

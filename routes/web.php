@@ -68,6 +68,8 @@ Route::get('/all-company','MainController@allCompany');
 
 Route::get('/company/{id}','MainController@companyPublicProfile');
 
+Route::post('/save-company-profile','MainController@updateCompanyProfile');
+
 Route::post('/changeselectAdvert','MainController@addAdvertToFavorite');
 
 Route::get('/techology','MainController@getAllTech');

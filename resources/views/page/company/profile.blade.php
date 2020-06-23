@@ -12,8 +12,10 @@
             вакансію</a>
     </div>
     <div class="company-profile-page-content">
+        <form action="/save-company-profile" method="POST" >
+            @csrf
         <div class=" menu-item profile-info-company " data-target="profile">
-            <div class="company-profile-page ">
+            <div class="company-profile-page">
                 <div>
                     <h1>Відомості про компанію</h1>
                     <div class="leftBlockParent">
@@ -22,11 +24,11 @@
                             <img src="{{$company->img}}" width="350px" height="200px" alt="">
                             <div class="notChange">
                                 <label for="">Назва</label>
-                                <input type="text" value="{{$company->name}}"><br>
+                                <input type="text" readonly value="{{$company->name}}"><br>
                                 <label for="">Місто</label>
-                                <input type="text" value="{{$city->name}}"><br>
+                                <input type="text" readonly value="{{$city->name}}"><br>
                                 <label for="">Працівники</label>
-                                <input type="text" value="{{$company->workers ?? 0}}"><br>
+                                <input type="text" name="workers" value="{{$company->workers ?? 0}}"><br>
                             </div>
 
                         </div>
@@ -77,6 +79,7 @@
             </div>
             <button class="greenBtn saveChangeCompanyProfile" type="submit">Зберегти</button>
         </div>
+        </form>
         <div class=" menu-item profile-add-advert hidden" data-target="addAdvert">
             @include('.page.add-advert',['company'=>$company,'city'=>$allCity])
         </div>
