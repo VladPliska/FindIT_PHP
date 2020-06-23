@@ -87,6 +87,7 @@ class AdminController extends Controller
                             'delete' => true
                         ]);
                     } catch (\Exception $e) {
+                        dd($e);
                         return response()->json([
                             'delete' => false
                         ]);
