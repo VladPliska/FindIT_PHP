@@ -81,8 +81,8 @@ class AdminController extends Controller
                 case 'company':
                     try {
                         $message = Message::where('company_id',$id)->delete();
-                        Advert::where('company_id',$id)->delete();
                         Answer::where('company_id',$id)->delete();
+                        Advert::where('company_id',$id)->delete();
                         $data = Company::where('id', $id)->delete();
                         return response()->json([
                             'delete' => true
