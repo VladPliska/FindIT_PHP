@@ -310,7 +310,7 @@ class MainController extends Controller
     {
 
         $companyInfo = Company::where([['id', $id],['block',false]])->first();
-        $technology = Technology::whereIn('id', $company->technology)->get();
+        $technology = Technology::whereIn('id', $companyInfo->technology)->get();
         return view('page.company', compact('companyInfo', 'technology'));
     }
 
